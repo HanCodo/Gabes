@@ -131,9 +131,6 @@ public class Customer implements Serializable {
 	  public boolean login() throws SQLException {
 	    Connection con = openDBConnection();
 	    String queryString = "SELECT c.Username FROM GABES_CUSTOMER c WHERE c.Username = ? and c.Pass = ?";
-	    System.out.println(queryString);
-	    System.out.println(this.getUsername());
-	    System.out.println(this.getPass());
 	    preparedStmt = con.prepareStatement(queryString);
 	    preparedStmt.clearParameters();
 	    preparedStmt.setString(1,this.getUsername());
