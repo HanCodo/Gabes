@@ -98,5 +98,16 @@ public class Admin {
 	    preparedStmt.close();
 	    return this.isLoggedIn();
 	  }
+	  
+	  /**
+	   * sets loggedIn class field to false
+	   * @throws IllegalStateException if then method is called when loggedIn = false
+	   */
+	  public void logout() throws IllegalStateException {
+	    if(! isLoggedIn())
+	      throw new IllegalStateException("MUST BE LOGGED IN FIRST!");
+	    
+	    this.loggedIn = false;
+	  }
 	
 }

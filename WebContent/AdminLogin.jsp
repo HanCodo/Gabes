@@ -8,7 +8,7 @@ http-equiv="content-type">
 <form method="post" action="AdminLogin_action.jsp" name="Login">Username:
 <input name="username"><br>
 Password: <input name="pass" type="password"><br>
-<input name="Confirm" value="Confirm" type="submit"><br>
+<input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
 </form>
 </body>
 </html>
