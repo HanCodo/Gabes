@@ -3,6 +3,7 @@ package gabes;
 import java.io.*;
 import java.sql.*;
 import oracle.jdbc.*;
+//import tdrichmond.companyDB.DatabaseConnection;
 
 public class Customer implements Serializable {
 
@@ -158,6 +159,7 @@ public class Customer implements Serializable {
 	    
 	    
 	  }
+	  
 	  /**
 	   * shows the items info for a specific itemID
 	   * @param itemID
@@ -168,6 +170,51 @@ public class Customer implements Serializable {
 		  	Connection con = openDBConnection();
 		    String queryString = "SELECT *" + "FROM GABES_ITEM" + "WHERE itemID = ?";
 		    preparedStmt.setString(1,itemID);
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    preparedStmt.close();
+		    return result;
+	  }
+	  
+	  /**
+	   * Updates the information for an account
+	   * @return an int representing the number of 
+	   * rows affected by the update statement
+	   * @throws SQLException
+	   */
+	  public int updateProfile() {
+		  int result = -1;
+		  Connection con = openDBConnection();
+	        try{
+	            stmt = con.createStatement();
+	            String queryString = "update irahal.company_employee set " 
+	                    + " fname='" + this.getFname() + "',"
+	                    + " lname='" + this.getLname() + "',"
+	                    + " phone='" + this.getPhone() + "',"
+	                    + " email='" + this.getEmail() + "',"
+	                    + " username=" + this.getUsername() + "',"
+	                    + " pass = '" + this.getPass()+"'"
+	                    + " where UserID='" + this.getUserID()+ "'";
+
+	            result = stmt.executeUpdate(queryString);
+	            stmt.close();         
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
+	  }
+	  
+	  /**
+	   * Lists items matched to active user
+	   * @return result set containing the results of the query
+	   * @throws SQLException
+	   */
+	  public ResultSet listMyItems() throws SQLException {
+		  	Connection con = openDBConnection();
+		    String queryString = "SELECT c.UserID, i.ItemName, i.Category, i.StartDate, i.EndDate, i.StartPrice" + 
+		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s" + 
+		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+
+		    		"";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    preparedStmt.close();
