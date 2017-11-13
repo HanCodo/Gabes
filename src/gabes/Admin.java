@@ -109,5 +109,45 @@ public class Admin {
 	    
 	    this.loggedIn = false;
 	  }
+	  
+	  /**
+	   * views all users in the database
+	   */
+	  public ResultSet viewUsers() {
+		    String queryString = "SELECT * FROM GABES_CUSTOMER";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    preparedStmt.close();
+		    return result;
+		  
+	  }
+	  
+	  /**
+	   * inserts a new user
+	   */
+	  public boolean insertUser(String userID, String Username, String pass, String fname, String lname, String phone, String Email) {
+		  String queryString = "INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) "
+		  		+ "VALUES (?, ?, ?, ?, ?, ?, ?)"; 
+		  preparedStmt = con.prepareStatement(queryString);
+		  preparedStmt.setString(1,userID);
+		  preparedStmt.setString(2, Username);
+		  preparedStmt.setString(3, pass);
+		  preparedStmt.setString(4, fname);
+		  preparedStmt.setString(5, lname);
+		  preparedStmt.setString(6, phone);
+		  preparedStmt.setString(7, Email);
+		  ResultSet result = preparedStmt.executeQuery();
+		  
+		  preparedStmt.close();
+		  if(result.next()){
+		    	return true;
+		    }
+		    else{
+		    	return false;
+		    }
+		  
+	  }
+	  
+	  
 	
 }

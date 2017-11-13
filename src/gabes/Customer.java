@@ -155,5 +155,7 @@ public class Customer implements Serializable {
 	      throw new IllegalStateException("MUST BE LOGGED IN FIRST!");
 	    
 	    this.loggedIn = false;
+	    
+	    
 	  }
 }
