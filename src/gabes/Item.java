@@ -132,5 +132,4 @@ public class Item implements Serializable {
 	    preparedStmt.close();
 	    return result;
 	}
-
 }
