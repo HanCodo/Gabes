@@ -21,10 +21,10 @@ name="BiddingManagement"><input style = "color: black" name="BiddingManagement"
 value="Bidding Management" type="submit"><br>
 </form>
 <form method="post" action="LeaveFeedback.jsp" name="LeaveFeedback"><input
-style = "color: black" name="LeaveFeedback" value="Leave Feedback" type="submit"><br>
+style = "color: black" name="Leave Feedback" value="Leave Feedback" type="submit"><br>
 </form>
 <form method="post" action="ViewFeedback.jsp" name="ViewFeedback"><input
-style = "color: black" name="ViewFeedback" value="View my Feedback" type="submit"><br>
+style = "color: black" name="View Feedback" value="View my Feedback" type="submit"><br>
 </form>
 <br>
 <br>
