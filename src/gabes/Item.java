@@ -117,6 +117,11 @@ public class Item implements Serializable {
 	    return null;
 	  }
 	
+	  /**
+	   * Lists the bidders who have been active on the implied item
+	   * @return result set containing the results of the query
+	   * @throws SQLException
+	   */
 	public ResultSet showBidderList() throws SQLException {
 		Connection con = openDBConnection();
 	    String queryString = "SELECT b.BidTime, c.Username, b.MaxBidLimit, i.StartDate, i.EndDate"
