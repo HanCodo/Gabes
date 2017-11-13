@@ -155,7 +155,7 @@ public class Admin {
 	   */
 	  public ResultSet viewReport1() throws SQLException{
 	  Connection con = openDBConnection();  
-	  String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, max(B.MAXBIDLIMIT) as FinalSellingPrice, (max(B.MAXBIDLIMIT) * 0.05) as Commission" + 
+	  String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, it.currentBid as FinalSellingPrice, (it.currentBid  * 0.05) as Commission" + 
 	  		"FROM GABES_Item it, GABES_Bid B" + 
 	  		"WHERE it.ItemID = b.ItemID" + 
 	  		"GROUP BY Categories, it.ItemID, it.itemname" + 
@@ -172,7 +172,7 @@ public class Admin {
 	  
 	  public ResultSet viewReport2() throws SQLException{
 	  Connection con = openDBConnection();
-	  String queryString = "SELECT c.UserID, c.Username, c.FName, c.LName, c.Email, AVG (se.Overall) as rating, (max(b.MAXBIDLIMIT) * 0.05) AS Commission" + 
+	  String queryString = "SELECT c.UserID, c.Username, c.FName, c.LName, c.Email, AVG (se.Overall) as rating, (it.currentBid  * 0.05) AS Commission" + 
 	  		"FROM GABES_CUSTOMER c, GABES_BID b, GABES_SELL se" + 
 	  		"WHERE c.UserID = b.UserID and  c.UserID =  se.UserID" + 
 	  		"Group by c.UserID, c.Username, c.FName, c.LName, c.Email";   
@@ -182,7 +182,7 @@ public class Admin {
 		  preparedStmt.close();
 		  return result;
 		  
-		  
+		   
 	  }
 	  
 	  
