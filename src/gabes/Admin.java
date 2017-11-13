@@ -123,11 +123,11 @@ public class Admin {
 	  }
 	  
 	  /**
-	   * inserts a new user
+	   * inserts a new user to the database
 	   */
 	  public boolean insertUser(String userID, String Username, String pass, String fname, String lname, String phone, String Email) {
 		  String queryString = "INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) "
-		  		+ "VALUES (?, ?, ?, ?, ?, ?, ?)"; 
+		  		+ "VALUES (?, ?, ?, ?, ?, ?, ?)";   
 		  preparedStmt = con.prepareStatement(queryString);
 		  preparedStmt.setString(1,userID);
 		  preparedStmt.setString(2, Username);
@@ -147,6 +147,45 @@ public class Admin {
 		    }
 		  
 	  }
+	  
+	  /**
+	   * used to view report 1
+	   */
+	  public ResultSet viewReport1() {
+		  
+	  String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, max(B.MAXBIDLIMIT) as FinalSellingPrice, (max(B.MAXBIDLIMIT) * 0.05) as Commission" + 
+	  		"FROM GABES_Item it, GABES_Bid B" + 
+	  		"WHERE it.ItemID = b.ItemID" + 
+	  		"GROUP BY Categories, it.ItemID, it.itemname" + 
+	  		"ORDER BY Categories ASC, ItemID ASC";   
+		  preparedStmt = con.prepareStatement(queryString);
+		  ResultSet result = preparedStmt.executeQuery();
+		  
+		  preparedStmt.close();
+		  return result;
+		  
+		  
+	  }
+	  
+	  
+	  public ResultSet viewReport2() {
+		  
+	  String queryString = "SELECT c.UserID, c.Username, c.FName, c.LName, c.Email, AVG (se.Overall) as rating, (max(b.MAXBIDLIMIT) * 0.05) AS Commission" + 
+	  		"FROM GABES_CUSTOMER c, GABES_BID b, GABES_SELL se" + 
+	  		"WHERE c.UserID = b.UserID and  c.UserID =  se.UserID" + 
+	  		"Group by c.UserID, c.Username, c.FName, c.LName, c.Email";   
+		  preparedStmt = con.prepareStatement(queryString);
+		  ResultSet result = preparedStmt.executeQuery();
+		  
+		  preparedStmt.close();
+		  return result;
+		  
+		  
+	  }
+	  
+	  
+	  
+	  
 	  
 	  
 	
