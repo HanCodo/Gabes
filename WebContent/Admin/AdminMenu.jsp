@@ -18,9 +18,7 @@ value="User Management" type="submit"><br>
 </form>
 <form method="post" action="ViewReports.jsp"
 name="ViewReports"><input style = "color: black" name="ViewReports"
-value="ViewReports" type="submit"><br>
-</form>
-
+value="View Reports" type="submit"><br>
 </form>
 <br>
 <br>
