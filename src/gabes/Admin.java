@@ -113,7 +113,8 @@ public class Admin {
 	  /**
 	   * views all users in the database
 	   */
-	  public ResultSet viewUsers() {
+	  public ResultSet viewUsers() throws SQLException{
+		  	Connection con = openDBConnection();
 		    String queryString = "SELECT * FROM GABES_CUSTOMER";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
@@ -125,7 +126,8 @@ public class Admin {
 	  /**
 	   * inserts a new user to the database
 	   */
-	  public boolean insertUser(String userID, String Username, String pass, String fname, String lname, String phone, String Email) {
+	  public boolean insertUser(String userID, String Username, String pass, String fname, String lname, String phone, String Email) throws SQLException{
+		  Connection con = openDBConnection();
 		  String queryString = "INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) "
 		  		+ "VALUES (?, ?, ?, ?, ?, ?, ?)";   
 		  preparedStmt = con.prepareStatement(queryString);
@@ -151,8 +153,8 @@ public class Admin {
 	  /**
 	   * used to view report 1
 	   */
-	  public ResultSet viewReport1() {
-		  
+	  public ResultSet viewReport1() throws SQLException{
+	  Connection con = openDBConnection();  
 	  String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, max(B.MAXBIDLIMIT) as FinalSellingPrice, (max(B.MAXBIDLIMIT) * 0.05) as Commission" + 
 	  		"FROM GABES_Item it, GABES_Bid B" + 
 	  		"WHERE it.ItemID = b.ItemID" + 
@@ -168,8 +170,8 @@ public class Admin {
 	  }
 	  
 	  
-	  public ResultSet viewReport2() {
-		  
+	  public ResultSet viewReport2() throws SQLException{
+	  Connection con = openDBConnection();
 	  String queryString = "SELECT c.UserID, c.Username, c.FName, c.LName, c.Email, AVG (se.Overall) as rating, (max(b.MAXBIDLIMIT) * 0.05) AS Commission" + 
 	  		"FROM GABES_CUSTOMER c, GABES_BID b, GABES_SELL se" + 
 	  		"WHERE c.UserID = b.UserID and  c.UserID =  se.UserID" + 
