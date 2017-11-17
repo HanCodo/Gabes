@@ -138,11 +138,16 @@ public class Customer implements Serializable {
 	    preparedStmt.setString(2,this.getPass());
 	    ResultSet result = preparedStmt.executeQuery();
 	    if(result.next()){
-	      this.setLoggedIn(true);
+	      this.setLoggedIn(true); 
 	    }
 	    else{
 	      this.setLoggedIn(false);
 	    }
+//	    this.setUserID(result.getInt("userID"));
+//	    this.setFname(result.getString("fname"));
+//	    this.setLname(result.getString("lname"));
+//	    this.setEmail(result.getString("email"));
+//	    this.setPhone(result.getInt("phone"));
 	    preparedStmt.close();
 	    return this.isLoggedIn();
 	  }
@@ -177,12 +182,34 @@ public class Customer implements Serializable {
 	  }
 	  
 	  /**
+	   * Retrieves the information for an account to be updated
+	   * @return an int representing the number of 
+	   * rows affected by the update statement
+	   * @throws SQLException
+	   */
+	  public ResultSet profileInfo() {
+		  Connection con = openDBConnection();
+	        try{
+	            stmt = con.createStatement();
+	            String queryString = "SELECT username, fname, lname, email, phone, password, count(overall) as numRatings, avg(overall) as avgRatings" 
+	                    + "FROM GABES_CUSTOMER c, GABES_SELL s "
+	                    + "WHERE c.UserID='" + this.getUserID()+ "' AND c.UserID = s.UserID"
+	                    + "GROUP BY username, fname, lname, email, phone, pass";
+
+	            return stmt.executeQuery(queryString);
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	            return null;
+	        }
+	  }
+	  
+	  /**
 	   * Updates the information for an account
 	   * @return an int representing the number of 
 	   * rows affected by the update statement
 	   * @throws SQLException
 	   */
-	  public int updateProfile() {
+	  public int updateProfile(){
 		  int result = -1;
 		  Connection con = openDBConnection();
 	        try{
