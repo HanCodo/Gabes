@@ -15,16 +15,20 @@
 </td>
 <td>ITEM NAME
 </td>
-<td>MAX BID LIMIT
+<td>CATAGORY
 </td>
-<td>BID TIME
+<td>START DATE
+</td>
+<td>END DATE
+</td>
+<td>BUY PRICE
 </td>
 </tr>
 <%ResultSet r = customer.listBidOnItems();
 while(r.next()){%>
 <tr>
 <td>
-<%=r.getInt("ITEMID")
+<%=r.getInt("sell.ITEMID")
 %>
 </td>
 <td>
@@ -32,11 +36,19 @@ while(r.next()){%>
 %>
 </td>
 <td>
-<%=r.getDouble("MAXBIDLIMIT")
+<%=r.getString("CATAGORIES")
 %>
 </td>
 <td>
-<%=r.getDate("ITEMID")
+<%=r.getDate("STARTDATE")
+%>
+</td>
+<td>
+<%=r.getDate("ENDDATE")
+%>
+</td>
+<td>
+<%=r.getDouble("CURRENTBID")
 %>
 </td>
 </tr>

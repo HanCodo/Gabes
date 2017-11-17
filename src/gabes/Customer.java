@@ -211,10 +211,27 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listMyItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "SELECT c.UserID, i.ItemName, i.Category, i.StartDate, i.EndDate, i.StartPrice" + 
-		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s" + 
+		    String queryString = "SELECT c.UserID, i.ItemName, i.Category, i.StartDate, i.EndDate, i.StartPrice " + 
+		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
 		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+
 		    		"";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    preparedStmt.close();
+		    return result;
+	  }
+	  
+	  /**
+	   * Lists items bid on matched to active user
+	   * @return result set containing the results of the query
+	   * @throws SQLException
+	   */
+	  public ResultSet listBidOnItems() throws SQLException {
+		  	Connection con = openDBConnection();
+		    String queryString = "Select b.ITEMID, it.ITEMNAME,b.MAXBIDLIMIT,b.BIDTIME "+
+		    		"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c "+
+		    		"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID";
+
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    preparedStmt.close();
