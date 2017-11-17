@@ -12,9 +12,13 @@ http-equiv="content-type">
 <form method="post" action="../CustomerLogout_action.jsp" name="logout"><input
 style = "color: black" name="Logout" value="Logout" type="submit"></form>
 </div>
+<form method="post" action="UpdateProfile.jsp"
+name="UpdateProfile"><input style = "color: black" name="UpdateProfile"
+value="Update Profile" type="submit"><br>
+</form>
 <form method="post" action="SellingManagement.jsp"
 name="SellingManagement"><input style = "color: black" name="SellingManagement"
-value="Selling Managemane" type="submit"><br>
+value="Selling Management" type="submit"><br>
 </form>
 <form method="post" action="BiddingManagement.jsp"
 name="BiddingManagement"><input style = "color: black" name="BiddingManagement"

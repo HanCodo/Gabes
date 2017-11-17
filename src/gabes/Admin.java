@@ -120,7 +120,6 @@ public class Admin {
 		    ResultSet result = preparedStmt.executeQuery();
 		    preparedStmt.close();
 		    return result;
-		  
 	  }
 	  
 	  /**
@@ -160,29 +159,34 @@ public class Admin {
 	  		"WHERE it.ItemID = b.ItemID" + 
 	  		"GROUP BY Categories, it.ItemID, it.itemname" + 
 	  		"ORDER BY Categories ASC, ItemID ASC";   
-		  preparedStmt = con.prepareStatement(queryString);
-		  ResultSet result = preparedStmt.executeQuery();
+		  stmt = con.createStatement();
+		  ResultSet result = stmt.executeQuery(queryString);
 		  
-		  preparedStmt.close();
+		  stmt.close();
 		  return result;
-		  
-		  
 	  }
 	  
 	  
-	  public ResultSet viewReport2() throws SQLException{
-	  Connection con = openDBConnection();
-	  String queryString = "SELECT c.UserID, c.Username, c.FName, c.LName, c.Email, AVG (se.Overall) as rating, (it.currentBid  * 0.05) AS Commission" + 
-	  		"FROM GABES_CUSTOMER c, GABES_BID b, GABES_SELL se" + 
-	  		"WHERE c.UserID = b.UserID and  c.UserID =  se.UserID" + 
-	  		"Group by c.UserID, c.Username, c.FName, c.LName, c.Email";   
-		  preparedStmt = con.prepareStatement(queryString);
-		  ResultSet result = preparedStmt.executeQuery();
+	  public ResultSet viewReport2(){
+		  try {
+			  Connection con = openDBConnection();
+//	  	String queryString = "SELECT c.UserID, c.Username, c.FName, c.LName, c.Email, AVG (se.Overall) as rating, (it.currentBid  * 0.05) AS Commission" + 
+//	  		"FROM GABES_CUSTOMER c, GABES_BID b, GABES_SELL se" + 
+//	  		"WHERE c.UserID = b.UserID and  c.UserID =  se.UserID" + 
+//	  		"Group by c.UserID, c.Username, c.FName, c.LName, c.Email";   
+			  String queryString = "SELECT *"+
+					  "FROM GABES_REPORT2";
+			  stmt = con.createStatement();
+			  ResultSet result = stmt.executeQuery(queryString);
 		  
-		  preparedStmt.close();
-		  return result;
+			  //stmt.close();
+			  return result;
 		  
-		   
+		  }
+		  catch (Exception E) {
+			  E.printStackTrace();
+			  return null;
+		  }   
 	  }
 	  
 	  
