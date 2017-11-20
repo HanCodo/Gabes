@@ -23,6 +23,8 @@
 </td>
 <td>BUY PRICE
 </td>
+<td>RATE SELLER
+</td>
 </tr>
 <%ResultSet r = customer.listBidOnItems();
 while(r.next()){%>
@@ -50,6 +52,12 @@ while(r.next()){%>
 <td>
 <%=r.getDouble("CURRENTBID")
 %>
+</td>
+<td>
+<form method="post" action="RateSeller.jsp" name="Rate">
+<input name="ItemID" value=<%=r.getInt("sell.ITEMID")%>><br>
+<input style = "color: black" name="Rate" value="Rate" type="submit">
+</form>
 </td>
 </tr>
 <%} %>
