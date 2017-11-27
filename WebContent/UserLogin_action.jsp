@@ -3,8 +3,9 @@
 <jsp:setProperty name="customer" property="*"/> 
 
 <%
-if (customer.login())
+if (customer.login()){
 	response.sendRedirect("Customer/CustomerMenu.jsp");
+}
 else
     response.sendRedirect("index.jsp");
 %> 

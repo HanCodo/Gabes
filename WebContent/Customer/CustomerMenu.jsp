@@ -4,7 +4,6 @@
 
 <%@ page language="java" import="java.sql.*, gabes.*"%>
 <jsp:useBean id="customer" class= "gabes.Customer" scope="session"/> 
-<jsp:setProperty name="customer" property="*"/> 
 
 <html>
 <head>
@@ -17,7 +16,7 @@ http-equiv="content-type">
 <form method="post" action="../CustomerLogout_action.jsp" name="logout"><input
 style = "color: black" name="Logout" value="Logout" type="submit"></form>
 </div>
-<div style="text-align: center;"><%=customer.getFname() %> <br>
+<div style="text-align: center;"><jsp:getProperty name="customer" property="fname"/> <br>
 </div>
 <form method="post" action="UpdateProfile.jsp"
 name="UpdateProfile"><input style = "color: black" name="UpdateProfile"
