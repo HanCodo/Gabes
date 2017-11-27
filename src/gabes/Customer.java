@@ -191,12 +191,16 @@ public class Customer implements Serializable {
 		  Connection con = openDBConnection();
 	        try{
 	            stmt = con.createStatement();
-	            String queryString = "SELECT username, fname, lname, email, phone, password, count(overall) as numRatings, avg(overall) as avgRatings" 
+	            String queryString = "SELECT username, fname, lname, email, phone, pass, count(overall) as numRatings, avg(overall) as avgRatings " 
 	                    + "FROM GABES_CUSTOMER c, GABES_SELL s "
-	                    + "WHERE c.UserID='" + this.getUserID()+ "' AND c.UserID = s.UserID"
+	                    + "WHERE c.Username = '"+this.getUsername()+"' AND c.UserID = s.UserID "
 	                    + "GROUP BY username, fname, lname, email, phone, pass";
 
-	            return stmt.executeQuery(queryString);
+	            
+	            ResultSet result = stmt.executeQuery(queryString);
+	            result.next();
+	            System.out.println(result.getString(1));
+	            return result;
 	        } catch (Exception E) {
 	            E.printStackTrace();
 	            return null;

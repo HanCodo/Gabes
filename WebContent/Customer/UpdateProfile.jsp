@@ -4,16 +4,15 @@
 
 <%@ page language="java" import="java.sql.*, gabes.*"%>
 <jsp:useBean id="customer" class= "gabes.Customer" scope="session"/> 
+<<jsp:setProperty property="*" name="customer"/>
 
-
-<% 	System.out.println(customer.getUserID());
+<% 	System.out.println(customer.getUsername());
 	try{
 		ResultSet rs = customer.profileInfo();
-		System.out.println(rs);
-        if (!rs.next()){
-            response.sendRedirect("../Logout_action.jsp");
-        }
-        else {
+        //if (!rs.next()){
+            //response.sendRedirect("../Logout_action.jsp");
+        //}
+        //else {
             	%>
 <html>
 <head>
@@ -25,11 +24,11 @@ http-equiv="content-type">
 <div style="text-align: center;">Update Profile <br>
 </div>
 <form method="post" action="UpdateProfile_action.jsp" name="Update">Username
-<input name="Username" value = <%=rs.getString("username")  %>><br>
-First Name <input name="Fname" value = <%=rs.getString("fname") %>><br>
-Last Name <input name="Lname" value = <%=rs.getString("lname") %>><br>
-Email <input name="Email" value = <%=rs.getString("email") %>><br>
-Phone <input name="Phone" value = <%=rs.getString("phone") %>><br>
+<input name="Username" value = <%=rs.getString(1)%>><br>
+First Name <input name="Fname" value = <%=rs.getString(2)%>><br>
+Last Name <input name="Lname" value = <%=rs.getString(3)%>><br>
+Email <input name="Email" value = <%=rs.getString(4)%>><br>
+Phone <input name="Phone" value = <%=rs.getString(5)%>><br>
 Seller Rating <br>
 Number of Ratings <br>
 Old Password <input name="oldPass" type="password"><br>
@@ -37,7 +36,7 @@ New Password <input name="Pass1" type="password"><br>
 Retype Password <input name="Pass2" type="password"><br>
 <input style = "color: black" name="Update" value="Update" type="submit"><br>
 </form>
-<% 		}
+<% 		//}
     }
 	catch(IllegalStateException ise){
     	out.println(ise.getMessage());
