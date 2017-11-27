@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page language="java" import="java.sql.*, gabes.*"%>
+<jsp:useBean id="admin" class= "gabes.Admin" scope="session"/> 
+<jsp:setProperty name="admin" property="*"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,18 +33,24 @@ cellspacing="2">
 <td style="vertical-align: top;">Commision<br>
 </td>
 </tr>
+<%try {ResultSet users = admin.viewReport1();
+//out.println(users);
+while(users.next()){%>
 <tr>
-<td style="vertical-align: top;"><br>
+<td style="vertical-align: top;"><%try{out.println(users.getString(1));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><br>
+<td style="vertical-align: top;"><%try{out.println(users.getString(2));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><br>
+<td style="vertical-align: top;"><%try{out.println(users.getString(3));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><br>
+<td style="vertical-align: top;"><%try{out.println(users.getString(4));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><br>
+<td style="vertical-align: top;"><%try{out.println(users.getString(5));}catch(Exception ex){out.println("noo");} %><br>
 </td>
 </tr>
+<%} }catch(Exception ex){
+	out.println(ex);
+	}%>
 </tbody>
 </table>
 <form method="post" action="../ViewReports.jsp"

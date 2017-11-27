@@ -118,7 +118,7 @@ public class Admin {
 		    String queryString = "SELECT * FROM GABES_CUSTOMER";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
-		    preparedStmt.close();
+		    //preparedStmt.close();
 		    return result;
 	  }
 	  
@@ -162,7 +162,7 @@ public class Admin {
 		  stmt = con.createStatement();
 		  ResultSet result = stmt.executeQuery(queryString);
 		  
-		  stmt.close();
+		  //stmt.close();
 		  return result;
 	  }
 	  
