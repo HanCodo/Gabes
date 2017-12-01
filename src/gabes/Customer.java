@@ -143,11 +143,11 @@ public class Customer implements Serializable {
 	    else{
 	      this.setLoggedIn(false);
 	    }
-//	    this.setUserID(result.getInt("userID"));
-//	    this.setFname(result.getString("fname"));
-//	    this.setLname(result.getString("lname"));
-//	    this.setEmail(result.getString("email"));
-//	    this.setPhone(result.getInt("phone"));
+	    this.setUserID(result.getInt("userID"));
+	    this.setFname(result.getString("fname"));
+	    this.setLname(result.getString("lname"));
+	    this.setEmail(result.getString("email"));
+	    this.setPhone(result.getInt("phone"));
 	    preparedStmt.close();
 	    return this.isLoggedIn();
 	  }

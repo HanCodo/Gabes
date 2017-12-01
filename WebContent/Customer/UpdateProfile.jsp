@@ -10,7 +10,7 @@
 	try{
 		ResultSet rs = customer.profileInfo();
         //if (!rs.next()){
-            //response.sendRedirect("../Logout_action.jsp");
+        //    response.sendRedirect("../Logout_action.jsp");
         //}
         //else {
             	%>
@@ -24,11 +24,11 @@ http-equiv="content-type">
 <div style="text-align: center;">Update Profile <br>
 </div>
 <form method="post" action="UpdateProfile_action.jsp" name="Update">Username
-<input name="Username" value = <%=rs.getString(1)%>><br>
-First Name <input name="Fname" value = <%=rs.getString(2)%>><br>
-Last Name <input name="Lname" value = <%=rs.getString(3)%>><br>
-Email <input name="Email" value = <%=rs.getString(4)%>><br>
-Phone <input name="Phone" value = <%=rs.getString(5)%>><br>
+<input name="Username" value = <%=customer.getUsername()%>><br>
+First Name <input name="Fname" value = <%=customer.getFname()%>><br>
+Last Name <input name="Lname" value = <%=customer.getLname()%>><br>
+Email <input name="Email" value = <%=customer.getEmail()%>><br>
+Phone <input name="Phone" value = <%=customer.getPhone()%>><br>
 Seller Rating <br>
 Number of Ratings <br>
 Old Password <input name="oldPass" type="password"><br>
