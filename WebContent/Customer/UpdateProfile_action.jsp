@@ -1,12 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page language="java" import="java.sql.*, gabes.*"%>
+<jsp:useBean id="customer" class= "gabes.Customer" scope="session"/> 
+<jsp:setProperty name="customer" property="*"/> 
 
-</body>
-</html>
+<%
+if(!request.getParameter("oldPass").equals("")){
+	if(!request.getParameter("oldPass").equals(customer.getPass())){
+		response.sendRedirect("UpdateProfile.jsp?error=1");
+	}
+	else if (!request.getParameter("pass1").equals(request.getParameter("pass2"))){
+		response.sendRedirect("UpdateProfile.jsp?error=2");
+	}
+	else{
+		System.out.println(request.getParameter("username") + request.getParameter("fname")+ request.getParameter("lname")+ request.getParameter("phone")+ request.getParameter("email")+ request.getParameter("pass1"));
+		int result = customer.updateProfile(request.getParameter("username"), request.getParameter("fname"), request.getParameter("lname"), request.getParameter("phone"), request.getParameter("email"), request.getParameter("pass1"));
+		response.sendRedirect("UpdateProfile.jsp");
+	}
+}
+else{
+	System.out.println(request.getParameter("username") + request.getParameter("fname")+ request.getParameter("lname")+ request.getParameter("phone")+ request.getParameter("email"));
+	int result = customer.updateProfile(request.getParameter("username"), request.getParameter("fname"), request.getParameter("lname"), request.getParameter("phone"), request.getParameter("email"), customer.getPass());
+	response.sendRedirect("UpdateProfile.jsp");
+}
+
+
+%> 

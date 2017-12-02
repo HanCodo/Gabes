@@ -16,7 +16,7 @@ public class Customer implements Serializable {
 	private String pass;
 	private String fname;
 	private String lname;
-	private int phone;
+	private String phone;
 	private String email;
 
 	private PreparedStatement preparedStmt;
@@ -67,11 +67,11 @@ public class Customer implements Serializable {
 		this.lname = lname;
 	}
 
-	public int getPhone() {
+	public String getPhone(){
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -147,7 +147,7 @@ public class Customer implements Serializable {
 	    this.setFname(result.getString("fname"));
 	    this.setLname(result.getString("lname"));
 	    this.setEmail(result.getString("email"));
-	    this.setPhone(result.getInt("phone"));
+	    this.setPhone(result.getString("phone"));
 	    preparedStmt.close();
 	    return this.isLoggedIn();
 	  }
@@ -213,22 +213,29 @@ public class Customer implements Serializable {
 	   * rows affected by the update statement
 	   * @throws SQLException
 	   */
-	  public int updateProfile(){
+	  public int updateProfile(String username,String fname,String lname,String phone,String email,String pass){
 		  int result = -1;
 		  Connection con = openDBConnection();
 	        try{
-	            stmt = con.createStatement();
-	            String queryString = "update irahal.company_employee set " 
-	                    + " fname='" + this.getFname() + "',"
-	                    + " lname='" + this.getLname() + "',"
-	                    + " phone='" + this.getPhone() + "',"
-	                    + " email='" + this.getEmail() + "',"
-	                    + " username=" + this.getUsername() + "',"
-	                    + " pass = '" + this.getPass()+"'"
-	                    + " where UserID='" + this.getUserID()+ "'";
+	            String queryString = "update GABES_CUSTOMER " 
+	                    + " set fname=?,"
+	                    + " lname=?,"
+	                    + " phone=?,"
+	                    + " email=?,"
+	                    + " username=?,"
+	                    + " pass=?"
+	                    + " where userID=?";
 
-	            result = stmt.executeUpdate(queryString);
-	            stmt.close();         
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setString(1,fname);
+	            preparedStmt.setString(2,lname);
+	            preparedStmt.setString(3,phone);
+	            preparedStmt.setString(4,email);
+	            preparedStmt.setString(5,username);
+	            preparedStmt.setString(6,pass);
+	            preparedStmt.setInt(7,(this.getUserID()));
+	            result = preparedStmt.executeUpdate();
+	            preparedStmt.close();
 	        } catch (Exception E) {
 	            E.printStackTrace();
 	        }       

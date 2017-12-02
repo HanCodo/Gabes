@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:useBean id="admin" class= "gabes.Admin" scope="session"/> 
+<% 
+if(admin.getPass() == null)
+{
+	response.sendRedirect("../AdminLogout_action.jsp");
+}
+%>
 <html>
 <head>
 <meta content="text/html; charset=ISO-8859-1"

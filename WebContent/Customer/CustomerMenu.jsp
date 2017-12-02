@@ -4,7 +4,12 @@
 
 <%@ page language="java" import="java.sql.*, gabes.*"%>
 <jsp:useBean id="customer" class= "gabes.Customer" scope="session"/> 
-
+<% 
+if(customer.getUsername() == null)
+{
+	response.sendRedirect("../CustomerLogout_action.jsp");
+}
+%>
 <html>
 <head>
 <meta content="text/html; charset=ISO-8859-1"
