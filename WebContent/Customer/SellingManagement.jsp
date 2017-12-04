@@ -16,12 +16,34 @@ if(customer.getUsername() == null)
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
 <title></title>
+<style type="text/css">
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.shift {
+    text-indent: 300px;
+}
+</style>
 </head>
 <body>
-<div style="text-align: right;">
-<form method="post" action="../CustomerLogout_action.jsp" name="logout"><input
-style = "color: black" name="Logout" value="Logout" type="submit"></form>
+<div>
+    <div class="left">
+    	<a href="CustomerMenu.jsp">
+  			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
+		</a>
+	</div>
+    <div class="right">
+    	<form method="post" action="../CustomerLogout_action.jsp" name="logout">
+    		Logged in as: <%=customer.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
+    	</form>
+    </div>
 </div>
+<br>
+<br>
+<br>
 <div style="text-align: center;"><br>
 </div>
 <form method="post" action="ItemsList.jsp"

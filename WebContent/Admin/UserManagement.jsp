@@ -61,11 +61,11 @@ while(users.next()){%>
 </td>
 <td style="vertical-align: top;"><%try{out.println(users.getString(2));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top; width: 253px;"><%try{out.println(users.getString(3));}catch(Exception ex){out.println("noo");}  %><br>
+<td style="vertical-align: top; width: 253px;"><%try{out.println(users.getString(4));}catch(Exception ex){out.println("noo");}  %><br>
 </td>
-<td style="vertical-align: top; width: 245px;"><%try{out.println(users.getString(4));}catch(Exception ex){out.println("noo");}  %><br>
+<td style="vertical-align: top; width: 245px;"><%try{out.println(users.getString(5));}catch(Exception ex){out.println("noo");}  %><br>
 </td>
-<td style="vertical-align: top; width: 282px;"><%try{out.println(users.getString(5));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top; width: 282px;"><%try{out.println(users.getString(3));}catch(Exception ex){out.println("noo");} %><br>
 </td>
 <td style="vertical-align: top;"><%try{out.println(users.getString(6));}catch(Exception ex){out.println("noo");}  %><br>
 </td>
