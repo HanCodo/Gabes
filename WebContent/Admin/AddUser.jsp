@@ -18,19 +18,6 @@ http-equiv="content-type">
 </style>
 </head>
 <body>
-<<<<<<< HEAD
-<form method="post" action="AddUser_action.jsp" name="adduser">
-UserID: <input name="userID"><br>
-User Name: <input name="userName"><br>
-First Name: <input name="fName"><br>
-Last Name: <input name="lName"><br>
-Phone: <input name="phone"><br>
-Email: <input name="email"><br>
-Password: <input name="password"><br>
-re-Type Password: <input name="password2"><br>
-<input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
-</form>
-=======
 <div>
     <div class="left">
     	<a href="AdminMenu.jsp">
@@ -46,60 +33,17 @@ re-Type Password: <input name="password2"><br>
 <br>
 <br>
 <br>
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
-cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: top; width: 795px;">UserID<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; width: 795px;">User Name<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; width: 795px;">First Name<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; width: 795px;">Last Name<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; width: 795px;">Phone<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; width: 795px;">Email<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; width: 795px;">Password<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; width: 795px;">re-type Password<br>
-</td>
-<td style="vertical-align: top; width: 808px;"><br>
-</td>
-</tr>
-</tbody>
-</table>
+<form method="post" action="AddUser_action.jsp" name="adduser">
+UserID: <input name="userID"><br>
+User Name: <input name="userName"><br>
+First Name: <input name="fName"><br>
+Last Name: <input name="lName"><br>
+Phone: <input name="phone"><br>
+Email: <input name="email"><br>
+Password: <input name="password"><br>
+Re-Type Password: <input name="password2"><br>
+<input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
+</form>
 <br>
->>>>>>> branch 'master' of https://github.com/HanCodo/Gabes.git
 </body>
 </html>
