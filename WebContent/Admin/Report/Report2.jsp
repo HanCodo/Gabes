@@ -79,11 +79,7 @@ cellspacing="2">
 </td>
 <td style="vertical-align: top;"><%try{out.println(rs.getString(6));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<<<<<<< HEAD
 <td style="vertical-align: top;"><%try{out.println(rs.getString(7));}catch(Exception ex){out.println("noo");} %><br>
-=======
-<td style="vertical-align: top;"><%=rs.getString("Commission") %><br>
->>>>>>> branch 'master' of https://github.com/HanCodo/Gabes.git
 </td>
 </tr>
 <%
