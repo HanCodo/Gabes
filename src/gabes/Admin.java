@@ -154,11 +154,10 @@ public class Admin {
 	   */
 	  public ResultSet viewReport1() throws SQLException{
 	  Connection con = openDBConnection();  
-	  String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, it.currentBid as FinalSellingPrice, (it.currentBid  * 0.05) as Commission" + 
+	  String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, it.currentBid as FinalSellingPrice, (it.currentBid  * 0.05) as Commission " + 
 	  		"FROM GABES_Item it, GABES_Bid B" + 
-	  		"WHERE it.ItemID = b.ItemID" + 
-	  		"GROUP BY Categories, it.ItemID, it.itemname" + 
-	  		"ORDER BY Categories ASC, ItemID ASC";   
+	  		" WHERE it.ItemID = b.ItemID" + 
+	  		" ORDER BY Categories ASC, ItemID ASC";   
 		  stmt = con.createStatement();
 		  ResultSet result = stmt.executeQuery(queryString);
 		  
