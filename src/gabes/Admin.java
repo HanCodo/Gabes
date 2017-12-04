@@ -94,6 +94,7 @@ public class Admin {
 	    }
 	    else{
 	    	this.setLoggedIn(false);
+	    	return this.isLoggedIn();
 	    }
 	    preparedStmt.close();
 	    return this.isLoggedIn();

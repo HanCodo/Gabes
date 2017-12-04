@@ -6,5 +6,5 @@
 if (admin.login())
     response.sendRedirect("Admin/AdminMenu.jsp");
 else
-    response.sendRedirect("index.jsp");
+    response.sendRedirect("AdminLogin.jsp?error=1");
 %> 
