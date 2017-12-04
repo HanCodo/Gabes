@@ -5,6 +5,9 @@ http-equiv="content-type">
 <title>User Log In</title>
 </head>
 <body>
+<a href="index.jsp">
+  <img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="img/gabes.png">
+</a>
 <form method="post" action="UserLogin_action.jsp" name="Login">Username:
 <input name="username"><br>
 Password: <input name="pass" type="password"><br>

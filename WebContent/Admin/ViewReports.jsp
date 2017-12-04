@@ -6,12 +6,31 @@
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
 <title></title>
+<style type="text/css">
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+</style>
 </head>
 <body>
-<div style="text-align: right;">
-<form method="post" action="../AdminLogout_action.jsp" name="logout"><input
-style = "color: black" name="Logout" value="Logout" type="submit"></form>
+<div>
+    <div class="left">
+    	<a href="AdminMenu.jsp">
+  			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
+		</a>
+	</div>
+    <div class="right">
+    	<form method="post" action="../AdminLogout_action.jsp" name="logout">
+    		<input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
+    	</form>
+    </div>
 </div>
+<br>
+<br>
+<br>
 <form method="post" action="Report/Report1.jsp"
 name="Report1"><input style = "color: black" name="Report1"
 value="View Sales Summary" type="submit"><br>

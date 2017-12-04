@@ -24,6 +24,9 @@ http-equiv="content-type">
 <title></title>
 </head>
 <body>
+<a href="CustomerMenu.jsp">
+  <img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
+</a>
 <div style="text-align: right;">
 <form method="post" action="../CustomerLogout_action.jsp" name="logout"><input
 style = "color: black" name="Logout" value="Logout" type="submit"></form>
