@@ -199,6 +199,7 @@ public class Customer implements Serializable {
 	            
 	            ResultSet result = stmt.executeQuery(queryString);
 	            result.next();
+	            System.out.println(result.getString(1));
 	            return result;
 	        } catch (Exception E) {
 	            E.printStackTrace();
@@ -248,7 +249,8 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listMyItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "SELECT c.UserID, i.ItemName, i.Category, i.StartDate, i.EndDate, i.StartPrice " + 
+		  	
+		    String queryString = "Select i.ITEMID as ITEM_ID, i.ITEMNAME as ITEM_NAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as START_DATE,i.ENDDATE as END_DATE,i.STARTPRICE as START_PRICE, i.CURRENTBID as CURRENT_BID,i.status as STATUS " + 
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
 		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+
 		    		"";
@@ -265,13 +267,44 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "Select b.ITEMID, it.ITEMNAME,b.MAXBIDLIMIT,b.BIDTIME "+
-		    		"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c "+
+		    String queryString = "Select b.ITEMID as ITEM_ID, it.ITEMNAME as ITEM_NAME,c.USERNAME as USERNAME,b.MAXBIDLIMIT as MAX_BID,b.BIDTIME as BID_TIME"+ 
+		    		"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c"+ 
 		    		"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID";
 
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    preparedStmt.close();
 		    return result;
+	  }
+	  public int addItem(String itemId,String startDate,String endDate,String ItemName,String Descript,String Categories,String startPrice){
+		  int result = -1;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "INSERT INTO GABES_ITEM"+
+	        "(ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid)"+
+	         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            int i = Integer.parseInt(itemId);
+	            preparedStmt.setInt(1,i);
+	            Date sd = Date.valueOf(startDate);
+	            preparedStmt.setDate(2,sd);
+	            Date ed = Date.valueOf(endDate);
+	            preparedStmt.setDate(3,ed);
+	            preparedStmt.setString(4,ItemName);
+	            preparedStmt.setString(5,Descript);
+	            preparedStmt.setString(6,Categories);
+	            double sp = Double.parseDouble(startPrice);
+	            preparedStmt.setDouble(7,sp);
+	            String status = "ON AUCTION";
+	            preparedStmt.setString(8,status);
+	            double cb= 0.0;
+	            preparedStmt.setDouble(9,cb);
+	            result = preparedStmt.executeUpdate();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
 	  }
 }
