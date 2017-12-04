@@ -18,6 +18,19 @@ http-equiv="content-type">
 </style>
 </head>
 <body>
+<<<<<<< HEAD
+<form method="post" action="AddUser_action.jsp" name="adduser">
+UserID: <input name="userID"><br>
+User Name: <input name="userName"><br>
+First Name: <input name="fName"><br>
+Last Name: <input name="lName"><br>
+Phone: <input name="phone"><br>
+Email: <input name="email"><br>
+Password: <input name="password"><br>
+re-Type Password: <input name="password2"><br>
+<input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
+</form>
+=======
 <div>
     <div class="left">
     	<a href="AdminMenu.jsp">
@@ -87,5 +100,6 @@ cellspacing="2">
 </tbody>
 </table>
 <br>
+>>>>>>> branch 'master' of https://github.com/HanCodo/Gabes.git
 </body>
 </html>
