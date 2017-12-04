@@ -51,9 +51,23 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
+<% 
+String message = "";
+String errorParam = request.getParameter("error");
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "Incorrect password. Try again.";
+	}
+	else if (error == 2){
+		message = "Password match fail. Try again.";
+	}
+}
+%>
 <div style="text-align: center;">Update Profile <br>
 </div>
 <br>
+<div style="color: red; text-align: center;"><%=message%></div><br>
 <div class="container">
 <form method="post" action="UpdateProfile_action.jsp" name="Update">
 <label>Username: </label><input name="username" value = <%=customer.getUsername()%>><br>
