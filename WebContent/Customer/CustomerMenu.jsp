@@ -27,13 +27,13 @@ http-equiv="content-type">
 <body>
 <div>
     <div class="left">
-    	<a href="CustomerMenu.jsp">
+    	<a href="../CustomerMenu.jsp">
   			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
 		</a>
 	</div>
     <div class="right">
     	<form method="post" action="../CustomerLogout_action.jsp" name="logout">
-    		<input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
+    		Logged in as: <%=customer.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
     	</form>
     </div>
 </div>

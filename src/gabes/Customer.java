@@ -199,7 +199,6 @@ public class Customer implements Serializable {
 	            
 	            ResultSet result = stmt.executeQuery(queryString);
 	            result.next();
-	            System.out.println(result.getString(1));
 	            return result;
 	        } catch (Exception E) {
 	            E.printStackTrace();

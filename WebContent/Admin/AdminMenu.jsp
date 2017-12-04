@@ -31,7 +31,7 @@ http-equiv="content-type">
 	</div>
     <div class="right">
     	<form method="post" action="../AdminLogout_action.jsp" name="logout">
-    		<input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
+    		Logged in as: <%=admin.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
     	</form>
     </div>
 </div>

@@ -6,8 +6,21 @@
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
 <title></title>
+<style type="text/css">
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+</style>
 </head>
 <body>
+<div>
+   	<a href="index.jsp">
+ 			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="img/gabes.png">
+	</a>
+</div>
 <form method="post" action="UserLogin.jsp"
 name="UserLogin"><input style = "color: black" name="UserLogin"
 value="Login as a customer" type="submit"><br>
