@@ -67,19 +67,23 @@ cellspacing="2">
         %>
 
 <tr>
-<td style="vertical-align: top;"><%=rs.getString("UserID")%><br>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(1));}catch(Exception ex){out.println("noo"); } %><br>
 </td>
-<td style="vertical-align: top;"><%=rs.getString("Username")%><br>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(2));}catch(Exception ex){out.println("noo");}%><br>
 </td>
-<td style="vertical-align: top;"><%=rs.getString("Fname") %><br>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(3));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%=rs.getString("Lname") %><br>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(4));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%=rs.getString("Email") %><br>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(5));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%=rs.getString("rating") %><br>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(6));}catch(Exception ex){out.println("noo");} %><br>
 </td>
+<<<<<<< HEAD
+<td style="vertical-align: top;"><%try{out.println(rs.getString(7));}catch(Exception ex){out.println("noo");} %><br>
+=======
 <td style="vertical-align: top;"><%=rs.getString("Commission") %><br>
+>>>>>>> branch 'master' of https://github.com/HanCodo/Gabes.git
 </td>
 </tr>
 <%

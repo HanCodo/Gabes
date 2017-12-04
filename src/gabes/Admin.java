@@ -153,6 +153,13 @@ public class Admin {
 	   * used to view report 1
 	   */
 	  public ResultSet viewReport1() throws SQLException{
+<<<<<<< HEAD
+	  Connection con = openDBConnection();  
+	  String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, it.currentBid as FinalSellingPrice, (it.currentBid  * 0.05) as Commission " + 
+	  		"FROM GABES_Item it, GABES_Bid B" + 
+	  		" WHERE it.ItemID = b.ItemID" + 
+	  		" ORDER BY Categories ASC, ItemID ASC";   
+=======
 		  Connection con = openDBConnection();  
 	  //String queryString = "SELECT  it.Categories, it.ItemID, it.itemname, it.currentBid as FinalSellingPrice, (it.currentBid  * 0.05) as Commission" + 
 	  //		"FROM GABES_Item it, GABES_Bid B" + 
@@ -160,6 +167,7 @@ public class Admin {
 	  //		"GROUP BY Categories, it.ItemID, it.itemname" + 
 	  //		"ORDER BY Categories, ItemID";   
 		  String queryString = "Select * From GABES_REPORT1";
+>>>>>>> branch 'master' of https://github.com/HanCodo/Gabes.git
 		  stmt = con.createStatement();
 		  ResultSet result = stmt.executeQuery(queryString);
 		  
