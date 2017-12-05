@@ -1,5 +1,6 @@
 package gabes;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ public class Admin {
 	private String username;
 	private String pass;
 	
+	private CallableStatement callStmt;
 	private PreparedStatement preparedStmt;
 	private Statement stmt;
 	/**
@@ -194,25 +196,32 @@ public class Admin {
 	  }
 	  
 	  public ResultSet search(int ItemID, String keyword, String category, String bidMin, String bidMax, 
-			  String StartTime, String endTime, String itemName) {
+			  String startTime, String endTime, String itemName) {
 		  try {
-		  Connection con = openDBConnection();
-		  stmt = con.createStatement();
-		  
-		  stmt=con.prepareCall ("{? = call GABES_Search(?, ?, ?, ?, ?, ?, ?, ?)}");
+			  System.out.println("test");
+			  Connection con = openDBConnection();
+			  String statementString = "{? = call GABES_Search(?, ?, ?, ?, ?, ?, ?, ?)}";
+			  //stmt = con.createStatement();
+			  callStmt = con.prepareCall(statementString);
+			  System.out.println("test2");
+			  //stmt=con.prepareCall ("{? = call GABES_Search(?, ?, ?, ?, ?, ?, ?, ?)}");
 
-		    
-		    ((PreparedStatement) stmt).setInt(2,ItemID);
-		    ((PreparedStatement) stmt).setString(3,keyword);
-		    ((PreparedStatement) stmt).setString(4,keyword);
-		    ((PreparedStatement) stmt).setString(5,keyword);
-		    ((PreparedStatement) stmt).setString(6,keyword);
-		    ((PreparedStatement) stmt).setString(7,keyword);
-		    ((PreparedStatement) stmt).setString(8,keyword);
-		    ((PreparedStatement) stmt).setString(9,keyword);
-		    ((PreparedStatement) stmt).execute(); 
-		    return stmt.getResultSet() ;
-		    
+			  System.out.println("test3");
+			  callStmt.setInt(2,ItemID);
+			  System.out.println("Test 4");
+			  callStmt.setString(3,keyword);
+			  System.out.println("Test 5");
+			  callStmt.setString(4,category);
+			  callStmt.setString(5,bidMin);
+			  callStmt.setString(6,bidMax);
+			  callStmt.setString(7,startTime);
+			  callStmt.setString(8,endTime);
+			  callStmt.setString(9,itemName);
+			  System.out.println("Test 6");
+			  callStmt.execute();
+			  System.out.println("Test 7");
+			  return callStmt.getResultSet() ;
+		    	
 		 // ResultSet result = stmt.executeQuery(queryString);
 	  
 		  //stmt.close();

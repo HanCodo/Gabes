@@ -30,8 +30,8 @@ cellspacing="2">
 <td style="vertical-align: top;">Current Bid<br>
 </td>
 </tr>
-<%try {ResultSet users = admin.search(1, null, null, null, null, null, null, null);
-//out.println(users);
+<%try {ResultSet users = admin.search(1, "null", "null", "null", "null", "null", "null", "null");
+System.out.println(users);
 while(users.next()){%>
 <tr>
 <td style="vertical-align: top;"><%try{out.println(users.getString(1));}catch(Exception ex){out.println("noo");} %><br>
