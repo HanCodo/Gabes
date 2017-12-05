@@ -29,6 +29,10 @@ value="Login as a customer" type="submit"><br>
 name="AdminLogin"><input style = "color: black" name="AdminLogin"
 value="Login as an administrator" type="submit"><br>
 </form>
+<form method="post" action="Search.jsp"
+name="Search"><input style = "color: black" name="Search"
+value="Search" type="submit"><br>
+</form>
 <br>
 <br>
 </body>

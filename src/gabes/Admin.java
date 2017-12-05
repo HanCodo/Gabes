@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 public class Admin {
 	
@@ -190,5 +191,34 @@ public class Admin {
 			  E.printStackTrace();
 			  return null;
 		  }   
+	  }
+	  
+	  public ResultSet search(int ItemID, String keyword, String category, String bidMin, String bidMax, 
+			  String StartTime, String endTime, String itemName) {
+		  try {
+		  Connection con = openDBConnection();
+		  stmt = con.createStatement();
+		  
+		  stmt=con.prepareCall ("{? = call GABES_Search(?, ?, ?, ?, ?, ?, ?, ?)}");
+
+		    
+		    ((PreparedStatement) stmt).setInt(2,ItemID);
+		    ((PreparedStatement) stmt).setString(3,keyword);
+		    ((PreparedStatement) stmt).setString(4,keyword);
+		    ((PreparedStatement) stmt).setString(5,keyword);
+		    ((PreparedStatement) stmt).setString(6,keyword);
+		    ((PreparedStatement) stmt).setString(7,keyword);
+		    ((PreparedStatement) stmt).setString(8,keyword);
+		    ((PreparedStatement) stmt).setString(9,keyword);
+		    ((PreparedStatement) stmt).execute(); 
+		    return stmt.getResultSet() ;
+		    
+		 // ResultSet result = stmt.executeQuery(queryString);
+	  
+		  //stmt.close();
+		  //return result;
+		  }catch(Exception ex) {
+			  return null;
+		  }
 	  }
 }
