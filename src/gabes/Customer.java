@@ -235,7 +235,7 @@ public class Customer implements Serializable {
 	            preparedStmt.setString(6,pass);
 	            preparedStmt.setInt(7,(this.getUserID()));
 	            result = preparedStmt.executeUpdate();
-	            preparedStmt.close();
+	            
 	        } catch (Exception E) {
 	            E.printStackTrace();
 	        }       
@@ -248,15 +248,16 @@ public class Customer implements Serializable {
 	   * @throws SQLException
 	   */
 	  public ResultSet listMyItems() throws SQLException {
+		 
 		  	Connection con = openDBConnection();
 		  	
-		    String queryString = "Select i.ITEMID as ITEM_ID, i.ITEMNAME as ITEM_NAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as START_DATE,i.ENDDATE as END_DATE,i.STARTPRICE as START_PRICE, i.CURRENTBID as CURRENT_BID,i.status as STATUS " + 
+		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
 		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+
 		    		"";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
-		    preparedStmt.close();
+		    
 		    return result;
 	  }
 	  
@@ -273,7 +274,7 @@ public class Customer implements Serializable {
 
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
-		    preparedStmt.close();
+		    
 		    return result;
 	  }
 	  public int addItem(String itemId,String startDate,String endDate,String ItemName,String Descript,String Categories,String startPrice){
