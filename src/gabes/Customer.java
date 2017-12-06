@@ -253,6 +253,25 @@ public class Customer implements Serializable {
 		  	
 		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
+		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+
+		    		"";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    
+		    return result;
+	  }
+	  
+	  /**
+	   * Lists items matched to active user
+	   * @return result set containing the results of the query
+	   * @throws SQLException
+	   */
+	  public ResultSet listMyBoughtItems() throws SQLException {
+		 
+		  	Connection con = openDBConnection();
+		  	
+		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
+		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
 		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD'"+
 		    		"";
 		    preparedStmt = con.prepareStatement(queryString);
@@ -268,9 +287,9 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "Select b.ITEMID as ITEMID, it.ITEMNAME as ITEMNAME,c.USERNAME as USERNAME,b.MAXBIDLIMIT as MAXBID,b.BIDTIME as BIDTIME "
-		    		+ "FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c"+ 
-		    		"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID";
+		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MAXBIDLIMIT, b.BIDTIME "+
+		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
+		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
@@ -332,5 +351,5 @@ public class Customer implements Serializable {
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    return result;
-}
+	  }
 }

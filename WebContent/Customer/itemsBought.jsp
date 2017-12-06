@@ -18,7 +18,7 @@
 </td>
 <td><b>ITEM NAME </b>
 </td>
-<td><b> CATAGORY </b>
+<td><b> CATEGORY </b>
 </td>
 <td><b> START DATE </b>
 </td>
@@ -29,7 +29,7 @@
 <td><b> RATE SELLER </b>
 </td>
 </tr>
-<%ResultSet r = customer.listMyItems();
+<%ResultSet r = customer.listMyBoughtItems();
 r.next();
 do{%>
 <tr>
