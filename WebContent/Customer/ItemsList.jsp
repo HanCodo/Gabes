@@ -44,19 +44,19 @@ catch(IllegalStateException ise){
 <%while(r.next()){ %>
 
 <tr>
-<td style="vertical-align: top;"><%= r.getInt("ITEM_ID")%><br>
+<td style="vertical-align: top;"><%= r.getInt("ITEMID")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("ITEM_NAME")%><br>
+<td style="vertical-align: top;"><%= r.getString("ITEMNAME")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("CATEGORIES")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("START_DATE")%><br>
+<td style="vertical-align: top;"><%= r.getString("STARTDATE")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("END_DATE")%><br>
+<td style="vertical-align: top;"><%= r.getString("ENDDATE")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("START_PRICE")%><br>
+<td style="vertical-align: top;"><%= r.getString("STARTPRICE")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("CURRENT_BID")%><br>
+<td style="vertical-align: top;"><%= r.getString("CURRENTBID")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("STATUS")%><br>
 </td>

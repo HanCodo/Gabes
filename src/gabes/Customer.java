@@ -271,7 +271,6 @@ public class Customer implements Serializable {
 		    String queryString = "Select b.ITEMID as ITEM_ID, it.ITEMNAME as ITEM_NAME,c.USERNAME as USERNAME,b.MAXBIDLIMIT as MAX_BID,b.BIDTIME as BID_TIME"+ 
 		    		"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c"+ 
 		    		"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID";
-
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
@@ -307,5 +306,19 @@ public class Customer implements Serializable {
 	            E.printStackTrace();
 	        }       
 	        return result;
+	  }
+	  public ResultSet viewMyFeedback() throws SQLException{
+		  	Connection con = openDBConnection();
+
+		    String queryString = "Select item.itemname as Item_Sold ,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response"+
+		    		"FROM GABES_SELL sell,GABES_ITEM item"+
+		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid";
+
+
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+		  
+		  
 	  }
 }
