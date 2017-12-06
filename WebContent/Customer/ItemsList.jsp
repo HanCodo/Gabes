@@ -65,9 +65,10 @@ catch(IllegalStateException ise){
 <button value="Item Info" name="Item Info">Item Info</button><br>
 </form><br>
 </td>
-<td style="vertical-align: top;"><form method="post" action="BidderList.jsp">  <input name="Bidder List"
-value="Bidder List" type="submit"></form><br>
-</td>
+<td style="vertical-align: top;"><form method="GET" action="BidderList.jsp" name="BidList">
+<input name="BidList" type="hidden" value="<%=r.getInt("ItemID") %>"/>
+<button value="BidList" name="BidList">Item Info</button><br>
+</form><br>
 </tr>
 <%} r.close(); %>
 </tbody>

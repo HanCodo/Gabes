@@ -329,8 +329,8 @@ public class Customer implements Serializable {
 	  public ResultSet viewFeedback() throws SQLException{
 		  	Connection con = openDBConnection();
 
-		    String queryString = "Select item.itemname as Item_Sold ,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response"+
-		    		"FROM GABES_SELL sell,GABES_ITEM item"+
+		    String queryString = "Select item.itemname as Item_Sold ,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response "+
+		    		"FROM GABES_SELL sell,GABES_ITEM item "+
 		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid";
 
 
@@ -342,14 +342,25 @@ public class Customer implements Serializable {
 	  public ResultSet viewItem(String ItemId) throws SQLException{
 		  	Connection con = openDBConnection();
 		  	int itemId = Integer.parseInt(ItemId);
-		    String queryString = "Select *"+
-		    		"From Gabes_ITEM item"+
-		    		"Where"+itemId+ "= item.itemid";
+		    String queryString = "Select * "+
+		    		" From GABES_ITEM "+
+		    		" Where "+itemId+ "= GABES_ITEM.itemid ";
 
 
 
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+	  }
+	  public ResultSet bidInfoList(String itemId) throws SQLException {
+		  	Connection con = openDBConnection();
+		  	int newId = Integer.parseInt(itemId);
+		    String queryString = "Select DISTINCT GABES_CUSTOMER.USERNAME as USERNAME, GABES_BID.MAXBIDLIMIT as MAX_BID, GABES_BID.BIDTIME as BID_TIME "+
+    				"FROM GABES_BID,GABES_ITEM, GABES_CUSTOMER " + 
+    				"WHERE GABES_BID.ITEMID = "+newId+" and GABES_CUSTOMER.UserID ="+this.userID;
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    
 		    return result;
 	  }
 }
