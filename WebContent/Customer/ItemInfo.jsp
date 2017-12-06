@@ -37,7 +37,7 @@ cellspacing="2">
 </tr>
 <%ResultSet r = null;
 try{
-r = customer.listMyItems();}
+r = customer.viewItem(request.getParameter("ItemInfo"));}
 catch(IllegalStateException ise){
         out.println(ise.getMessage());
     }%>
@@ -60,14 +60,9 @@ catch(IllegalStateException ise){
 </td>
 <td style="vertical-align: top;"><%= r.getString("STATUS")%><br>
 </td>
-<td style="vertical-align: top;"><form method="GET" action="ItemInfo.jsp" name="ItemInfo">
-<input name="ItemInfo" type="hidden" value="<%=r.getInt("ItemID") %>"/>
-<button value="Item Info" name="Item Info">Item Info</button><br>
-</form><br>
+<td style="vertical-align: top;"><%= r.getString("DESCRIPT")%><br>
 </td>
-<td style="vertical-align: top;"><form method="post" action="BidderList.jsp">  <input name="Bidder List"
-value="Bidder List" type="submit"></form><br>
-</td>
+
 </tr>
 <%} r.close(); %>
 </tbody>

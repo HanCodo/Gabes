@@ -13,9 +13,10 @@ http-equiv="content-type">
 <body>
 <div style="text-align: center;">Leave Feedback <br>
 </div>
+
 <form method="post" action="RateSeller_action.jsp" name="Leave">
 Item Id:<br> <input name="ItemID" value=<%=request.getParameter("ItemID")%> readonly><br>
-Item Name:<br><input name="ItemName" value=><br>
+Item Name:<br><input name="ItemName" value=<%=request.getParameter("ItemName")%> readonly><br>
 Overall Rating:<br><select name="Overall">
     <option value="1">1</option>
     <option value="2">2</option>
@@ -40,5 +41,8 @@ Delivery:<br><select name="Delivery">
 Comments:<br><textarea name="Comments" cols="50" rows="10"></textarea><br>
 <input style = "color: black" name="Submit" value="Submit" type="submit"><br>
 </form>
+<form method="post" action="itemsBought.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Your Items" type="submit"></form>
 </body>
 </html>

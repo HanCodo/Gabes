@@ -4,6 +4,7 @@
 
 <%@ page language="java" import="java.sql.*, gabes.*"%>
 <jsp:useBean id="customer" class= "gabes.Customer" scope="session"/> 
+<jsp:setProperty property="*" name="customer"/>
 <% 
 if(customer.getUsername() == null)
 {
@@ -22,6 +23,9 @@ http-equiv="content-type">
 .right {
     float: right;
 }
+.shift {
+    text-indent: 300px;
+}
 </style>
 </head>
 <body>
@@ -39,29 +43,20 @@ http-equiv="content-type">
 </div>
 <br>
 <br>
+<br>
 <div style="text-align: center;"><br>
 </div>
-<form method="post" action="UpdateProfile.jsp"
-name="UpdateProfile"><input style = "color: black" name="UpdateProfile"
-value="Update Profile" type="submit"><br>
+<form method="post" action="ItemsList.jsp"
+name="Search"><input style = "color: black" name="Search"
+value="Search" type="submit"><br>
 </form>
-<form method="post" action="SellingManagement.jsp"
-name="SellingManagement"><input style = "color: black" name="SellingManagement"
-value="Selling Management" type="submit"><br>
+<form method="post" action="itemsBidOn.jsp"
+name="Bid on Items"><input style = "color: black" name="BidOn"
+value="Bid On" type="submit"><br>
 </form>
-<form method="post" action="BiddingManagement.jsp"
-name="BiddingManagement"><input style = "color: black" name="BiddingManagement"
-value="Bidding Management" type="submit"><br>
-</form>
-<form method="post" action="itemsBought.jsp" name="LeaveFeedback"><input
-style = "color: black" name="Items Bought" value="Items Bought" type="submit"><br>
-</form>
-<form method="post" action="itemsBidOn.jsp" name="listBids"><input
-style = "color: black" name="Items Bid On" value="Items Bid On" type="submit"><br>
-</form>
-<form method="post" action="ViewFeedback.jsp" name="ViewFeedback"><input
-style = "color: black" name="View Feedback" value="View my Feedback" type="submit"><br>
-</form>
+<form method="post" action="CustomerMenu.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Menu" type="submit"></form>
 <br>
 <br>
 </body>

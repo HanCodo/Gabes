@@ -6,31 +6,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>My Bought Items</title>
 </head>
 <body>
-<table>
+<div style="text-align: left;"><b><u>Your Purchased Items</u></b>  <br>
+</div>
+<br>
+<table border=2>
 <tr>
-<td>ITEM ID
+<td><b>ITEM ID</b>
 </td>
-<td>ITEM NAME
+<td><b>ITEM NAME </b>
 </td>
-<td>CATAGORY
+<td><b> CATAGORY </b>
 </td>
-<td>START DATE
+<td><b> START DATE </b>
 </td>
-<td>END DATE
+<td><b> END DATE </b>
 </td>
-<td>BUY PRICE
+<td><b> BUY PRICE </b>
 </td>
-<td>RATE SELLER
+<td><b> RATE SELLER </b>
 </td>
 </tr>
-<%ResultSet r = customer.listBidOnItems();
-while(r.next()){%>
+<%ResultSet r = customer.listMyItems();
+r.next();
+do{%>
 <tr>
 <td>
-<%=r.getInt("sell.ITEMID")
+<%=r.getInt("ITEMID")
 %>
 </td>
 <td>
@@ -38,7 +42,7 @@ while(r.next()){%>
 %>
 </td>
 <td>
-<%=r.getString("CATAGORIES")
+<%=r.getString("CATEGORIES")
 %>
 </td>
 <td>
@@ -55,13 +59,17 @@ while(r.next()){%>
 </td>
 <td>
 <form method="post" action="RateSeller.jsp" name="Rate">
-<input name="ItemID" value=<%=r.getInt("sell.ITEMID")%>><br>
+<input name="ItemID" value=<%=r.getInt("ITEMID")%> type="hidden">
+<input name="ItemName" value=<%=r.getString("ITEMNAME")%> type="hidden">
 <input style = "color: black" name="Rate" value="Rate" type="submit">
 </form>
 </td>
 </tr>
-<%} %>
+<%} while(r.next()); %>
 </table>
+<form method="post" action="CustomerMenu.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Menu" type="submit"></form>
 
 </body>
 </html>

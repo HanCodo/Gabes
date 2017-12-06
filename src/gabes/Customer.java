@@ -235,7 +235,7 @@ public class Customer implements Serializable {
 	            preparedStmt.setString(6,pass);
 	            preparedStmt.setInt(7,(this.getUserID()));
 	            result = preparedStmt.executeUpdate();
-	            preparedStmt.close();
+	            
 	        } catch (Exception E) {
 	            E.printStackTrace();
 	        }       
@@ -248,15 +248,16 @@ public class Customer implements Serializable {
 	   * @throws SQLException
 	   */
 	  public ResultSet listMyItems() throws SQLException {
+		 
 		  	Connection con = openDBConnection();
 		  	
-		    String queryString = "Select i.ITEMID as ITEM_ID, i.ITEMNAME as ITEM_NAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as START_DATE,i.ENDDATE as END_DATE,i.STARTPRICE as START_PRICE, i.CURRENTBID as CURRENT_BID,i.status as STATUS " + 
+		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
 		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+
 		    		"";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
-		    preparedStmt.close();
+		    
 		    return result;
 	  }
 	  
@@ -267,13 +268,12 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "Select b.ITEMID as ITEM_ID, it.ITEMNAME as ITEM_NAME,c.USERNAME as USERNAME,b.MAXBIDLIMIT as MAX_BID,b.BIDTIME as BID_TIME"+ 
-		    		"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c"+ 
+		    String queryString = "Select b.ITEMID as ITEMID, it.ITEMNAME as ITEMNAME,c.USERNAME as USERNAME,b.MAXBIDLIMIT as MAXBID,b.BIDTIME as BIDTIME "
+		    		+ "FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c"+ 
 		    		"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID";
-
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
-		    preparedStmt.close();
+		    
 		    return result;
 	  }
 	  public int addItem(String itemId,String startDate,String endDate,String ItemName,String Descript,String Categories,String startPrice){
@@ -307,4 +307,30 @@ public class Customer implements Serializable {
 	        }       
 	        return result;
 	  }
+	  public ResultSet viewFeedback() throws SQLException{
+		  	Connection con = openDBConnection();
+
+		    String queryString = "Select item.itemname as Item_Sold ,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response"+
+		    		"FROM GABES_SELL sell,GABES_ITEM item"+
+		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid";
+
+
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+		 
+	  }
+	  public ResultSet viewItem(String ItemId) throws SQLException{
+		  	Connection con = openDBConnection();
+		  	int itemId = Integer.parseInt(ItemId);
+		    String queryString = "Select *"+
+		    		"From Gabes_ITEM item"+
+		    		"Where"+itemId+ "= item.itemid";
+
+
+
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+}
 }
