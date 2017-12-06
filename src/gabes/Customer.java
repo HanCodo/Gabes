@@ -318,5 +318,19 @@ public class Customer implements Serializable {
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    return result;
+		 
 	  }
+	  public ResultSet viewItem(String ItemId) throws SQLException{
+		  	Connection con = openDBConnection();
+		  	int itemId = Integer.parseInt(ItemId);
+		    String queryString = "Select *"+
+		    		"From Gabes_ITEM item"+
+		    		"Where"+itemId+ "= item.itemid";
+
+
+
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+}
 }
