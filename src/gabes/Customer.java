@@ -307,7 +307,7 @@ public class Customer implements Serializable {
 	        }       
 	        return result;
 	  }
-	  public ResultSet viewMyFeedback() throws SQLException{
+	  public ResultSet viewFeedback() throws SQLException{
 		  	Connection con = openDBConnection();
 
 		    String queryString = "Select item.itemname as Item_Sold ,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response"+
@@ -318,7 +318,5 @@ public class Customer implements Serializable {
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    return result;
-		  
-		  
 	  }
 }

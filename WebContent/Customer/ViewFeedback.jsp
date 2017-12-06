@@ -25,14 +25,14 @@ cellspacing="2">
 </tr>
 <%ResultSet r = null;
 try{
-r = customer.viewMyFeedback();}
+r = customer.viewFeedback();}
 catch(IllegalStateException ise){
         out.println(ise.getMessage());
     }%>
 <%while(r.next()){ %>
 
 <tr>
-<td style="vertical-align: top;"><%= r.getInt("Item_Sold")%><br>
+<td style="vertical-align: top;"><%= r.getString("Item_Sold")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("Quality")%><br>
 </td>
