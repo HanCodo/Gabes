@@ -50,7 +50,7 @@ CREATE TABLE gabes_bid (
 --        ON DELETE SET NULL	ON UPDATE CASCADE,
 	FOREIGN KEY (ItemID) REFERENCES gabes_item(ItemID),
 --        ON DELETE SET NULL	ON UPDATE CASCADE
-	PRIMARY KEY (UserID, ItemID)
+	PRIMARY KEY (UserID, ItemID, BidTime)
 );
 
 -- SELL
@@ -96,12 +96,42 @@ INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categori
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (11111, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Kidney', 'No need to deal with black-markets any longer -- ships right to you', 'Health', 10000.00, 'ON AUCTION', 10000.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (22222, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Shoe', 'One single shoe, for left foot only', 'Style', 15.00, 'ON AUCTION', 15.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (33333, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Eraser', 'For blackboard purposes', 'Classroom', 5.00, 'ON AUCTION', 5.00);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (12321, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Toaster', 'A toaster for toasting', 'Household', 15.00, 'ON AUCTION', 15.00);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (12345, 12345, 5, 'Great work', 5, 5);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (12345, 11111, 5, 'Great work', 5, 5);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (54321, 22222, 5, 'Great work', 5, 5);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (11111, 33333, 5, 'Great work', 5, 5);
-INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (11111, 12345, 12000.00, to_date('2017-10-23', 'YYYY-MM-DD'));
-INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (12345, 11111, 20.00, to_date('2017-10-23', 'YYYY-MM-DD'));
+INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (11111, 12345, 20.00, to_date('2017-10-23', 'YYYY-MM-DD'));
+INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (12345, 11111, 12000.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (22222, 22222, 20.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_MANAGE(Username, UserID) VALUES ('Admin1', '12345');
 INSERT INTO GABES_MANAGE(Username, UserID) VALUES ('Admin2', '11111');
+
+create or replace TRIGGER GABES_UPDATE_CURRENT_PRICE
+	BEFORE INSERT ON GABES_BID
+	FOR EACH ROW
+		Declare
+    		OldMax decimal(10,2);
+	BEGIN
+    	SELECT MAX(MaxBidLimit)
+    	INTO OldMax
+    	FROM GABES_BID b
+    	WHERE b.ItemID = :NEW.ItemID;
+
+    	IF (OldMax IS NULL) THEN
+            UPDATE GABES_Item i
+            SET i.CurrentBid = i.StartPrice + 1
+            WHERE :NEW.ItemID = i.itemID;
+        ELSE
+            IF (OldMax > :New.MaxBidLimit) THEN
+                UPDATE GABES_Item i
+                SET i.CurrentBid = :NEW.MaxBidLimit + 1
+                WHERE :NEW.ItemID = i.itemID;
+            ELSE
+                UPDATE GABES_Item i
+                SET i.CurrentBid = OldMax + 1
+                WHERE :NEW.ItemID = i.itemID;
+            END IF;
+        END IF;
+End;
+

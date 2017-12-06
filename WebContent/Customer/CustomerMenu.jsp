@@ -27,7 +27,7 @@ http-equiv="content-type">
 <body>
 <div>
     <div class="left">
-    	<a href="../CustomerMenu.jsp">
+    	<a href="CustomerMenu.jsp">
   			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
 		</a>
 	</div>
