@@ -40,23 +40,23 @@ http-equiv="content-type">
 <div style="text-align: center;">Overall Commision Report<br>
 </div>
 <br>
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tbody>
 <tr>
-<td style="vertical-align: top;">User ID<br>
+<td style="vertical-align: top;"><b>User ID</b><br>
 </td>
-<td style="vertical-align: top;">Username<br>
+<td style="vertical-align: top;"><b>Username</b><br>
 </td>
-<td style="vertical-align: top;">First Name<br>
+<td style="vertical-align: top;"><b>First Name</b><br>
 </td>
-<td style="vertical-align: top;">Last Name<br>
+<td style="vertical-align: top;"><b>Last Name</b><br>
 </td>
-<td style="vertical-align: top;">Email<br>
+<td style="vertical-align: top;"><b>Email</b><br>
 </td>
-<td style="vertical-align: top;">Seller Rating<br>
+<td style="vertical-align: top;"><b>Seller Rating</b><br>
 </td>
-<td style="vertical-align: top;">Commisions<br>
+<td style="vertical-align: top;"><b>Commisions</b><br>
 </td>
 </tr>
 
