@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page language="java" import="java.util.*, java.sql.*, gabes.*"%>
 <jsp:useBean id="admin" class= "gabes.Admin" scope="session"/> 
 <jsp:setProperty name="admin" property="*"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,7 +35,12 @@ http-equiv="content-type">
 <br>
 <br>
 <form method="post" action="AddUser_action.jsp" name="adduser">
-UserID: <input name="userID"><br>
+<%ResultSet users = admin.viewUsers();
+//out.println(users);
+int x=0;
+while(users.next()){ x++;
+}%>
+UserID: <input value=<%=x=10000+x %> name="userID" readonly><br>
 User Name: <input name="userName"><br>
 First Name: <input name="fName"><br>
 Last Name: <input name="lName"><br>
