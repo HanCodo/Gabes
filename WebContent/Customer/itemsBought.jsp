@@ -13,7 +13,7 @@ if(customer.getUsername() == null)
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>My Purchases</title>
 <style type="text/css">
 .left {
     float: left;
@@ -38,7 +38,8 @@ http-equiv="content-type">
 </div>
 <br>
 <br>
-<div style="text-align: left;"><b><u>Your Purchased Items</u></b>  <br>
+<br>
+<div style="text-align: center;"><b>My Purchases</b>  <br>
 </div>
 <br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"

@@ -38,16 +38,20 @@ http-equiv="content-type">
 </div>
 <br>
 <br>
+<br>
+<div style="text-align: center;"><b>My Bids</b>  <br>
+</div>
+<br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tr>
-<td>ITEM ID
+<td><b>ITEM ID</b>
 </td>
-<td>ITEM NAME
+<td><b>ITEM NAME</b>
 </td>
-<td>MAX BID LIMIT
+<td><b>MAX BID LIMIT</b>
 </td>
-<td>BID TIME
+<td><b>BID TIME</b>
 </td>
 </tr>
 <%ResultSet r = customer.listBidOnItems();
@@ -72,6 +76,9 @@ while(r.next()){%>
 </tr>
 <%} %>
 </table>
-
+<form method="post" action="CustomerMenu.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Menu" type="submit"><br>
+</form>
 </body>
 </html>

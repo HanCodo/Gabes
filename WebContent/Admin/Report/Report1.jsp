@@ -37,19 +37,19 @@ http-equiv="content-type">
 <div style="text-align: center;">Sales Summary Report<br>
 </div>
 <br>
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tbody>
 <tr>
-<td style="vertical-align: top;">Category<br>
+<td style="vertical-align: top;"><b>Category</b><br>
 </td>
-<td style="vertical-align: top;">Item ID<br>
+<td style="vertical-align: top;"><b>Item ID</b><br>
 </td>
-<td style="vertical-align: top;">Item Name<br>
+<td style="vertical-align: top;"><b>Item Name</b><br>
 </td>
-<td style="vertical-align: top;">Final Selling Price<br>
+<td style="vertical-align: top;"><b>Final Selling Price</b><br>
 </td>
-<td style="vertical-align: top;">Commision<br>
+<td style="vertical-align: top;"><b>Commision</b><br>
 </td>
 </tr>
 <%try {ResultSet users = admin.viewReport1();
