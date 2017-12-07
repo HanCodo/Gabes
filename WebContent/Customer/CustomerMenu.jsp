@@ -39,8 +39,8 @@ http-equiv="content-type">
 </div>
 <br>
 <br>
-<div style="text-align: center;"><br>
-</div>
+<br>
+<div style="text-align: center;"><b>Customer Homepage</b></div><br>
 <form method="post" action="UpdateProfile.jsp"
 name="UpdateProfile"><input style = "color: black" name="UpdateProfile"
 value="Update Profile" type="submit"><br>

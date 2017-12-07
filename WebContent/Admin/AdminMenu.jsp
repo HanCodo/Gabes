@@ -12,7 +12,7 @@ if(admin.getPass() == null)
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Homepage</title>
 <style type="text/css">
 .left {
     float: left;
@@ -38,6 +38,7 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
+<div style="text-align: center;"><b>Admin Homepage</b></div>
 <form method="post" action="UserManagement.jsp"
 name="UserManagement"><input style = "color: black" name="UserManagement"
 value="User Management" type="submit"><br>

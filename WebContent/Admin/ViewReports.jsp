@@ -7,7 +7,7 @@
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Report Homepage</title>
 <style type="text/css">
 .left {
     float: left;
@@ -33,6 +33,7 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
+<div style="text-align: center;"><b>Report Homepage</b></div>
 <form method="post" action="Report/Report1.jsp"
 name="Report1"><input style = "color: black" name="Report1"
 value="View Sales Summary" type="submit"><br>
