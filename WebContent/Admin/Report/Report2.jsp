@@ -61,7 +61,7 @@ cellspacing="2">
 </tr>
 
 <%
-        
+        	double total = 0.0;
          	ResultSet rs = admin.viewReport2();
             while (rs.next()){
         %>
@@ -79,16 +79,18 @@ cellspacing="2">
 </td>
 <td style="vertical-align: top;"><%try{out.println(rs.getString(6));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println("$"+rs.getString(7));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%try{out.println("$"+rs.getDouble(7)); total = total+rs.getDouble(7);}catch(Exception ex){out.println("noo");} %><br>
 </td>
 </tr>
 <%
 	}
     rs.close();
     %>
-
 </tbody>
 </table>
+<br>
+<div class="left"><b>Total Income</b></div><div class="right"><b>$<%=total %></b></div>
+<br><br>
 <form method="post" action="../ViewReports.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"><br>

@@ -289,7 +289,7 @@ public class Customer implements Serializable {
 		  	Connection con = openDBConnection();
 		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MAXBIDLIMIT, b.BIDTIME "+
 		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
-		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID";
+		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID();
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
