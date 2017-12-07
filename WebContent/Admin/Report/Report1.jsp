@@ -8,7 +8,7 @@
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Sales Summary Report</title>
 <style type="text/css">
 .left {
     float: left;
@@ -34,7 +34,7 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align: center;">Sales Summary Report<br>
+<div style="text-align: center;"><b>Sales Summary Report</b><br>
 </div>
 <br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
@@ -64,7 +64,7 @@ while(users.next()){%>
 </td>
 <td style="vertical-align: top;"><%try{out.println(users.getString(4));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println(users.getString(5));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%try{out.println("$"+users.getString(5));}catch(Exception ex){out.println("noo");} %><br>
 </td>
 </tr>
 <%} }catch(Exception ex){

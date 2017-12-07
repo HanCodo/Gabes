@@ -11,7 +11,7 @@
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Overall Commision Report</title>
 <style type="text/css">
 .left {
     float: left;
@@ -37,7 +37,7 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align: center;">Overall Commision Report<br>
+<div style="text-align: center;"><b>Overall Commision Report</b><br>
 </div>
 <br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
@@ -79,7 +79,7 @@ cellspacing="2">
 </td>
 <td style="vertical-align: top;"><%try{out.println(rs.getString(6));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println(rs.getString(7));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%try{out.println("$"+rs.getString(7));}catch(Exception ex){out.println("noo");} %><br>
 </td>
 </tr>
 <%

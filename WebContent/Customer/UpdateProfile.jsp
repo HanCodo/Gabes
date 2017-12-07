@@ -22,7 +22,7 @@ try{
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Update Profile</title>
 <style type="text/css">
 .left {
     float: left;
@@ -64,22 +64,24 @@ if (errorParam != null){
 	}
 }
 %>
-<div style="text-align: center;">Update Profile <br>
+<div style="text-align: center;"><b>Update Profile </b><br>
 </div>
 <br>
 <div style="color: red; text-align: center;"><%=message%></div><br>
 <div class="container">
 <form method="post" action="UpdateProfile_action.jsp" name="Update">
-<label>Username: </label><input name="username" value = <%=customer.getUsername()%>><br>
-<label>First Name: </label><input name="fname" value = <%=customer.getFname()%>><br>
-<label>Last Name: </label><input name="lname" value = <%=customer.getLname()%>><br>
-<label>Email: </label><input name="email" value = <%=customer.getEmail()%>><br>
-<label>Phone: </label><input name="phone" value = <%=customer.getPhone()%>><br>
-<label>Seller Rating: </label><b> <%=rs.getString("avgRatings")%></b><br>
-<label>Number of Ratings: </label><b> <%=rs.getString("numRatings")%></b><br>
-<label>Old Password: </label><input name="oldPass" type="password"><br>
-<label>New Password: </label><input name="pass1" type="password"><br>
-<label>Retype Password: </label><input name="pass2" type="password"><br>
+<table>
+<tr><td>Username: </td><td><input name="username" value = <%=customer.getUsername()%>></td></tr>
+<tr><td>First Name: </td><td><input name="fname" value = <%=customer.getFname()%>></td></tr>
+<tr><td>Last Name: </td><td><input name="lname" value = <%=customer.getLname()%>></td></tr>
+<tr><td>Email: </td><td><input name="email" value = <%=customer.getEmail()%>></td></tr>
+<tr><td>Phone: </td><td><input name="phone" value = <%=customer.getPhone()%>></td></tr>
+<tr><td>Seller Rating: </td><td><b> <%=rs.getString("avgRatings")%></b></td></tr>
+<tr><td>Number of Ratings: </td><td><b> <%=rs.getString("numRatings")%></b></td></tr>
+<tr><td>Old Password: </td><td><input name="oldPass" type="password"></td></tr>
+<tr><td>New Password: </td><td><input name="pass1" type="password"></td></tr>
+<tr><td>Retype Password: </td><td><input name="pass2" type="password"></td></tr>
+</table>
 <input style = "color: black" name="Update" value="Update" type="submit">
 </form>
 </div>
