@@ -295,13 +295,13 @@ public class Customer implements Serializable {
 		    
 		    return result;
 	  }
-	  public int addItem(String itemId,String startDate,String endDate,String ItemName,String Descript,String Categories,String startPrice){
+	  public int addItem(String itemId,String startDate,String endDate,String ItemName,String Descript,String Categories,String startPrice, String buyNow){
 		  int result = -1;
 		  Connection con = openDBConnection();
 	        try{
 	            String queryString = "INSERT INTO GABES_ITEM"+
-	        "(ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid)"+
-	         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        "(ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow)"+
+	         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	            preparedStmt = con.prepareStatement(queryString);
 	            int i = Integer.parseInt(itemId);
@@ -314,11 +314,31 @@ public class Customer implements Serializable {
 	            preparedStmt.setString(5,Descript);
 	            preparedStmt.setString(6,Categories);
 	            double sp = Double.parseDouble(startPrice);
+	            double bn = Double.parseDouble(buyNow);
 	            preparedStmt.setDouble(7,sp);
+	            preparedStmt.setDouble(10,bn);
 	            String status = "ON AUCTION";
 	            preparedStmt.setString(8,status);
-	            double cb= 0.0;
-	            preparedStmt.setDouble(9,cb);
+	            preparedStmt.setDouble(9,sp);
+	            result = preparedStmt.executeUpdate();
+	            preparedStmt.close();
+	            this.addSeller(i);
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
+	  }
+	  public int addSeller(int itemId){
+		  int result = -1;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "INSERT INTO GABES_SELL"+
+	        "(UserID, ItemID, Overall, Comments, Quality, Delivery) "+
+	         "VALUES (?, ?, null, null, null, null)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setInt(1,this.getUserID());
+	            preparedStmt.setInt(2,itemId);
 	            result = preparedStmt.executeUpdate();
 	            preparedStmt.close();
 	        } catch (Exception E) {

@@ -12,7 +12,7 @@ else{
 		String endDate =""+request.getParameter("eYear")+"-"+request.getParameter("eMonth")+"-"+request.getParameter("eDay")+"";
 		System.out.println(startDate);
 		System.out.println(endDate);
-		int result = customer.addItem(request.getParameter("Item_ID"), startDate, endDate,request.getParameter("Item_Name"), request.getParameter("Descript"), request.getParameter("Categories"), request.getParameter("Start_Price"));
+		int result = customer.addItem(request.getParameter("Item_ID"), startDate, endDate,request.getParameter("Item_Name"), request.getParameter("Descript"), request.getParameter("Categories"), request.getParameter("Start_Price"),request.getParameter("BuyNow"));
 		response.sendRedirect("AddItem.jsp");
 	}
 
