@@ -2,16 +2,45 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" import="java.sql.*, gabes.*"%>
-
-
+<jsp:useBean id="customer" class="gabes.Customer" scope="session"/> 
+<jsp:setProperty property="*" name="customer"/>
+<% 
+if(customer.getUsername() == null)
+{
+	response.sendRedirect("../CustomerLogout_action.jsp");
+}
+%>
 <html>
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Leave Feedback</title>
+<style type="text/css">
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+</style>
 </head>
 <body>
-<div style="text-align: center;">Leave Feedback <br>
+<div>
+    <div class="left">
+    	<a href="CustomerMenu.jsp">
+  			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
+		</a>
+	</div>
+    <div class="right">
+    	<form method="post" action="../CustomerLogout_action.jsp" name="logout">
+    		Logged in as: <%=customer.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
+    	</form>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<div style="text-align: center;"><b>Leave Feedback</b><br>
 </div>
 
 <form method="post" action="RateSeller_action.jsp" name="Leave">

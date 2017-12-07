@@ -47,25 +47,25 @@ http-equiv="content-type">
 cellspacing="2">
 <tbody>
 <tr>
-<td style="vertical-align: top;">Item ID<br>
+<td style="vertical-align: top;"><b>Item ID</b><br>
 </td>
-<td style="vertical-align: top;">Item Name<br>
+<td style="vertical-align: top;"><b>Item Name</b><br>
 </td>
-<td style="vertical-align: top;">Category<br>
+<td style="vertical-align: top;"><b>Category</b><br>
 </td>
-<td style="vertical-align: top;">Auction Start Time<br>
+<td style="vertical-align: top;"><b>Auction Start Time</b><br>
 </td>
-<td style="vertical-align: top;">Auction End Time<br>
+<td style="vertical-align: top;"><b>Auction End Time</b><br>
 </td>
-<td style="vertical-align: top;">Start Price<br>
+<td style="vertical-align: top;"><b>Start Price</b><br>
 </td>
-<td style="vertical-align: top;">Current Bid<br>
+<td style="vertical-align: top;"><b>Current Bid</b><br>
 </td>
-<td style="vertical-align: top;">Status<br>
+<td style="vertical-align: top;"><b>Status</b><br>
 </td>
-<td style="vertical-align: top;">Item Info<br>
+<td style="vertical-align: top;"><b>Item Info</b><br>
 </td>
-<td style="vertical-align: top;">Bidders List<br>
+<td style="vertical-align: top;"><b>Bidders List</b><br>
 </td>
 </tr>
 <%ResultSet r = null;

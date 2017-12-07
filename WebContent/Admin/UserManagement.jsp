@@ -8,7 +8,7 @@
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Manage Users</title>
 <style type="text/css">
 .left {
     float: left;
@@ -34,23 +34,26 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
+<div style="text-align: center;"><b>Manage Users</b></div>
+
+<br>
 <table style="text-align: left; width: 100%;" border="1" cellpadding="2"
 cellspacing="2">
 <tbody>
 <tr>
-<td style="vertical-align: top;">UserID<br>
+<td style="vertical-align: top;"><b>UserID</b><br>
 </td>
-<td style="vertical-align: top;">User Name<br>
+<td style="vertical-align: top;"><b>User Name</b><br>
 </td>
-<td style="vertical-align: top; width: 253px;">First Name<br>
+<td style="vertical-align: top; width: 253px;"><b>First Name</b><br>
 </td>
-<td style="vertical-align: top; width: 245px;">Last Name<br>
+<td style="vertical-align: top; width: 245px;"><b>Last Name</b><br>
 </td>
-<td style="vertical-align: top; width: 282px;">Password<br>
+<td style="vertical-align: top; width: 282px;"><b>Password</b><br>
 </td>
-<td style="vertical-align: top;">Phone<br>
+<td style="vertical-align: top;"><b>Phone</b><br>
 </td>
-<td style="vertical-align: top;">Email<br>
+<td style="vertical-align: top;"><b>Email</b><br>
 </td>
 </tr>
 <%try {ResultSet users = admin.viewUsers();
