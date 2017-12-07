@@ -13,7 +13,7 @@ if(customer.getUsername() == null)
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>My Bids</title>
 <style type="text/css">
 .left {
     float: left;
@@ -38,7 +38,8 @@ http-equiv="content-type">
 </div>
 <br>
 <br>
-<table>
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
+cellspacing="2">
 <tr>
 <td>ITEM ID
 </td>
@@ -65,7 +66,7 @@ while(r.next()){%>
 %>
 </td>
 <td>
-<%=r.getString("BIDTIME")
+<%=r.getString("BIDTIME").substring(0,10)
 %>
 </td>
 </tr>

@@ -4,13 +4,42 @@
 <%@ page language="java" import="java.sql.*, gabes.*"%>
 <jsp:useBean id="customer" class="gabes.Customer" scope="session"/> 
 <jsp:setProperty property="*" name="customer"/>
+<% 
+if(customer.getUsername() == null)
+{
+	response.sendRedirect("../CustomerLogout_action.jsp");
+}
+%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta content="text/html; charset=ISO-8859-1"
+http-equiv="content-type">
+<title></title>
+<style type="text/css">
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+</style>
 </head>
 <body>
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+<div>
+    <div class="left">
+    	<a href="CustomerMenu.jsp">
+  			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
+		</a>
+	</div>
+    <div class="right">
+    	<form method="post" action="../CustomerLogout_action.jsp" name="logout">
+    		Logged in as: <%=customer.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
+    	</form>
+    </div>
+</div>
+<br>
+<br>
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tbody>
 <tr>
@@ -50,9 +79,9 @@ catch(IllegalStateException ise){
 </td>
 <td style="vertical-align: top;"><%= r.getString("CATEGORIES")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("STARTDATE")%><br>
+<td style="vertical-align: top;"><%= r.getString("STARTDATE").substring(0,10)%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("ENDDATE")%><br>
+<td style="vertical-align: top;"><%= r.getString("ENDDATE").substring(0,10)%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("STARTPRICE")%><br>
 </td>
@@ -61,20 +90,20 @@ catch(IllegalStateException ise){
 <td style="vertical-align: top;"><%= r.getString("STATUS")%><br>
 </td>
 <td style="vertical-align: top;"><form method="GET" action="ItemInfo.jsp" name="ItemInfo">
-<input name="ItemInfo" type="hidden" value="<%=r.getInt("ItemID") %>"/>
-<button value="Item Info" name="Item Info">Item Info</button><br>
+<input  style = "color: black" name="ItemInfo" type="hidden" value="<%=r.getInt("ItemID") %>"/>
+<button style = "color: black" value="Item Info" name="Item Info">Item Info</button><br>
 </form><br>
 </td>
 <td style="vertical-align: top;"><form method="GET" action="BidderList.jsp" name="BidList">
-<input name="BidList" type="hidden" value="<%=r.getInt("ItemID") %>"/>
-<button value="BidList" name="BidList">Item Info</button><br>
+<input  style = "color: black" name="BidList" type="hidden" value="<%=r.getInt("ItemID") %>"/>
+<button style = "color: black" value="BidList" name="BidList">Item Info</button><br>
 </form><br>
 </tr>
 <%} r.close(); %>
 </tbody>
 </table>
 <br>
-<form method="post" action="CustomerMenu.jsp"
+<form method="post" action="SellingManagement.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
 </body>
