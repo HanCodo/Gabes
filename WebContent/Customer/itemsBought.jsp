@@ -85,7 +85,7 @@ do{%>
 %>
 </td>
 <td>
-<%=r.getDouble("CURRENTBID")
+<%="$"+r.getDouble("CURRENTBID")
 %>
 </td>
 <td>

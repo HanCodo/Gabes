@@ -87,9 +87,9 @@ catch(IllegalStateException ise){
 </td>
 <td style="vertical-align: top;"><%= r.getString("ENDDATE").substring(0,10)%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("STARTPRICE")%><br>
+<td style="vertical-align: top;"><%= "$"+r.getString("STARTPRICE")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("CURRENTBID")%><br>
+<td style="vertical-align: top;"><%= "$"+r.getString("CURRENTBID")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("STATUS")%><br>
 </td>

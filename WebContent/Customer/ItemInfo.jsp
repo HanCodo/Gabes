@@ -4,35 +4,67 @@
 <%@ page language="java" import="java.sql.*, gabes.*"%>
 <jsp:useBean id="customer" class="gabes.Customer" scope="session"/> 
 <jsp:setProperty property="*" name="customer"/>
+<% 
+if(customer.getUsername() == null)
+{
+	response.sendRedirect("../CustomerLogout_action.jsp");
+}
+%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta content="text/html; charset=ISO-8859-1"
+http-equiv="content-type">
+<title>Item Info</title>
+<style type="text/css">
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+</style>
 </head>
 <body>
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+<div>
+    <div class="left">
+    	<a href="CustomerMenu.jsp">
+  			<img style="width:150px;height:42px;border:0;" alt="GABeS_Logo" src="../img/gabes.png">
+		</a>
+	</div>
+    <div class="right">
+    	<form method="post" action="../CustomerLogout_action.jsp" name="logout">
+    		Logged in as: <%=customer.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
+    	</form>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<div style = "text-align: center"><b>Item Info</b></div>
+<br>
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tbody>
 <tr>
-<td style="vertical-align: top;">Item ID<br>
+<td style="vertical-align: top;"><b>Item ID</b><br>
 </td>
-<td style="vertical-align: top;">Item Name<br>
+<td style="vertical-align: top;"><b>Item Name</b><br>
 </td>
-<td style="vertical-align: top;">Category<br>
+<td style="vertical-align: top;"><b>Category</b><br>
 </td>
-<td style="vertical-align: top;">Auction Start Time<br>
+<td style="vertical-align: top;"><b>Auction Start Time</b><br>
 </td>
-<td style="vertical-align: top;">Auction End Time<br>
+<td style="vertical-align: top;"><b>Auction End Time</b><br>
 </td>
-<td style="vertical-align: top;">Start Price<br>
+<td style="vertical-align: top;"><b>Start Price</b><br>
 </td>
-<td style="vertical-align: top;">Current Bid<br>
+<td style="vertical-align: top;"><b>Current Bid</b><br>
 </td>
-<td style="vertical-align: top;">Status<br>
+<td style="vertical-align: top;"><b>Status</b><br>
 </td>
-<td style="vertical-align: top;">Item Info<br>
+<td style="vertical-align: top;"><b>Item Info</b><br>
 </td>
-<td style="vertical-align: top;">Bidders List<br>
+<td style="vertical-align: top;"><b>Bidders List</b><br>
 </td>
 </tr>
 <%ResultSet r = null;
@@ -50,13 +82,13 @@ catch(IllegalStateException ise){
 </td>
 <td style="vertical-align: top;"><%= r.getString("CATEGORIES")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("STARTDATE")%><br>
+<td style="vertical-align: top;"><%= r.getString("STARTDATE").substring(0,10)%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("ENDDATE")%><br>
+<td style="vertical-align: top;"><%= r.getString("ENDDATE").substring(0,10)%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("STARTPRICE")%><br>
+<td style="vertical-align: top;"><%= "$"+r.getString("STARTPRICE")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("CURRENTBID")%><br>
+<td style="vertical-align: top;"><%= "$"+r.getString("CURRENTBID")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("STATUS")%><br>
 </td>
@@ -68,7 +100,7 @@ catch(IllegalStateException ise){
 </tbody>
 </table>
 <br>
-<form method="post" action="CustomerMenu.jsp"
+<form method="post" action="ItemsList.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
 </body>

@@ -66,7 +66,7 @@ while(r.next()){%>
 %>
 </td>
 <td>
-<%=r.getString("MAXBIDLIMIT")
+<%="$"+r.getString("MAXBIDLIMIT")
 %>
 </td>
 <td>
