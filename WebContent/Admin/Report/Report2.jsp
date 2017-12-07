@@ -40,8 +40,7 @@ http-equiv="content-type">
 <div style="text-align: center;"><b>Overall Commision Report</b><br>
 </div>
 <br>
-<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
-cellspacing="2">
+<table style="text-align: left; " width="100%">
 <tbody>
 <tr>
 <td style="vertical-align: top;"><b>User ID</b><br>

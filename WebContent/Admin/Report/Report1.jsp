@@ -37,8 +37,7 @@ http-equiv="content-type">
 <div style="text-align: center;"><b>Sales Summary Report</b><br>
 </div>
 <br>
-<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
-cellspacing="2">
+<table style="text-align: left; width: 100%;">
 <tbody>
 <tr>
 <td style="vertical-align: top;"><b>Category</b><br>
@@ -52,22 +51,49 @@ cellspacing="2">
 <td style="vertical-align: top;"><b>Commision</b><br>
 </td>
 </tr>
-<%try {ResultSet users = admin.viewReport1();
-//out.println(users);
-while(users.next()){%>
 <tr>
-<td style="vertical-align: top;"><%try{out.println(users.getString(1));}catch(Exception ex){out.println("noo");} %><br>
+<%try {ResultSet rs = admin.viewReport1();
+String last = "";
+double sum = 0.0;
+double totalsum = 0.0;
+//out.println(users);
+while(rs.next()){
+	if(!last.equals(rs.getString(1))){
+		if(!last.equals("")){
+		%>
+		<td></td><td></td><td></td><td>--------------</td><td>----------</td></tr><tr>
+		<td></td><td></td><td></td><td><b>Subtotal:</b></td><td>$<%=sum %></td></tr><tr><td></td></tr><tr>
+		<td style="color:white;">.</td><td></td><td></td><td></td><td></td></tr><tr><td></td></tr><tr>
+		<%} totalsum+=sum; sum = 0.0; %>
+		<td style="vertical-align: top;">
+		<%try{out.println(rs.getString(1));}catch(Exception ex){out.println("noo");} %>
+		<br></td>
+		<%
+	}
+	else{
+	%>
+		<td style="vertical-align: top;"><br>
+		</td>
+	<%} %>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(2));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println(users.getString(2));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%try{out.println(rs.getString(3));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println(users.getString(3));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%try{out.println("$"+rs.getString(4));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println("$"+users.getString(4));}catch(Exception ex){out.println("noo");} %><br>
-</td>
-<td style="vertical-align: top;"><%try{out.println("$"+users.getString(5));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%sum+=rs.getDouble(5); try{out.println("$"+rs.getString(5));}catch(Exception ex){out.println("noo");} %><br>
 </td>
 </tr>
-<%} }catch(Exception ex){
+<%
+last = rs.getString(1);
+}
+%>
+<tr><td></td><td></td><td></td><td>--------------</td><td>----------</td></tr><tr>
+<td></td><td></td><td></td><td><b>Subtotal:</b></td><td>$<%=sum %></td></tr><tr><td></td></tr>
+<%totalsum+=sum; %>
+<tr><td></td><td></td><td></td><td>--------------</td><td>----------</td></tr><tr>
+<td></td><td></td><td></td><td><b>Total:</b></td><td>$<%=totalsum %></td></tr><tr><td></td></tr><tr>
+<%}catch(Exception ex){
 	out.println(ex);
 	}%>
 </tbody>
