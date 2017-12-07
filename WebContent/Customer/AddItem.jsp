@@ -50,8 +50,12 @@ http-equiv="content-type">
 <div style="text-align: center;"><b>Add Item</b><br>
 </div>
 <form method="post" action="AddItem_action.jsp" name="AddItem">
-Item ID<input name="Item_ID" type="text"><br>
-Item Name <input name="Item_Name"type="text"><br>
+<%ResultSet items = customer.allItems();
+int x=0;
+while(items.next()){ x++;
+}%>
+Item ID<input value=<%=x=10000+x %> name="itemId" readOnly><br>
+Item Name <input name="itemName"type="text"><br>
 Start Date<select name="sDay" >
   <option value="01">1</option>
   <option value="02">2</option>

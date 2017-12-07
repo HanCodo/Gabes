@@ -383,6 +383,16 @@ public class Customer implements Serializable {
 		    
 		    return result;
 	  }
+	  public ResultSet allItems() throws SQLException {
+		  	Connection con = openDBConnection();
+
+		    String queryString = "SELECT * FROM GABES_ITEM";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    
+		    return result;
+	  
+}
 }
 
 
