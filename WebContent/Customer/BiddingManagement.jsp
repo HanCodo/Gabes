@@ -46,13 +46,12 @@ http-equiv="content-type">
 <br>
 <div style="text-align: center;"><br>
 </div>
-<form method="post" action="ItemsList.jsp"
+<form method="post" action="../Search.jsp"
 name="Search"><input style = "color: black" name="Search"
 value="Search" type="submit"><br>
 </form>
-<form method="post" action="itemsBidOn.jsp"
-name="Bid on Items"><input style = "color: black" name="BidOn"
-value="Bid On" type="submit"><br>
+<form method="post" action="itemsBidOn.jsp" name="listBids"><input
+style = "color: black" name="Items Bid On" value="Items Bid On" type="submit"><br>
 </form>
 <form method="post" action="CustomerMenu.jsp"
 name="Return"><input style = "color: black" name="Return"
