@@ -18,7 +18,7 @@ try{
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Add Item</title>
 <style type="text/css">
 .left {
     float: left;
@@ -47,7 +47,7 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align: center;">Add Item <br>
+<div style="text-align: center;"><b>Add Item</b><br>
 </div>
 <form method="post" action="AddItem_action.jsp" name="AddItem">
 Item ID<input name="Item_ID" type="text"><br>
@@ -141,7 +141,7 @@ End Date<select name="eDay" >
   <option value="31">31</option>
 </select>
 <select name="eMonth" >
-  <option value="01">Janurary </option>
+  <option value="01">January </option>
   <option value="02">Feburary</option>
   <option value="03">March</option>
   <option value="04">April</option>
