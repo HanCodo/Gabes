@@ -78,15 +78,14 @@ try {
 	if(bidmax1.trim().length() > 0) {
 		bidmax = Integer.parseInt(bidmax1);
 	}
-	
 	String itemName = request.getParameter("itemName");
 	String keyword = request.getParameter("keyword");
 	String category = request.getParameter("category");
 	System.out.println(keyword);
 	ResultSet users = admin.search(itemID, keyword, category, bidmin, bidmax, startDate1, endDate1, itemName);
-	System.out.println(users);
+	//System.out.println(users);
 if(users == null){
-	response.sendRedirect("Search.jsp?error=2");
+	response.sendRedirect("Search.jsp?error=4");
 }
 else{
 	int x = 0;
@@ -94,9 +93,9 @@ while(users.next()){  x++; %>
 <tr>
 <td style="vertical-align: top;"><%try{out.println(users.getString(1));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println(users.getString(2));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%try{out.println(users.getString(2).substring(0,10));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top; width: 253px;"><%try{out.println(users.getString(3));}catch(Exception ex){out.println("noo");}  %><br>
+<td style="vertical-align: top; width: 253px;"><%try{out.println(users.getString(3).substring(0,10));}catch(Exception ex){out.println("noo");}  %><br>
 </td>
 <td style="vertical-align: top; width: 245px;"><%try{out.println(users.getString(4));}catch(Exception ex){out.println("noo");}  %><br>
 </td>
@@ -122,5 +121,8 @@ while(users.next()){  x++; %>
 	}%>
 </tbody>
 </table>
+<form method="post" action="Search.jsp" name="Search">
+<input style = "color: black" name="BacktoSearch" value="Back To Search" type="submit"><br>
+</form>
 </body>
 </html>

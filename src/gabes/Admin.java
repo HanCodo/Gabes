@@ -202,32 +202,32 @@ public class Admin {
 	  public ResultSet search(int ItemID, String keyword, String category, double bidMin, double bidMax, 
 			  Date startTime, Date endTime, String itemName) {
 		  try {
-			  System.out.println("test");
+			  //System.out.println("test");
 			  Connection con = openDBConnection();
 			  String statementString = "{?= call GABES_Search(?,?,?,?,?,?,?,?)}";
 			  						   
 			  //stmt = con.createStatement();  
 			  callStmt = con.prepareCall(statementString);
-			  System.out.println("test2");
+			  //System.out.println("test2");
 			  //stmt=con.prepareCall ("{?= call GABES_Search(?, ?, ?, ?, ?, ?, ?, ?)}");
-			  System.out.println("test3");
+			  //System.out.println("test3");
 			  callStmt.setInt(2,ItemID);
-			  System.out.println("Test 4");
+			  //System.out.println("Test 4");
 			  callStmt.setString(3,keyword);
-			  System.out.println("Test 5");
+			  //System.out.println("Test 5");
 			  callStmt.setString(4,itemName);
 			  callStmt.setString(5,category);
 			  callStmt.setDouble(6,bidMin);
 			  callStmt.setDouble(7,bidMax);
 			  callStmt.setDate(8,startTime);
 			  callStmt.setDate(9,endTime);
-			  System.out.println("Test 6");
+			  //System.out.println("Test 6");
 			  //callStmt.registerOutParameter(1, Types.REF_CURSOR);
 			  //callSt.registerOutParameter(2, Types.ResultSet);
 			  callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-			  System.out.println("Test 7");
+			  //System.out.println("Test 7");
 			  callStmt.execute();
-			  System.out.println("Test 8");
+			  //System.out.println("Test 8");
 			  ResultSet result = (ResultSet)callStmt.getObject(1); 
 			//  System.out.println(result);
 			  return result;
