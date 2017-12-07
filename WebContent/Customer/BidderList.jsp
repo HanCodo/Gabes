@@ -23,7 +23,7 @@ cellspacing="2">
 </tr>
 <%ResultSet r = null;
 try{
-r = customer.listBidOnItems();}
+r = customer.bidInfoList(request.getParameter("BidList"));}
 catch(IllegalStateException ise){
         out.println(ise.getMessage());
     }%>
@@ -31,9 +31,9 @@ catch(IllegalStateException ise){
 <tr>
 <td style="vertical-align: top;"><%= r.getDate("BID_TIME")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getDate("USERNAME")%><br>
+<td style="vertical-align: top;"><%= r.getString("USERNAME")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getDate("MAX_BID")%><br>
+<td style="vertical-align: top;"><%= r.getDouble("MAX_BID")%><br>
 </td>
 </tr>
 <%} r.close(); %>
