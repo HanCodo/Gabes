@@ -271,8 +271,8 @@ public class Customer implements Serializable {
 		  	Connection con = openDBConnection();
 		  	
 		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
-		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
-		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD'"+
+		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_BID b " + 
+		    		"WHERE c.UserID = b.UserID AND i.ItemID = b.ItemID AND b.UserID = "+this.getUserID()+" AND i.status = 'SOLD' and b.maxBidLimit >= i.currentBid"+
 		    		"";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
@@ -351,7 +351,7 @@ public class Customer implements Serializable {
 
 		    String queryString = "Select item.itemname as Item_Sold ,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response "+
 		    		"FROM GABES_SELL sell,GABES_ITEM item "+
-		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid";
+		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid and item.status='SOLD'";
 
 
 		    preparedStmt = con.prepareStatement(queryString);
