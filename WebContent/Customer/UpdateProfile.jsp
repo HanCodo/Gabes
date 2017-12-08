@@ -71,16 +71,16 @@ if (errorParam != null){
 <div class="container">
 <form method="post" action="UpdateProfile_action.jsp" name="Update">
 <table>
-<tr><td>Username: </td><td><input name="username" value = <%=customer.getUsername()%>></td></tr>
-<tr><td>First Name: </td><td><input name="fname" value = <%=customer.getFname()%>></td></tr>
-<tr><td>Last Name: </td><td><input name="lname" value = <%=customer.getLname()%>></td></tr>
-<tr><td>Email: </td><td><input name="email" value = <%=customer.getEmail()%>></td></tr>
-<tr><td>Phone: </td><td><input name="phone" value = <%=customer.getPhone()%>></td></tr>
-<tr><td>Seller Rating: </td><td><b> <%=rs.getString("avgRatings")%></b></td></tr>
-<tr><td>Number of Ratings: </td><td><b> <%=rs.getString("numRatings")%></b></td></tr>
-<tr><td>Old Password: </td><td><input name="oldPass" type="password"></td></tr>
-<tr><td>New Password: </td><td><input name="pass1" type="password"></td></tr>
-<tr><td>Retype Password: </td><td><input name="pass2" type="password"></td></tr>
+<tr><td><b>Username: </b></td><td><input name="username" value = <%=customer.getUsername()%>></td></tr>
+<tr><td><b>First Name: </b></td><td><input name="fname" value = <%=customer.getFname()%>></td></tr>
+<tr><td><b>Last Name: </b></td><td><input name="lname" value = <%=customer.getLname()%>></td></tr>
+<tr><td><b>Email: </b></td><td><input name="email" value = <%=customer.getEmail()%>></td></tr>
+<tr><td><b>Phone: </b></td><td><input name="phone" value = <%=customer.getPhone()%>></td></tr>
+<tr><td><b>Seller Rating: </b></td><td><b> <%=rs.getString("avgRatings")%></b></td></tr>
+<tr><td><b>Number of Ratings: </b></td><td><b> <%=rs.getString("numRatings")%></b></td></tr>
+<tr><td><b>Old Password: </b></td><td><input name="oldPass" type="password"></td></tr>
+<tr><td><b>New Password: </b></td><td><input name="pass1" type="password"></td></tr>
+<tr><td><b>Retype Password: </b></td><td><input name="pass2" type="password"></td></tr>
 </table>
 <input style = "color: black" name="Update" value="Update" type="submit">
 </form>
