@@ -91,7 +91,7 @@ INSERT INTO GABES_ADMIN (Username, Pass) VALUES ('Admin5', 'Password5');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10000, 'Username1', 'Password1', 'Jon', 'Snow', '1234567890', 'jsnow@csbsju.edu');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10001, 'Username2', 'Password2', 'Soulja', 'Boy', '6789998212', 'sboy@csbsju.edu');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10002, 'Username3', 'Password3', 'Stanley', 'Steamer', '8007832637', 'ssteamer@csbsju.edu');
-INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10003, 'Username4', 'Password3', 'Tommy', 'Tutone', '9528675309', 'ttutone@csbsju.edu');
+INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10003, 'Username4', 'Password4', 'Tommy', 'Tutone', '9528675309', 'ttutone@csbsju.edu');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10004, 'Username5', 'Password5', 'Pizza', 'Hut', '5888888888', 'phutt@csbsju.edu');
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10000, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Iron', 'An iron for clothing', 'Household', 15.00, 'SOLD', 21.00, 50.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10001, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Pacemaker', 'Keep pace with your health', 'Health', 100.00, 'SOLD', 101.00, 300.00);

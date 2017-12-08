@@ -39,7 +39,17 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align: center;"><b>Bidder List</b></div><br>
+<%ResultSet r = null;
+try{
+r = customer.viewItem(request.getParameter("BidList"));}
+catch(IllegalStateException ise){
+        out.println(ise.getMessage());
+    }
+    r.next();%>
+<div style="text-align: center;"><b>List of Bidders</b><br>
+<b>Item ID: <%=request.getParameter("BidList") %></b><br>
+<b>(<%=r.getDate("startDate") %> to <%=r.getDate("endDate") %>)</b><br>
+</div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tbody>
@@ -51,24 +61,38 @@ cellspacing="2">
 <td style="vertical-align: top;"><b>Max Bid Limit</b><br>
 </td>
 </tr>
-<%ResultSet r = null;
+<%ResultSet rs = null;
 try{
-r = customer.bidInfoList(request.getParameter("BidList"));}
+rs = customer.bidInfoList(request.getParameter("BidList"));}
 catch(IllegalStateException ise){
         out.println(ise.getMessage());
-    }%>
-<%while(r.next()){ %>
+    }
+while(rs.next()){ %>
 <tr>
-<td style="vertical-align: top;"><%= r.getDate("BID_TIME")%><br>
+<td style="vertical-align: top;"><%= rs.getDate("BID_TIME")%><br>
 </td>
-<td style="vertical-align: top;"><%= r.getString("USERNAME")%><br>
+<td style="vertical-align: top;"><%= rs.getString("USERNAME")%><br>
 </td>
-<td style="vertical-align: top;"><%= "$"+r.getDouble("MAX_BID")%><br>
+<td style="vertical-align: top;"><%= "$"+rs.getDouble("MAX_BID")%><br>
 </td>
 </tr>
-<%} r.close(); %>
+<%} %>
 </tbody>
 </table>
+<div style="text-align:center;">
+<br>
+<b>Winner: </b><%
+if(r.getString("Status").equals("SOLD")){
+	ResultSet winner = customer.winnerInfo(request.getParameter("BidList"));
+	winner.next();
+	out.println(winner.getString("Username")+" $"+winner.getDouble("FinalSellingPrice"));
+}
+else{
+	out.print(r.getString("Status"));
+}
+r.close();
+	%>
+</div>
 <form method="post" action="ItemsList.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>

@@ -501,6 +501,20 @@ public class Customer implements Serializable {
 	   * Takes a input of itemID which is a int and uses it to find the winner of bid
 	   * that winners username is then returned
 	   */
+	  public ResultSet winnerInfo(String itemID) throws SQLException {
+		  	Connection con = openDBConnection();
+
+		    String queryString = "SELECT * FROM GABES_CUSTOMER c, GABES_WINNERS w "
+		    		+"WHERE c.USERID = w.USERID  and w.ITEMID = "+itemID+"";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+	  }
+	  
+	  /**
+	   * Takes a input of itemID which is a int and uses it to find the winner of bid
+	   * that winners username is then returned
+	   */
 	  public String winner(int itemID) throws SQLException {
 		  	Connection con = openDBConnection();
 
