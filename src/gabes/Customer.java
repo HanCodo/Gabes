@@ -409,8 +409,25 @@ public class Customer implements Serializable {
 		    result.next();
 		    String name = result.getString("USERNAME");
 		    return name;
-	  
-}
+	  }
+	  /**
+	   * Checks if a  item has been rated
+	   * @return rated, a boolean
+	   */
+	  public boolean hasRated(int itemID) throws SQLException {
+		  	Connection con = openDBConnection();
+
+		    String queryString = "SELECT OVERALL FROM GABES_SELL s "
+		    		+"WHERE ITEMID= "+itemID+"";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    result.next();
+		    Integer name = result.getInt("OVERALL");
+		    if(name != null)
+		    	return true;
+		    return false;
+	  }
+
 }
 
 

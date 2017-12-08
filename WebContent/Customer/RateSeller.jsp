@@ -9,6 +9,10 @@ if(customer.getUsername() == null)
 {
 	response.sendRedirect("../CustomerLogout_action.jsp");
 }
+if(customer.hasRated(Integer.parseInt(request.getParameter("ItemID"))))
+{
+	response.sendRedirect("itemsBought.jsp?error=1");
+}
 %>
 <html>
 <head>

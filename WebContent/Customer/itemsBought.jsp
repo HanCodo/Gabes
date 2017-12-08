@@ -42,6 +42,17 @@ http-equiv="content-type">
 <div style="text-align: center;"><b>My Purchases</b>  <br>
 </div>
 <br>
+<%
+String message = "";
+String errorParam = request.getParameter("error");
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "You Already Rated That Item!";
+	}
+}
+out.print(message);	
+%>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tr>
