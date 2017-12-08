@@ -66,9 +66,31 @@ cellspacing="2">
 
 try {
 	String itemID1 = request.getParameter("itemID");
-	String bidmin1 = request.getParameter("itemID");
-	String bidmax1 = request.getParameter("itemID");
-	String startDate = request.getParameter("startDate");
+	String bidmin1 = request.getParameter("minbid");
+	String bidmax1 = request.getParameter("maxbid");
+	String sDay = request.getParameter("sDay");
+	String sMonth = request.getParameter("sMonth");
+	String sYear = request.getParameter("sYear");
+	String startDate = sMonth+"/"+sDay+"/"+sYear;
+	String eDay = request.getParameter("eDay");
+	String eMonth = request.getParameter("eMonth");
+	String eYear = request.getParameter("eYear");
+	String endDate = eMonth+"/"+eDay+"/"+eYear;
+	if(Integer.parseInt(sYear)==0 && Integer.parseInt(sMonth)==0 && Integer.parseInt(sDay)==0 && Integer.parseInt(eYear)==0 && 
+			Integer.parseInt(eMonth)==0 && Integer.parseInt(eDay)==0){
+		endDate = "";
+		startDate = "";
+	}else if(Integer.parseInt(eYear)==0 && Integer.parseInt(eMonth)==0 && Integer.parseInt(eDay)==0 && 
+			Integer.parseInt(sYear)==0 && Integer.parseInt(sMonth)==0 && Integer.parseInt(sDay)==0){
+		endDate = "";
+		startDate = "";
+	}else if(Integer.parseInt(eYear)!=0 && Integer.parseInt(eMonth)!=0 && Integer.parseInt(eDay)!=0 && 
+			Integer.parseInt(sYear)!=0 && Integer.parseInt(sMonth)!=0 && Integer.parseInt(sDay)!=0) {
+		
+	}
+	else{
+		response.sendRedirect("Search.jsp?error=5");
+	}
 	Date startDate1 = null;
 	if(startDate.trim().length() > 0){
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
@@ -81,7 +103,7 @@ try {
 		    response.sendRedirect("Search.jsp?error=3");
 		}
 	}
-	String endDate = request.getParameter("endDate");
+	//String endDate = request.getParameter("endDate");
 	Date endDate1 = null;
 	if(startDate.trim().length() > 0){
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
@@ -112,7 +134,7 @@ try {
 	String itemName = request.getParameter("itemName");
 	String keyword = request.getParameter("keyword");
 	String category = request.getParameter("category");
-	System.out.println(keyword);
+	//System.out.println(keyword);
 	ResultSet users = customer.search(itemID, keyword, category, bidmin, bidmax, startDate1, endDate1, itemName);
 	//System.out.println(users);
 if(users == null){
