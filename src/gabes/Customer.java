@@ -370,7 +370,7 @@ public class Customer implements Serializable {
 //		    		"FROM GABES_SELL sell,GABES_ITEM item,GABES_CUSTOMER customer, GABES_CUSTOMER c2"+
 //		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid and item.status='SOLD' and sell.userid = customer.userid";
 
-		    String queryString = "Select c.USERNAME as userName, i.itemname as Item_Sold , s.overall as OVERALL, s.quality as Quality, s.delivery as Delivery, s.Comments as Buyer_Response "+
+		    String queryString = "Select c.USERNAME as userName, i.itemID as itemID, i.itemname as Item_Sold , s.overall as OVERALL, s.quality as Quality, s.delivery as Delivery, s.Comments as Buyer_Response "+
 		    		"FROM GABES_SELL s, GABES_ITEM i, GABES_CUSTOMER c, GABES_Winners w "+
 		    		"WHERE c.userID = w.userID and s.UserID ="+this.userID+" and i.itemId = s.itemid and w.itemID = i.itemID and i.status='SOLD'";
 

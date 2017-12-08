@@ -48,6 +48,8 @@ cellspacing="2">
 <tr>
 <td style="vertical-align: top;"><b>Username</b><br>
 </td>
+<td style="vertical-align: top;"><b>Item ID</b><br>
+</td>
 <td style="vertical-align: top;"><b>Item Name</b><br>
 </td>
 <td style="vertical-align: top;"><b>Overall</b><br>
@@ -69,6 +71,8 @@ catch(IllegalStateException ise){
 
 <tr>
 <td style="vertical-align: top;"><%= r.getString("userName")%><br>
+</td>
+<td style="vertical-align: top;"><%= r.getString("itemid")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("Item_Sold")%><br>
 </td>
