@@ -273,10 +273,12 @@ public class Customer implements Serializable {
 		 
 		  	Connection con = openDBConnection();
 		  	
-		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
-		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_BID b " + 
-		    		"WHERE c.UserID = b.UserID AND i.ItemID = b.ItemID AND b.UserID = "+this.getUserID()+" AND i.status = 'SOLD' and b.maxBidLimit >= i.currentBid"+
-		    		"";
+		  	String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS, " +
+		    		"c2.USERNAME as SUSERNAME, c2.EMAIL as EMAIL "+
+		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2 " + 
+		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD' "+
+		    		"AND s.USERID = c2.USERID";
+		  	
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
@@ -290,7 +292,7 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MAXBIDLIMIT, b.BIDTIME "+
+		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, it.CURRENTBID, it.STATUS, it.STARTDATE, it.ENDDATE, it.CATEGORIES "+
 		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
 		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID();
 		    preparedStmt = con.prepareStatement(queryString);
@@ -414,6 +416,38 @@ public class Customer implements Serializable {
 	            E.printStackTrace();
 	        }       
 	        return result;
+	  }
+	  /**
+	   * Takes a input of itemID which is a int and uses it to find the winner of bid
+	   * that winners username is then returned
+	   */
+	  public String winner(int itemID) throws SQLException {
+		  	Connection con = openDBConnection();
+
+		    String queryString = "SELECT c.USERNAME FROM GABES_CUSTOMER c, GABES_WINNERS w "
+		    		+"WHERE c.USERID = w.USERID  and w.ITEMID = "+itemID+"";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    result.next();
+		    String name = result.getString("USERNAME");
+		    return name;
+	  }
+	  /**
+	   * Checks if a  item has been rated
+	   * @return rated, a boolean
+	   */
+	  public boolean hasRated(int itemID) throws SQLException {
+		  	Connection con = openDBConnection();
+
+		    String queryString = "SELECT OVERALL FROM GABES_SELL s "
+		    		+"WHERE ITEMID= "+itemID+"";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    result.next();
+		    Integer name = result.getInt("OVERALL");
+		    if(name != null)
+		    	return true;
+		    return false;
 	  }
 }
 

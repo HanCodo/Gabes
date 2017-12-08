@@ -42,6 +42,17 @@ http-equiv="content-type">
 <div style="text-align: center;"><b>My Purchases</b>  <br>
 </div>
 <br>
+<%
+String message = "";
+String errorParam = request.getParameter("error");
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "You Already Rated That Item!";
+	}
+}
+out.print(message);	
+%>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tr>
@@ -55,14 +66,20 @@ cellspacing="2">
 </td>
 <td><b> END DATE </b>
 </td>
+<td><b> START PRICE </b>
+</td>
 <td><b> BUY PRICE </b>
+</td>
+<td><b> SELLER USERNAME </b>
+</td>
+<td><b> SELLER EMAIL </b>
 </td>
 <td><b> RATE SELLER </b>
 </td>
 </tr>
 <%ResultSet r = customer.listMyBoughtItems();
-r.next();
-do{%>
+
+while(r.next()){%>
 <tr>
 <td>
 <%=r.getInt("ITEMID")
@@ -85,10 +102,23 @@ do{%>
 %>
 </td>
 <td>
+<%=r.getDouble("STARTPRICE")
+%>
+</td>
+<td>
 <%="$"+r.getDouble("CURRENTBID")
 %>
 </td>
 <td>
+<%=r.getString("SUSERNAME")
+%>
+</td>
+<td>
+<%=r.getString("EMAIL")
+%>
+</td>
+<td>
+
 <form method="post" action="RateSeller.jsp" name="Rate">
 <input name="ItemID" value=<%=r.getInt("ITEMID")%> type="hidden">
 <input name="ItemName" value=<%=r.getString("ITEMNAME")%> type="hidden">
@@ -96,7 +126,7 @@ do{%>
 </form>
 </td>
 </tr>
-<%} while(r.next()); %>
+<%} %>
 </table>
 <form method="post" action="CustomerMenu.jsp"
 name="Return"><input style = "color: black" name="Return"
