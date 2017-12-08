@@ -14,7 +14,7 @@ else{
 		System.out.println(endDate);
 		try{
 		int result = customer.addItem(request.getParameter("Item_ID"), startDate, endDate,request.getParameter("Item_Name"), request.getParameter("Descript"), request.getParameter("Categories"), request.getParameter("Start_Price"),request.getParameter("BuyNow"));
-		response.sendRedirect("AddItem.jsp");}
+		response.sendRedirect("ItemsList.jsp?itemid="+request.getParameter("Item_ID"));}
 		catch(Exception e){
 			response.sendRedirect("AddItem.jsp?error=1");}
 		}

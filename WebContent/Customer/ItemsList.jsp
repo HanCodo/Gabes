@@ -43,6 +43,16 @@ http-equiv="content-type">
 <div style="text-align: center;"><b>My Items</b>  <br>
 </div>
 <br>
+<%
+String message = "";
+String itemID = request.getParameter("itemid");
+if (itemID != null){
+	message = "You successfully listed item number "+itemID+"!";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+	
+
+%>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tbody>
