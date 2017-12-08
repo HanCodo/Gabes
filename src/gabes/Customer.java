@@ -290,7 +290,7 @@ public class Customer implements Serializable {
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
 		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MAXBIDLIMIT, b.BIDTIME, it.CURRENTBID, i.STATUS "+
-		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c, GABES_SELL s " + 
+		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
 		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID();
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
