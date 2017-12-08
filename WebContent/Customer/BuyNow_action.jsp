@@ -3,5 +3,5 @@
 <jsp:setProperty name="customer" property="*"/>
 <%
 customer.buyNow(Integer.parseInt(request.getParameter("i")), Double.parseDouble(request.getParameter("p")));
-response.sendRedirect("Bid.jsp?i="+request.getParameter("i")+"&m=1");
+response.sendRedirect("itemsBought.jsp?itemID="+request.getParameter("i"));
 %>

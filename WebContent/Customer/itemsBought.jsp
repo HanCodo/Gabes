@@ -45,14 +45,21 @@ http-equiv="content-type">
 <%
 String message = "";
 String errorParam = request.getParameter("error");
+String itemID = request.getParameter("itemID");
 if (errorParam != null){
 	int error = Integer.parseInt(errorParam);
 	if (error == 1){
 		message = "You Already Rated That Item!";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
 	}
 }	
+if (itemID != null){
+	message = "You successfully bought item number "+itemID+"! Don't forget to rate the seller!";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+	
+
 %>
-<div style="text-align: center; color:red;"><%=message %></div>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tr>

@@ -46,7 +46,7 @@ cellspacing="2">
 <tr>
 <td style="vertical-align: top;"><b>Bidding Time</b><br>
 </td>
-<td style="vertical-align: top;"><b>Username</b><br>
+<td style="vertical-align: top;"><b>Bidder Username</b><br>
 </td>
 <td style="vertical-align: top;"><b>Max Bid Limit</b><br>
 </td>
