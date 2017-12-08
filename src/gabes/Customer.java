@@ -78,6 +78,23 @@ public class Customer implements Serializable {
 	public String getEmail() {
 		return email;
 	}
+	public String getEmail(int id) {
+		Connection con = openDBConnection();
+        try{
+            stmt = con.createStatement();
+            String queryString = "SELECT EMAIL" 
+                    + "FROM GABES_CUSTOMER c "
+                    + "WHERE c.Username = '"+id+" ";
+
+            
+            ResultSet result = stmt.executeQuery(queryString);
+            result.next();
+            return result.getString("EMAIL");
+        } catch (Exception E) {
+            E.printStackTrace();
+            return null;
+        }
+	}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -270,10 +287,11 @@ public class Customer implements Serializable {
 		 
 		  	Connection con = openDBConnection();
 		  	
-		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
-		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
-		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD'"+
-		    		"";
+		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS, " +
+		    		"c2.USERNAME as SUSERNAME, c2.EMAIL as EMAIL "+
+		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2 " + 
+		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD' "+
+		    		"AND s.USERID = c2.USERID";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
@@ -287,8 +305,8 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MAXBIDLIMIT, b.BIDTIME "+
-		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
+		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MAXBIDLIMIT, b.BIDTIME, it.CURRENTBID, i.STATUS "+
+		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c, GABES_SELL s " + 
 		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID();
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
