@@ -51,6 +51,10 @@ http-equiv="content-type">
 name="Search"><input style = "color: black" name="Search"
 value="Search" type="submit"><br>
 </form>
+<form method="post" action="../Featured.jsp"
+name="FeaturedItem"><input style = "color: black" name="FeaturedItem"
+value="Featured Item" type="submit"><br>
+</form>
 <form method="post" action="itemsBidOn.jsp" name="listBids"><input
 style = "color: black" name="Items Bid On" value="Items Bid On" type="submit"><br>
 </form>

@@ -543,6 +543,24 @@ public class Customer implements Serializable {
 		    ResultSet result = preparedStmt.executeQuery();
 		    return result;
 	  }
+	  
+	  public ResultSet featuredItem() throws SQLException{
+		  	Connection con = openDBConnection();
+		    String queryString = "Select i.itemID " + 
+		    		"from gabes_item i, gabes_bid b " + 
+		    		"where i.itemID = b.itemID and i.status = 'ON AUCTION' " + 
+		    		"group by i.itemID " + 
+		    		"having count(b.itemID) >= (select max(count(b.itemID)) AS mostBids " + 
+		    		"    from gabes_item i, gabes_bid b " + 
+		    		"    where i.itemID = b.itemID and i.status = 'ON AUCTION' " + 
+		    		"    group by b.itemID)";
+
+
+
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+	  }
 
 
 public ResultSet search(int ItemID, String keyword, String category, double bidMin, double bidMax, 
