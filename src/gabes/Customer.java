@@ -3,6 +3,8 @@ package gabes;
 import java.io.*;
 import java.sql.*;
 import oracle.jdbc.*;
+import java.sql.*;
+import java.util.*;
 //import tdrichmond.companyDB.DatabaseConnection;
 
 public class Customer implements Serializable {
@@ -21,6 +23,7 @@ public class Customer implements Serializable {
 
 	private PreparedStatement preparedStmt;
 	private Statement stmt;
+	private CallableStatement callStmt;
 	/**
 	* The following stores whether or not the Customer has successfully logged
 	* to the System
@@ -306,9 +309,9 @@ public class Customer implements Serializable {
 	            preparedStmt = con.prepareStatement(queryString);
 	            int i = Integer.parseInt(itemId);
 	            preparedStmt.setInt(1,i);
-	            Date sd = Date.valueOf(startDate);
+	            java.sql.Date sd = java.sql.Date.valueOf(startDate);
 	            preparedStmt.setDate(2,sd);
-	            Date ed = Date.valueOf(endDate);
+	            java.sql.Date ed = java.sql.Date.valueOf(endDate);
 	            preparedStmt.setDate(3,ed);
 	            preparedStmt.setString(4,ItemName);
 	            preparedStmt.setString(5,Descript);
@@ -392,7 +395,26 @@ public class Customer implements Serializable {
 		    
 		    return result;
 	  
-}
+	  }
+	  public ResultSet bid(int itemId, double price, java.sql.Date date){
+		  ResultSet result = null;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "insert into GABES_BID(UserID, ItemID, MaxBidLimit, BidTime) VALUES (?,?,?,?)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setInt(1,this.getUserID());
+	            preparedStmt.setInt(2,itemId);
+	            preparedStmt.setDouble(3,price);
+	            preparedStmt.setDate(4,date);
+	            
+	            result = preparedStmt.executeQuery();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
+	  }
 }
 
 

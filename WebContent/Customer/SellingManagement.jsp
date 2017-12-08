@@ -15,7 +15,7 @@ if(customer.getUsername() == null)
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title></title>
+<title>Selling Manager</title>
 <style type="text/css">
 .left {
     float: left;
@@ -44,8 +44,9 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align: center;"><br>
+<div style="text-align: center;"><b>Selling Manager</b>  <br>
 </div>
+<br>
 <form method="post" action="ItemsList.jsp"
 name="ItemLists"><input style = "color: black" name="ItemLists"
 value="Item Lists" type="submit"><br>

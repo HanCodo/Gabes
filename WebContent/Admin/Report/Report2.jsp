@@ -85,11 +85,27 @@ http-equiv="content-type">
 	}
     rs.close();
     %>
+    <tr>
+<td><br></td>
+<td><br></td>
+<td><br></td>
+<td><br></td>
+<td><br></td>
+<td><br></td>
+<td>---------------<br></td>
+</tr>
+<tr>
+<td><b>Total Income:</b><br></td>
+<td><br></td>
+<td><br></td>
+<td><br></td>
+<td><br></td>
+<td><br></td>
+<td style="vertical-align: top;">$<%=total %><br></td>
+</tr>
 </tbody>
 </table>
 <br>
-<div class="left"><b>Total Income</b></div><div class="right"><b>$<%=total %></b></div>
-<br><br>
 <form method="post" action="../ViewReports.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"><br>

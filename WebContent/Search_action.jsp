@@ -59,6 +59,8 @@ cellspacing="2">
 </td>
 <td style="vertical-align: top;"><b>Current Bid</b><br>
 </td>
+<td style="vertical-align: top;"><b>Buy Now</b><br>
+</td>
 </tr>
 <%
 
@@ -134,9 +136,13 @@ while(users.next()){  x++; %>
 </td>
 <td style="vertical-align: top; width: 282px;"><%try{out.println(users.getString(8));}catch(Exception ex){out.println("noo");} %><br>
 </td>
+<td style="vertical-align: top; text-align: center; width: 282px;">$<%try{out.println(users.getString(9));}catch(Exception ex){out.println("noo");} %>
+<form method="post" action="Customer/Bid.jsp?i=<%=users.getString(1)%>" name="Bid"><input style = "color: black" name="Bid" value="Bid" type="submit">
+</form>
 </td>
-<td style="vertical-align: top; width: 282px;"><%try{out.println(users.getString(7));}catch(Exception ex){out.println("noo");} %><br>
-</td>
+<td style="vertical-align: top; text-align: center; width: 282px;">$<%try{out.println(users.getString(10));}catch(Exception ex){out.println("noo");}%>
+<form method="post" action="Customer/BuyNow_action.jsp?i=<%=users.getString(1)%>" name="Buynow">
+<input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
 </tr>
 <%}if(x==0){
 	response.sendRedirect("Search.jsp?error=2");
