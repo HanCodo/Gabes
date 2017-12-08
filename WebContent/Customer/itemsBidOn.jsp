@@ -45,21 +45,21 @@ http-equiv="content-type">
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tr>
-<td><b>ITEM ID</b>
+<td><b>Item ID</b>
 </td>
-<td><b>ITEM NAME</b>
+<td><b>Item Name</b>
 </td>
-<td><b>CATAGORY</b>
+<td><b>Category</b>
 </td>
-<td><b>AUCTION START TIME</b>
+<td><b>Bid Date</b>
 </td>
-<td><b>AUCTION END TIME</b>
+<td><b>Auction End Time</b>
 </td>
-<td><b>CURRENT BID</b>
+<td><b>Bid Amount</b>
 </td>
-<td><b>ITEM INFO</b>
+<td><b>Item Info</b>
 </td>
-<td><b>WINNER</b>
+<td><b>Winner</b>
 </td>
 </tr>
 <%ResultSet r = customer.listBidOnItems();
@@ -78,7 +78,7 @@ while(r.next()){%>
 %>
 </td>
 <td>
-<%=r.getString("STARTDATE").substring(0,10)
+<%=r.getString("BIDTIME").substring(0,10)
 %>
 </td>
 <td>
@@ -86,7 +86,7 @@ while(r.next()){%>
 %>
 </td>
 <td>
-<%="$"+r.getString("CURRENTBID")
+<%="$"+r.getString("MaxBidLimit")
 %>
 </td>
 <td style="vertical-align: top;"><form method="GET" action="ItemInfo.jsp" name="ItemInfo">

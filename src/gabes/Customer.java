@@ -301,9 +301,10 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, it.CURRENTBID, it.STATUS, it.STARTDATE, it.ENDDATE, it.CATEGORIES "+
+		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MaxBidLimit, it.STATUS, b.BidTime, it.ENDDATE, it.CATEGORIES "+
 		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
-		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID();
+		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID()+" "+
+		    				"ORDER BY b.BidTime";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
