@@ -2,6 +2,9 @@ package gabes;
 
 import java.io.*;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import oracle.jdbc.*;
 import java.sql.*;
 import java.util.*;
@@ -404,7 +407,19 @@ public class Customer implements Serializable {
 		    return result;
 	  
 	  }
-	  public ResultSet bid(int itemId, double price, java.sql.Date date){
+	  public ResultSet bid(int itemId, double price){
+		  String mydate = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
+		  java.sql.Date date1 = null;
+		  if(mydate.trim().length() > 0){
+		  	DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		  	try {
+		  	    java.util.Date date2 = df.parse(mydate);
+		  	    date1 = new java.sql.Date(date2.getTime());
+		  	   
+		  	} catch (Exception e) {
+		  	}
+		  }
+		  
 		  ResultSet result = null;
 		  Connection con = openDBConnection();
 	        try{
@@ -414,7 +429,7 @@ public class Customer implements Serializable {
 	            preparedStmt.setInt(1,this.getUserID());
 	            preparedStmt.setInt(2,itemId);
 	            preparedStmt.setDouble(3,price);
-	            preparedStmt.setDate(4,date);
+	            preparedStmt.setDate(4,date1);
 	            
 	            result = preparedStmt.executeQuery();
 	            preparedStmt.close();
@@ -423,6 +438,54 @@ public class Customer implements Serializable {
 	        }       
 	        return result;
 	  }
+	  
+	  
+	  public ResultSet buyNow(int itemId, double price){
+		  String mydate = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
+		  java.sql.Date date1 = null;
+		  if(mydate.trim().length() > 0){
+		  	DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		  	try {
+		  	    java.util.Date date2 = df.parse(mydate);
+		  	    date1 = new java.sql.Date(date2.getTime());
+		  	   
+		  	} catch (Exception e) {
+		  	}
+		  }
+		  
+		  ResultSet result = null;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "insert into GABES_BID(UserID, ItemID, MaxBidLimit, BidTime) VALUES (?,?,?,?)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setInt(1,this.getUserID());
+	            preparedStmt.setInt(2,itemId);
+	            preparedStmt.setDouble(3,price);
+	            preparedStmt.setDate(4,date1);
+	            
+	            result = preparedStmt.executeQuery();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }  
+	        try{
+	            String queryString = "update GABES_ITEM " 
+	                    + " set currentBid=?, status='SOLD'"
+	                    + " where itemID=?";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setDouble(1,price);
+	            preparedStmt.setInt(2,itemId);
+	            
+	            result = preparedStmt.executeQuery();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }
+	        return result;
+	  }
+	  
 	  /**
 	   * Takes a input of itemID which is a int and uses it to find the winner of bid
 	   * that winners username is then returned

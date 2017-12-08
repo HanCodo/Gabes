@@ -141,7 +141,7 @@ while(users.next()){  x++; %>
 </form>
 </td>
 <td style="vertical-align: top; text-align: center; width: 282px;">$<%try{out.println(users.getString(10));}catch(Exception ex){out.println("noo");}%>
-<form method="post" action="Customer/BuyNow_action.jsp?i=<%=users.getString(1)%>" name="Buynow">
+<form method="post" action="Customer/BuyNow_action.jsp?i=<%=users.getString(1)%>&p=<%=users.getString(10)%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
 </tr>
 <%}if(x==0){
