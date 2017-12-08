@@ -523,9 +523,9 @@ public class Customer implements Serializable {
 		    		+"WHERE ITEMID= "+itemID+"";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
-		    result.next();
-		    Integer name = result.getInt("OVERALL");
-		    if(name != null)
+		    result.next();		    
+		    int over = result.getInt("OVERALL");
+		    if(over > 0)
 		    	return true;
 		    return false;
 	  }
