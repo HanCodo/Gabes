@@ -100,7 +100,7 @@ catch(IllegalStateException ise){
 </td>
 <td style="vertical-align: top;"><form method="GET" action="BidderList.jsp" name="BidList">
 <input  style = "color: black" name="BidList" type="hidden" value="<%=r.getInt("ITEMID") %>"/>
-<button style = "color: black" value="BidList" name="BidList">Item Info</button><br>
+<button style = "color: black" value="BidList" name="BidList">Bid History</button><br>
 </form><br>
 </tr>
 <%} r.close(); %>

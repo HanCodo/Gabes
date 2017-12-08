@@ -102,7 +102,7 @@ while(r.next()){%>
 %>
 </td>
 <td>
-<%=r.getDouble("STARTPRICE")
+<%="$"+r.getDouble("STARTPRICE")
 %>
 </td>
 <td>

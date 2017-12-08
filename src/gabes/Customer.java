@@ -273,10 +273,16 @@ public class Customer implements Serializable {
 		 
 		  	Connection con = openDBConnection();
 		  	
+//		  	String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS, " +
+//		    		"c2.USERNAME as SUSERNAME, c2.EMAIL as EMAIL "+
+//		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2 " + 
+//		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD' "+
+//		    		"AND s.USERID = c2.USERID";
+//		  	
 		  	String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS, " +
 		    		"c2.USERNAME as SUSERNAME, c2.EMAIL as EMAIL "+
-		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2 " + 
-		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD' "+
+		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2, GABES_BID b " + 
+		    		"WHERE c.UserID = b.UserID AND b.itemID = i.itemID and i.ItemID = s.ItemID and b.maxBidLimit >= i.currentBid AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD' "+
 		    		"AND s.USERID = c2.USERID";
 		  	
 		    preparedStmt = con.prepareStatement(queryString);
