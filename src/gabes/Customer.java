@@ -354,9 +354,9 @@ public class Customer implements Serializable {
 	  public ResultSet viewFeedback() throws SQLException{
 		  	Connection con = openDBConnection();
 
-		    String queryString = "Select item.itemname as Item_Sold ,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response "+
-		    		"FROM GABES_SELL sell,GABES_ITEM item "+
-		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid and item.status='SOLD'";
+		    String queryString = "Select customer.USERNAME as userName,item.itemname as Item_Sold ,sell.overall as OVERALL,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response "+
+		    		"FROM GABES_SELL sell,GABES_ITEM item,GABES_CUSTOMER customer "+
+		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid and item.status='SOLD' and sell.userid = customer.userid";
 
 
 		    preparedStmt = con.prepareStatement(queryString);

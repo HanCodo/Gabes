@@ -14,6 +14,16 @@ if(customer.getUsername() == null)
 try{
 
             	%>
+            	<% 
+String message = "";
+String errorParam = request.getParameter("error");
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "Error";
+	}
+}
+%>
 <html>
 <head>
 <meta content="text/html; charset=ISO-8859-1"
@@ -48,16 +58,17 @@ http-equiv="content-type">
 <br>
 <br>
 <div style="text-align: center;"><b>Add Item</b><br>
+<div style="color: red; text-align: center;"><%=message%></div><br>
 </div>
 <form method="post" action="AddItem_action.jsp" name="AddItem">
 <%ResultSet items = customer.allItems();
 int x=0;
 while(items.next()){ x++;
 }%>
-Item ID<input value=<%=x=10000+x %> name="itemId" readOnly><br>
-Item Name <input name="itemName"type="text"><br>
+Item ID<input value=<%=x=10000+x %> name=Item_ID readOnly><br>
+Item Name <input name="Item_Name"type="text"><br>
 Start Date<select name="sDay" >
-  <option value="01">1</option>
+ <option value="01">1</option>
   <option value="02">2</option>
   <option value="03">3</option>
   <option value="04">4</option>
@@ -87,9 +98,10 @@ Start Date<select name="sDay" >
   <option value="29">29</option>
   <option value="30">30</option>
   <option value="31">31</option>
+ 
 </select>
 <select name="sMonth" >
-  <option value="01">January </option>
+ <option value="01">January </option>
   <option value="02">Feburary</option>
   <option value="03">March</option>
   <option value="04">April</option>
@@ -101,14 +113,14 @@ Start Date<select name="sDay" >
   <option value="10">October</option>
   <option value="11">November</option>
   <option value="12">December</option>
+
 </select>
 <select name="sYear" >
-  <option value="2017">2017 </option>
-  <option value="2018">2018</option>
-  <option value="2019">2019</option>
-  <option value="2020">2020</option>
-  <option value="2021">2021</option>
-  <option value="2022">2022</option>
+  <%for (int i = 0; i <= 5 ; i++){ 
+  String currentYear = new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
+  int currentDateInt= Integer.parseInt(currentYear);%>
+<option value = "<%=currentDateInt + i%>"><%=currentDateInt + i%></option>
+<%} %>
   </select>
 <br>
 
@@ -159,12 +171,11 @@ End Date<select name="eDay" >
   <option value="12">December</option>
 </select>
 <select name="eYear" >
-  <option value="2017">2017 </option>
-  <option value="2018">2018</option>
-  <option value="2019">2019</option>
-  <option value="2020">2020</option>
-  <option value="2021">2021</option>
-  <option value="2022">2022</option>
+ <%for (int i = 0; i <= 5 ; i++){ 
+  String currentYear = new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
+  int currentDateInt= Integer.parseInt(currentYear);%>
+<option value = "<%=currentDateInt + i%>"><%=currentDateInt + i%></option>
+<%} %>
   </select>
 <br>
 Description <input name="Descript" type="text"><br>

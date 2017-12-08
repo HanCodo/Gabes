@@ -94,12 +94,12 @@ catch(IllegalStateException ise){
 <td style="vertical-align: top;"><%= r.getString("STATUS")%><br>
 </td>
 <td style="vertical-align: top;"><form method="GET" action="ItemInfo.jsp" name="ItemInfo">
-<input  style = "color: black" name="ItemInfo" type="hidden" value="<%=r.getInt("ItemID") %>"/>
+<input  style = "color: black" name="ItemInfo" type="hidden" value="<%=r.getInt("ITEMID") %>"/>
 <button style = "color: black" value="Item Info" name="Item Info">Item Info</button><br>
 </form><br>
 </td>
 <td style="vertical-align: top;"><form method="GET" action="BidderList.jsp" name="BidList">
-<input  style = "color: black" name="BidList" type="hidden" value="<%=r.getInt("ItemID") %>"/>
+<input  style = "color: black" name="BidList" type="hidden" value="<%=r.getInt("ITEMID") %>"/>
 <button style = "color: black" value="BidList" name="BidList">Item Info</button><br>
 </form><br>
 </tr>

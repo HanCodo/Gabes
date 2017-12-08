@@ -46,7 +46,11 @@ http-equiv="content-type">
 cellspacing="2">
 <tbody>
 <tr>
+<td style="vertical-align: top;"><b>Username</b><br>
+</td>
 <td style="vertical-align: top;"><b>Item Name</b><br>
+</td>
+<td style="vertical-align: top;"><b>Overall</b><br>
 </td>
 <td style="vertical-align: top;"><b>Quality</b><br>
 </td>
@@ -64,7 +68,11 @@ catch(IllegalStateException ise){
 <%while(r.next()){ %>
 
 <tr>
+<td style="vertical-align: top;"><%= r.getString("userName")%><br>
+</td>
 <td style="vertical-align: top;"><%= r.getString("Item_Sold")%><br>
+</td>
+<td style="vertical-align: top;"><%= r.getString("OVERALL")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("Quality")%><br>
 </td>
