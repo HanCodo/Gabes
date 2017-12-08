@@ -140,11 +140,16 @@ while(users.next()){  x++; %>
 <form method="post" action="Customer/Bid.jsp?i=<%=users.getString(1)%>" name="Bid"><input style = "color: black" name="Bid" value="Bid" type="submit">
 </form>
 </td>
-<td style="vertical-align: top; text-align: center; width: 282px;">$<%try{out.println(users.getString(10));}catch(Exception ex){out.println("noo");}%>
+<td style="vertical-align: top; text-align: center; width: 282px;"><%if(users.getString(10) == null){
+	out.println("Buy now not made available by seller");
+}else{
+	try{out.println("$"+users.getString(10));}catch(Exception ex){out.println("noo");}%>
+
 <form method="post" action="Customer/BuyNow_action.jsp?i=<%=users.getString(1)%>&p=<%=users.getString(10)%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
 </tr>
-<%}if(x==0){
+<%}}
+if(x==0){
 	response.sendRedirect("Search.jsp?error=2");
 }
 
