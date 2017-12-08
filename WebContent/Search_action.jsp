@@ -37,25 +37,27 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
+<div style="text-align:center;"><b>Search Results</b></div>
+<br>
 <table style="text-align: left; width: 100%;" border="1" cellpadding="2"
 cellspacing="2">
 <tbody>
 <tr>
-<td style="vertical-align: top;">ItemID<br>
+<td style="vertical-align: top;"><b>ItemID</b><br>
 </td>
-<td style="vertical-align: top;">Start Date<br>
+<td style="vertical-align: top;"><b>Start Date</b><br>
 </td>
-<td style="vertical-align: top; width: 253px;">End Date<br>
+<td style="vertical-align: top; width: 253px;"><b>End Date</b><br>
 </td>
-<td style="vertical-align: top; width: 245px;">Item Name<br>
+<td style="vertical-align: top; width: 245px;"><b>Item Name</b><br>
 </td>
-<td style="vertical-align: top; width: 282px;">Item Description<br>
+<td style="vertical-align: top; width: 282px;"><b>Item Description</b><br>
 </td>
-<td style="vertical-align: top;">Category<br>
+<td style="vertical-align: top;"><b>Category</b><br>
 </td>
-<td style="vertical-align: top;">Status<br>
+<td style="vertical-align: top;"><b>Status</b><br>
 </td>
-<td style="vertical-align: top;">Current Bid<br>
+<td style="vertical-align: top;"><b>Current Bid</b><br>
 </td>
 </tr>
 <%

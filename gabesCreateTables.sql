@@ -33,6 +33,7 @@ CREATE TABLE gabes_item (
 	StartPrice 		DECIMAL(10,2) 		NOT NULL,
 	Status			VARCHAR(11),
 	CurrentBid		DECIMAL(10,2),
+    buyNow          DECIMAL(10,2),
 	PRIMARY KEY (ItemID),
     CONSTRAINT valDate CHECK (EndDate > StartDate),
     CONSTRAINT notNegStart CHECK (StartPrice >0)
@@ -92,16 +93,22 @@ INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) 
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10002, 'Username3', 'Password3', 'Stanley', 'Steamer', '8007832637', 'ssteamer@csbsju.edu');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10003, 'Username4', 'Password3', 'Tommy', 'Tutone', '9528675309', 'ttutone@csbsju.edu');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10004, 'Username5', 'Password5', 'Pizza', 'Hut', '5888888888', 'phutt@csbsju.edu');
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (10000, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Iron', 'An iron for clothing', 'Household', 15.00, 'SOLD', 21.00);
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (10001, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Pacemaker', 'Keep pace with your health', 'Health', 100.00, 'SOLD', 101.00);
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (10002, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Man purse', 'ITS A SATCHEL!', 'Style', 50.00, 'SOLD', 76.00);
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (10003, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Kidney', 'No need to deal with black-markets any longer -- ships right to you', 'Health', 10000.00, 'ON AUCTION', 10001.00);
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (10004, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Shoe', 'One single shoe, for left foot only', 'Style', 15.00, 'ON AUCTION', 15.00);
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (10005, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Eraser', 'For blackboard purposes', 'Classroom', 5.00, 'ON AUCTION', 5.00);
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid) VALUES (10006, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Toaster', 'A toaster for toasting', 'Household', 15.00, 'OFF AUCTION', 15.00);
-INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10000, 5, 'Great work', 5, 5);
-INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10001, 5, 'Great work', 5, 5);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10000, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Iron', 'An iron for clothing', 'Household', 15.00, 'SOLD', 21.00, 50.00);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10001, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Pacemaker', 'Keep pace with your health', 'Health', 100.00, 'SOLD', 101.00, 300.00);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10002, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Man purse', 'ITS A SATCHEL!', 'Style', 50.00, 'SOLD', 76.00, 150.00);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10003, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Kidney', 'No need to deal with black-markets any longer -- ships right to you', 'Health', 10000.00, 'ON AUCTION', 10001.00, 20000.00);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10004, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Shoe', 'One single shoe, for left foot only', 'Style', 15.00, 'ON AUCTION', 15.00, null);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10005, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Eraser', 'For blackboard purposes', 'Classroom', 5.00, 'ON AUCTION', 5.00, null);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10006, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Toaster', 'A toaster for toasting', 'Household', 15.00, 'OFF AUCTION', 15.00, 35.00);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10007, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Tool Kit', 'For household use', 'Household', 15.00, 'SOLD', 16.00, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10000, 5, 'Great work', 5, 5);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10001, 5, 'Great work', 5, 5);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10002, 5, 'Great work', 5, 5);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10003, 5, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10004, 5, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10005, 5, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10006, 5, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10007, 5, 'Great work', 5, 5);
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10002, 10000, 20.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10000, 10000, 25.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10000, 10001, 150.00, to_date('2017-10-23', 'YYYY-MM-DD'));
@@ -109,6 +116,7 @@ INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10000, 1000
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10003, 10002, 100.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10000, 10003, 12000.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10003, 10004, 20.00, to_date('2017-10-23', 'YYYY-MM-DD'));
+INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10004, 10007, 25.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_MANAGE(Username, UserID) VALUES ('Admin1', '10000');
 INSERT INTO GABES_MANAGE(Username, UserID) VALUES ('Admin2', '10001');
 
