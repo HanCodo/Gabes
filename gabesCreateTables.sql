@@ -31,8 +31,8 @@ CREATE TABLE gabes_item (
 	Descript 		VARCHAR(255),
 	Categories     VARCHAR(15),
 	StartPrice 		DECIMAL(10,2) 		NOT NULL,
-	Status			VARCHAR(11),
-	CurrentBid		DECIMAL(10,2),
+	Status			VARCHAR(11)         NOT NULL,
+	CurrentBid		DECIMAL(10,2)       NOT NULL,
     buyNow          DECIMAL(10,2),
 	PRIMARY KEY (ItemID),
     CONSTRAINT valDate CHECK (EndDate > StartDate),
@@ -51,7 +51,7 @@ CREATE TABLE gabes_bid (
 --        ON DELETE SET NULL	ON UPDATE CASCADE,
 	FOREIGN KEY (ItemID) REFERENCES gabes_item(ItemID),
 --        ON DELETE SET NULL	ON UPDATE CASCADE
-	PRIMARY KEY (UserID, ItemID, BidTime)
+	PRIMARY KEY (UserID, ItemID, MaxBidLimit, BidTime)
 );
 
 -- SELL
@@ -104,10 +104,10 @@ INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categori
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10000, 5, 'Great work', 5, 5);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10001, 5, 'Great work', 5, 5);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10002, 5, 'Great work', 5, 5);
-INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10003, 5, null, null, null);
-INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10004, 5, null, null, null);
-INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10005, 5, null, null, null);
-INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10006, 5, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10001, 10003, null, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10004, null, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10005, null, null, null, null);
+INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10006, null, null, null, null);
 INSERT INTO GABES_SELL (UserID, ItemID, Overall, Comments, Quality, Delivery) VALUES (10000, 10007, 5, 'Great work', 5, 5);
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10002, 10000, 20.00, to_date('2017-10-23', 'YYYY-MM-DD'));
 INSERT INTO GABES_BID (UserID, ItemID, MaxBidLimit, BidTime) VALUES (10000, 10000, 25.00, to_date('2017-10-23', 'YYYY-MM-DD'));
