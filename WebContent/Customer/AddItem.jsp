@@ -181,7 +181,7 @@ End Date<select name="eDay" >
 Description <input name="Descript" type="text"><br>
 Categories<input name="Categories" type="text"><br>
 Start Price <input name="Start_Price" type="text"><br>
-Buy Now Price<input name="BuyNow" type="text"><br>
+Buy Now Price  (Optional)<input name="BuyNow" type="text"><br>
 <input style = "color: black" name="Add" value="Add" type="submit">
 <br>
 </form>
