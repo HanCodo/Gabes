@@ -64,8 +64,6 @@ cellspacing="2">
 </td>
 <td style="vertical-align: top;"><b>Item Info</b><br>
 </td>
-<td style="vertical-align: top;"><b>Bidders List</b><br>
-</td>
 </tr>
 <%ResultSet r = null;
 try{
