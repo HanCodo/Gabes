@@ -39,7 +39,7 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align: center;"><b>My Bids</b>  <br>
+<div style="text-align: center;"><b>My Bid History</b>  <br>
 </div>
 <br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"

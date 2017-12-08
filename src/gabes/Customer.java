@@ -259,8 +259,8 @@ public class Customer implements Serializable {
 		  	
 		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
-		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+
-		    		"";
+		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" "+
+		    		"ORDER BY ENDDATE DESC";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
@@ -286,7 +286,8 @@ public class Customer implements Serializable {
 		    		"c2.USERNAME as SUSERNAME, c2.EMAIL as EMAIL "+
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2, GABES_BID b " + 
 		    		"WHERE c.UserID = b.UserID AND b.itemID = i.itemID and i.ItemID = s.ItemID and b.maxBidLimit >= i.currentBid AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD' "+
-		    		"AND s.USERID = c2.USERID";
+		    		"AND s.USERID = c2.USERID "+
+		    		"ORDER BY i.ENDDATE DESC";
 		  	
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
@@ -304,7 +305,7 @@ public class Customer implements Serializable {
 		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MaxBidLimit, it.STATUS, b.BidTime, it.ENDDATE, it.CATEGORIES "+
 		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
 		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID()+" "+
-		    				"ORDER BY b.BidTime";
+		    				"ORDER BY b.BidTime DESC, b.MaxBidLimit DESC";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
@@ -475,12 +476,13 @@ public class Customer implements Serializable {
 	        }  
 	        try{
 	            String queryString = "update GABES_ITEM " 
-	                    + " set currentBid=?, status='SOLD'"
+	                    + " set currentBid=?, status='SOLD', endDate=?"
 	                    + " where itemID=?";
 
 	            preparedStmt = con.prepareStatement(queryString);
 	            preparedStmt.setDouble(1,price);
 	            preparedStmt.setInt(2,itemId);
+	            preparedStmt.setDate(3,date1);
 	            
 	            result = preparedStmt.executeQuery();
 	            preparedStmt.close();

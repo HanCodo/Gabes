@@ -39,7 +39,7 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align: center;"><b>My Purchases</b>  <br>
+<div style="text-align: center;"><b>My Purchase History</b>  <br>
 </div>
 <br>
 <%
