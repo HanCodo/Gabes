@@ -113,7 +113,7 @@ try {
 	String keyword = request.getParameter("keyword");
 	String category = request.getParameter("category");
 	System.out.println(keyword);
-	ResultSet users = admin.search(itemID, keyword, category, bidmin, bidmax, startDate1, endDate1, itemName);
+	ResultSet users = customer.search(itemID, keyword, category, bidmin, bidmax, startDate1, endDate1, itemName);
 	//System.out.println(users);
 if(users == null){
 	response.sendRedirect("Search.jsp?error=4");
