@@ -50,9 +50,9 @@ if (errorParam != null){
 	if (error == 1){
 		message = "You Already Rated That Item!";
 	}
-}
-out.print(message);	
+}	
 %>
+<div style="text-align: center; color:red;"><%=message %></div>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tr>

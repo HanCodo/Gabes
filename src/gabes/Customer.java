@@ -518,6 +518,20 @@ public class Customer implements Serializable {
 		    	return true;
 		    return false;
 	  }
+	  
+	  public ResultSet bidInfo(String ItemId) throws SQLException{
+		  	Connection con = openDBConnection();
+		  	int itemId = Integer.parseInt(ItemId);
+		    String queryString = "Select i.*, c.Username "+
+		    		" From GABES_ITEM i, GABES_BID b, GABES_CUSTOMER c "+
+		    		" Where "+itemId+ "= i.itemid and b.itemID = i.itemID and b.maxBidLimit > i.currentBid and c.UserID = b.UserID";
+
+
+
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
+	  }
 }
 
 

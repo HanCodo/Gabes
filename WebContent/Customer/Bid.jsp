@@ -42,6 +42,16 @@ http-equiv="content-type">
 <br>
 <div style = "text-align: center"><b>Bid</b></div>
 <br>
+<%ResultSet r = null;
+int itemid = 0;
+try{
+r = customer.bidInfo(request.getParameter("i"));}
+catch(IllegalStateException ise){
+        out.println(ise.getMessage());
+    }%>
+<%while(r.next()){ 
+itemid = r.getInt("ITEMID");%>
+<div style="text-align: center;"><b>Leading Bidder:</b> <%=r.getString("Username") %></div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
 <tbody>
@@ -57,16 +67,6 @@ cellspacing="2">
 <td style="vertical-align: top;"><b>Current Bid</b><br>
 </td>
 </tr>
-<%ResultSet r = null;
-int itemid = 0;
-try{
-r = customer.viewItem(request.getParameter("i"));}
-catch(IllegalStateException ise){
-        out.println(ise.getMessage());
-    }%>
-<%while(r.next()){ 
-itemid = r.getInt("ITEMID");%>
-
 <tr>
 <td style="vertical-align: top;"><%= r.getInt("ITEMID")%><br>
 </td>
