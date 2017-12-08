@@ -49,13 +49,17 @@ cellspacing="2">
 </td>
 <td><b>ITEM NAME</b>
 </td>
+<td><b>CATAGORY</b>
+</td>
+<td><b>AUCTION START TIME</b>
+</td>
+<td><b>AUCTION END TIME</b>
+</td>
 <td><b>CURRENT BID</b>
 </td>
-<td><b>BID TIME</b>
+<td><b>ITEM INFO</b>
 </td>
 <td><b>WINNER</b>
-</td>
-<td><b>ITEM INFO</b>
 </td>
 </tr>
 <%ResultSet r = customer.listBidOnItems();
@@ -70,28 +74,42 @@ while(r.next()){%>
 %>
 </td>
 <td>
+<%=r.getString("CATEGORIES")
+%>
+</td>
+<td>
+<%=r.getString("STARTDATE").substring(0,10)
+%>
+</td>
+<td>
+<%=r.getString("ENDDATE").substring(0,10)
+%>
+</td>
+<td>
 <%="$"+r.getString("CURRENTBID")
-%>
-</td>
-<td>
-<%=r.getString("BIDTIME").substring(0,10)
-%>
-</td>
-<td>
-<%
-String status = r.getString("STATUS");
-if (status == "ON AUCTION") {
-System.out.print(status);
-}
-else if (status == "SOLD") {
-System.out.print(r.getString("BIDTIME").substring(0,10));
-}
 %>
 </td>
 <td style="vertical-align: top;"><form method="GET" action="ItemInfo.jsp" name="ItemInfo">
 <input  style = "color: black" name="ItemInfo" type="hidden" value="<%=r.getInt("ITEMID") %>"/>
 <button style = "color: black" value="Item Info" name="Item Info">Item Info</button><br>
 </form>
+</td>
+<td>
+<%
+String status = r.getString("STATUS");
+if (status.equals("ON AUCTION")) {
+	
+	out.write(status); 
+}
+else if (status.equals("SOLD")) {
+	
+	out.write(customer.winner(r.getInt("ITEMID")));
+}
+else{
+	out.write("NONE");
+}
+%>
+</td>
 </tr>
 <%} %>
 </table>

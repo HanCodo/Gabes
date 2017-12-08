@@ -289,7 +289,7 @@ public class Customer implements Serializable {
 	   */
 	  public ResultSet listBidOnItems() throws SQLException {
 		  	Connection con = openDBConnection();
-		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, b.MAXBIDLIMIT, b.BIDTIME, it.CURRENTBID, i.STATUS "+
+		    String queryString = "Select b.ITEMID, it.ITEMNAME, c.USERNAME, it.CURRENTBID, it.STATUS, it.STARTDATE, it.ENDDATE, it.CATEGORIES "+
 		    				"FROM GABES_BID b,GABES_ITEM it, GABES_CUSTOMER c " + 
 		    				"WHERE b.ITEMID = it.ITEMID and b.UserID = c.UserID and c.UserID ="+this.getUserID();
 		    preparedStmt = con.prepareStatement(queryString);
@@ -393,6 +393,22 @@ public class Customer implements Serializable {
 		    ResultSet result = preparedStmt.executeQuery();
 		    
 		    return result;
+	  
+	  }
+	  /**
+	   * Takes a input of itemID which is a int and uses it to find the winner of bid
+	   * that winners username is then returned
+	   */
+	  public String winner(int itemID) throws SQLException {
+		  	Connection con = openDBConnection();
+
+		    String queryString = "SELECT c.USERNAME FROM GABES_CUSTOMER c, GABES_WINNERS w "
+		    		+"WHERE c.USERID = w.USERID  and w.ITEMID = "+itemID+"";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    result.next();
+		    String name = result.getString("USERNAME");
+		    return name;
 	  
 }
 }
