@@ -481,8 +481,8 @@ public class Customer implements Serializable {
 
 	            preparedStmt = con.prepareStatement(queryString);
 	            preparedStmt.setDouble(1,price);
-	            preparedStmt.setInt(2,itemId);
-	            preparedStmt.setDate(3,date1);
+	            preparedStmt.setDate(2,date1);
+	            preparedStmt.setInt(3,itemId);
 	            
 	            result = preparedStmt.executeQuery();
 	            preparedStmt.close();
