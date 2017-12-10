@@ -558,67 +558,81 @@ public class Customer implements Serializable {
 		    return result;
 	  }
 	  
-	  public ResultSet featuredItem() throws SQLException{
+	  public ResultSet featuredItem(String cat) throws SQLException{
 		  	Connection con = openDBConnection();
 		    String queryString = "Select i.itemID " + 
 		    		"from gabes_item i, gabes_bid b " + 
-		    		"where i.itemID = b.itemID and i.status = 'ON AUCTION' " + 
+		    		"where i.categories = ? and i.itemID = b.itemID and i.status = 'ON AUCTION' " + 
 		    		"group by i.itemID " + 
 		    		"having count(b.itemID) >= (select max(count(b.itemID)) AS mostBids " + 
 		    		"    from gabes_item i, gabes_bid b " + 
 		    		"    where i.itemID = b.itemID and i.status = 'ON AUCTION' " + 
 		    		"    group by b.itemID)";
 
-
-
 		    preparedStmt = con.prepareStatement(queryString);
+		    preparedStmt.setString(1,cat);
+
 		    ResultSet result = preparedStmt.executeQuery();
 		    return result;
 	  }
 
 
-public ResultSet search(int ItemID, String keyword, String category, double bidMin, double bidMax, 
+	  public ResultSet search(int ItemID, String keyword, String category, double bidMin, double bidMax, 
 		  Date startTime, Date endTime, String itemName) {
-	  try {
+		  try {
 		  //System.out.println("test");
-		  Connection con = openDBConnection();
-		  String statementString = "{?= call GABES_Search(?,?,?,?,?,?,?,?)}";
-		  						   
-		  //stmt = con.createStatement();  
-		  callStmt = con.prepareCall(statementString);
-		  //System.out.println("test2");
-		  //stmt=con.prepareCall ("{?= call GABES_Search(?, ?, ?, ?, ?, ?, ?, ?)}");
-		  //System.out.println("test3");
-		  callStmt.setInt(2,ItemID);
-		  //System.out.println("Test 4");
-		  callStmt.setString(3,keyword);
-		  //System.out.println("Test 5");
-		  callStmt.setString(4,itemName);
-		  callStmt.setString(5,category);
-		  callStmt.setDouble(6,bidMin);
-		  callStmt.setDouble(7,bidMax);
-		  callStmt.setDate(8,startTime);
-		  callStmt.setDate(9,endTime);
-		  //System.out.println("Test 6");
-		  //callStmt.registerOutParameter(1, Types.REF_CURSOR);
-		  //callSt.registerOutParameter(2, Types.ResultSet);
-		  callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-		  //System.out.println("Test 7");
-		  callStmt.execute();
-		  //System.out.println("Test 8");
-		  ResultSet result = (ResultSet)callStmt.getObject(1); 
-		//  System.out.println(result);
-		  return result;
+			  Connection con = openDBConnection();
+			  String statementString = "{?= call GABES_Search(?,?,?,?,?,?,?,?)}";
+			  						   
+			  //stmt = con.createStatement();  
+			  callStmt = con.prepareCall(statementString);
+			  //System.out.println("test2");
+			  //stmt=con.prepareCall ("{?= call GABES_Search(?, ?, ?, ?, ?, ?, ?, ?)}");
+			  //System.out.println("test3");
+			  callStmt.setInt(2,ItemID);
+			  //System.out.println("Test 4");
+			  callStmt.setString(3,keyword);
+			  //System.out.println("Test 5");
+			  callStmt.setString(4,itemName);
+			  callStmt.setString(5,category);
+			  callStmt.setDouble(6,bidMin);
+			  callStmt.setDouble(7,bidMax);
+			  callStmt.setDate(8,startTime);
+			  callStmt.setDate(9,endTime);
+			  //System.out.println("Test 6");
+			  //callStmt.registerOutParameter(1, Types.REF_CURSOR);
+			  //callSt.registerOutParameter(2, Types.ResultSet);
+			  callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+			  //System.out.println("Test 7");
+			  callStmt.execute();
+			  //System.out.println("Test 8");
+			  ResultSet result = (ResultSet)callStmt.getObject(1); 
+			//  System.out.println(result);
+			  return result;
 	    	
 	 // ResultSet result = stmt.executeQuery(queryString);
 
 	  //stmt.close();
 	  //return result;
-	  }catch(Exception ex) {
-		  ex.printStackTrace();
-		  return null;
-	  }
-}
+		  }catch(Exception ex) {
+			  ex.printStackTrace();
+			  return null;
+		  }
+	}
+
+	public ResultSet allActiveCategories() throws SQLException {
+		Connection con = openDBConnection();
+	    String queryString = "Select distinct i.categories "+
+	    		" From GABES_ITEM i, GABES_BID b"+
+	    		" Where i.status = 'ON AUCTION' and i.itemID = b.itemID";
+	
+	
+	
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
+
 }
 
 

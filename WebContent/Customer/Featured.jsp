@@ -41,50 +41,30 @@ http-equiv="content-type">
 <br>
 <br>
 <div style="text-align: center;"><b>Featured Item</b></div><br>
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+<%
+ResultSet cat = customer.allActiveCategories();
+while (cat.next()){
+	ResultSet rs = customer.featuredItem(cat.getString("categories"));
+	%> 
+	<div style="text-align: center;"><b>Featured item in <%=cat.getString("categories") %></b></div>
+	<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
 cellspacing="2">
 <tbody>
-<tr>
-<td style="vertical-align: top;"><b>ItemID</b><br>
-</td>
-<td style="vertical-align: top;"><b>Start Date</b><br>
-</td>
-<td style="vertical-align: top; width: 253px;"><b>End Date</b><br>
-</td>
-<td style="vertical-align: top; width: 245px;"><b>Item Name</b><br>
-</td>
-<td style="vertical-align: top; width: 282px;"><b>Item Description</b><br>
-</td>
-<td style="vertical-align: top;"><b>Category</b><br>
-</td>
-<td style="vertical-align: top;"><b>Status</b><br>
-</td>
-<td style="vertical-align: top;"><b>Current Bid</b><br>
-</td>
-<td style="vertical-align: top;"><b>Buy Now</b><br>
-</td>
-</tr>
-<%
-ResultSet rs = customer.featuredItem();
-while(rs.next()){
-	ResultSet item = customer.viewItem(""+rs.getInt("ItemID"));
-	item.next();
-
+	<%
+	while(rs.next()){
+		ResultSet item = customer.viewItem(""+rs.getInt("ItemID"));
+		item.next();
 	%>
 <tr>
-<td style="vertical-align: top;"><%=item.getInt("ItemID")%><br>
+<td style="vertical-align: top; width: 253px; text-align:center;"><%=item.getString("itemName")%><br>
 </td>
-<td style="vertical-align: top;"><%=item.getDate("startdate")%><br>
+<td style="vertical-align: top; width: 253px;text-align:center;"><%=item.getInt("ItemID")%><br>
 </td>
-<td style="vertical-align: top; width: 253px;"><%=item.getDate("enddate")%><br>
-</td>
-<td style="vertical-align: top; width: 245px;"><%=item.getString("itemName")%><br>
+<td style="vertical-align: top; width: 245px;text-align:center;"><%=item.getDate("enddate")%><br>
 </td>
 <td style="vertical-align: top; width: 282px;"><%=item.getString("descript")%><br>
 </td>
-<td style="vertical-align: top;"><%=item.getString("categories")%><br>
-</td>
-<td style="vertical-align: top; width: 282px;"><%=item.getString("status")%><br>
+<td style="vertical-align: top; width: 282px;text-align:center;"><%=item.getString("status")%><br>
 </td>
 <td style="vertical-align: top; text-align: center; width: 282px;">$<%=item.getDouble("currentBid")%>
 <form method="post" action="Customer/Bid.jsp?i=<%=item.getString(1)%>" name="Bid"><input style = "color: black" name="Bid" value="Bid" type="submit">
@@ -97,11 +77,16 @@ while(rs.next()){
 
 <form method="post" action="Customer/BuyNow_action.jsp?i=<%=item.getString(1)%>&p=<%=item.getString(10)%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
-</tr>
-<%}
-}%>
+
+<%		}
+	}
+	%> 
+	</tr>
 </tbody>
 </table>
+<br>
+	<%
+}%>
 <form method="post" action="BiddingManagement.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
