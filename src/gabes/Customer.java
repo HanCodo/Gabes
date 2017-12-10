@@ -334,7 +334,7 @@ public class Customer implements Serializable {
 	            double bn = Double.parseDouble(buyNow);
 	            preparedStmt.setDouble(7,sp);
 	            preparedStmt.setDouble(10,bn);
-	            String status = "ON AUCTION";
+	            String status = null;
 	            preparedStmt.setString(8,status);
 	            preparedStmt.setDouble(9,sp);
 	            result = preparedStmt.executeUpdate();
