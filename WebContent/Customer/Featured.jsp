@@ -67,7 +67,7 @@ cellspacing="2">
 <td style="vertical-align: top; width: 282px;text-align:center;"><%=item.getString("status")%><br>
 </td>
 <td style="vertical-align: top; text-align: center; width: 282px;">$<%=item.getDouble("currentBid")%>
-<form method="post" action="Customer/Bid.jsp?i=<%=item.getString(1)%>" name="Bid"><input style = "color: black" name="Bid" value="Bid" type="submit">
+<form method="post" action="Bid.jsp?i=<%=item.getString(1)%>" name="Bid"><input style = "color: black" name="Bid" value="Bid" type="submit">
 </form>
 </td>
 <td style="vertical-align: top; text-align: center; width: 282px;"><%if(item.getString(10) == null){
@@ -75,7 +75,7 @@ cellspacing="2">
 }else{
 	try{out.println("$"+item.getString("buyNow"));}catch(Exception ex){out.println("noo");}%>
 
-<form method="post" action="Customer/BuyNow_action.jsp?i=<%=item.getString(1)%>&p=<%=item.getString(10)%>" name="Buynow">
+<form method="post" action="BuyNow_action.jsp?i=<%=item.getString(1)%>&p=<%=item.getString(10)%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
 
 <%		}

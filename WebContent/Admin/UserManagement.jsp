@@ -4,6 +4,12 @@
 <jsp:useBean id="admin" class= "gabes.Admin" scope="session"/> 
 <jsp:setProperty name="admin" property="*"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<% 	
+if(admin.isLoggedIn() == false)
+{
+	response.sendRedirect("../index.jsp");
+}
+%>
 <html>
 <head>
 <meta content="text/html; charset=ISO-8859-1"

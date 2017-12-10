@@ -4,6 +4,12 @@
 <jsp:useBean id="admin" class= "gabes.Admin" scope="session"/> 
 <jsp:setProperty name="admin" property="*"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<% 	
+if(admin.isLoggedIn() == false)
+{
+	response.sendRedirect("../../index.jsp");
+}
+%>
 <html>
 <head>
 <meta content="text/html; charset=ISO-8859-1"
@@ -26,7 +32,7 @@ http-equiv="content-type">
 		</a>
 	</div>
     <div class="right">
-    	<form method="post" action="../AdminLogout_action.jsp" name="logout">
+    	<form method="post" action="../../AdminLogout_action.jsp" name="logout">
     		Logged in as: <%=admin.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
     	</form>
     </div>

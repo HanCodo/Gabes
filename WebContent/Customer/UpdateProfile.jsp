@@ -6,11 +6,12 @@
 <jsp:useBean id="customer" class= "gabes.Customer" scope="session"/> 
 <jsp:setProperty property="*" name="customer"/>
 
-<% 	
-if(customer.getUsername() == null)
+<%
+if(customer.isLoggedIn() == false)
 {
-	response.sendRedirect("../CustomerLogout_action.jsp");
+	response.sendRedirect("../index.jsp");
 }
+else{
 try{
 	ResultSet rs = customer.profileInfo();
         //if (!rs.next()){
@@ -93,6 +94,7 @@ if (errorParam != null){
 	catch(IllegalStateException ise){
     	out.println(ise.getMessage());
     }
+}
     %>
 </body>
 </html>

@@ -3,8 +3,7 @@
 <% 
     try{
         customer.logout();
- 		session.invalidate(); 
-
+ 		session.invalidate();
     }
     catch(IllegalStateException ise){
         out.println(ise.getMessage());
