@@ -152,29 +152,16 @@ Start Date<select name="sDay" >
 <br>
 
 End Date<select name="eDay" >
-  <%
-  if(request.getParameter("eMonth").equals("January") || request.getParameter("eMonth").equals("March")||request.getParameter("eMonth").equals("May")||
-		  request.getParameter("eMonth").equals("July")||request.getParameter("eMonth").equals("August")||request.getParameter("eMonth").equals("October")||
-		  request.getParameter("eMonth").equals("December")){
-  for (int i = 01; i <= 31 ; i++){ 
+    <%for (int i = 1; i <= 31 ; i++){ 
   int day = i ;
+  System.out.println("DAY COUNTD:"+day);
   String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
   int curDay = Integer.parseInt(currentDay);
+  System.out.println("CURRENT DAY:"+curDay);
  %>
- <option value = "<%=curDay%>"
+ <option value = "<%=i %>"
  <%if(i == curDay){ %> selected <%}%>><%= i%></option>
- <%} }
-  else{
-	  for (int i = 01; i <= 30 ; i++){ 
-		  int day = i ;
-		  String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
-		  int curDay = Integer.parseInt(currentDay);
-		 %>
-		 <option value = "<%=curDay%>"
-		 <%if(i == curDay){ %> selected <%}%>><%= i%></option>
-		 <%}
-  }
- %>
+ <%} %>
 </select>
 <select name="eMonth" >
   <%
