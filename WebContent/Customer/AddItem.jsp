@@ -68,52 +68,79 @@ while(items.next()){ x++;
 Item ID<input value=<%=x=10000+x %> name=Item_ID readOnly><br>
 Item Name <input name="Item_Name"type="text"><br>
 Start Date<select name="sDay" >
- <option value="01">1</option>
-  <option value="02">2</option>
-  <option value="03">3</option>
-  <option value="04">4</option>
-  <option value="05">5</option>
-  <option value="06">6</option>
-  <option value="07">7</option>
-  <option value="08">8</option>
-  <option value="09">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-  <option value="21">21</option>
-  <option value="22">22</option>
-  <option value="23">23</option>
-  <option value="24">24</option>
-  <option value="25">25</option>
-  <option value="26">26</option>
-  <option value="27">27</option>
-  <option value="28">28</option>
-  <option value="29">29</option>
-  <option value="30">30</option>
-  <option value="31">31</option>
+  <%for (int i = 1; i <= 31 ; i++){ 
+  int day = i ;
+  System.out.println("DAY COUNTD:"+day);
+  String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
+  int curDay = Integer.parseInt(currentDay);
+  System.out.println("CURRENT DAY:"+curDay);
+ %>
+ <option value = "<%=i %>"
+ <%if(i == curDay){ %> selected <%}%>><%= i%></option>
+ <%} %>
+ 
  
 </select>
 <select name="sMonth" >
- <option value="01">January </option>
-  <option value="02">Feburary</option>
-  <option value="03">March</option>
-  <option value="04">April</option>
-  <option value="05">May</option>
-  <option value="06">June</option>
-  <option value="07">July</option>
-  <option value="08">August</option>
-  <option value="09">September</option>
-  <option value="10">October</option>
-  <option value="11">November</option>
-  <option value="12">December</option>
+  <%!
+  private String getMonth(int num){
+	  if(num == 1){
+		  return "January";
+	  }
+	  else if(num == 2){
+		  return "February";
+	  }
+	  else if(num == 3){
+		  return "March";
+	  }
+	  else if(num == 4){
+		  return "April";
+	  }
+	  else if(num == 5){
+		  return "May";
+	  }
+	  else if(num == 6){
+		  return "June";
+	  }
+	  else if(num == 7){
+		  return "July";
+	  }
+	  else if(num == 8){
+		  return "August";
+	  }
+	  else if(num == 9){
+		  return "September";
+	  }
+	  else if(num == 10){
+		  return "October";
+	  }
+	  else if(num == 11){
+		  return "November";
+	  }
+	  else if(num == 12){
+		  return "December";
+	  }
+	  else{
+		  return "";
+	  }
 
+	  
+		  
+	  
+  }
+  private %>
+  <%
+  for (int i = 1; i <= 12 ; i++){ 
+  int month = i ;
+  System.out.println("MONTH COUNTED:"+month);
+  String currentMonth = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
+  int curMonth = Integer.parseInt(currentMonth);
+  System.out.println("CURRENT MONTH:"+curMonth);
+ %>
+ <option value = "<%=i %>"
+ <%if(i == curMonth){ %> selected <%}%>><%= getMonth(i)%></option>
+ <%} %>
+ 
 </select>
 <select name="sYear" >
   <%for (int i = 0; i <= 5 ; i++){ 
@@ -125,50 +152,42 @@ Start Date<select name="sDay" >
 <br>
 
 End Date<select name="eDay" >
-  <option value="01">1</option>
-  <option value="02">2</option>
-  <option value="03">3</option>
-  <option value="04">4</option>
-  <option value="05">5</option>
-  <option value="06">6</option>
-  <option value="07">7</option>
-  <option value="08">8</option>
-  <option value="09">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-  <option value="21">21</option>
-  <option value="22">22</option>
-  <option value="23">23</option>
-  <option value="24">24</option>
-  <option value="25">25</option>
-  <option value="26">26</option>
-  <option value="27">27</option>
-  <option value="28">28</option>
-  <option value="29">29</option>
-  <option value="30">30</option>
-  <option value="31">31</option>
+  <%
+  if(request.getParameter("eMonth").equals("January") || request.getParameter("eMonth").equals("March")||request.getParameter("eMonth").equals("May")||
+		  request.getParameter("eMonth").equals("July")||request.getParameter("eMonth").equals("August")||request.getParameter("eMonth").equals("October")||
+		  request.getParameter("eMonth").equals("December")){
+  for (int i = 01; i <= 31 ; i++){ 
+  int day = i ;
+  String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
+  int curDay = Integer.parseInt(currentDay);
+ %>
+ <option value = "<%=curDay%>"
+ <%if(i == curDay){ %> selected <%}%>><%= i%></option>
+ <%} }
+  else{
+	  for (int i = 01; i <= 30 ; i++){ 
+		  int day = i ;
+		  String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
+		  int curDay = Integer.parseInt(currentDay);
+		 %>
+		 <option value = "<%=curDay%>"
+		 <%if(i == curDay){ %> selected <%}%>><%= i%></option>
+		 <%}
+  }
+ %>
 </select>
 <select name="eMonth" >
-  <option value="01">January </option>
-  <option value="02">Feburary</option>
-  <option value="03">March</option>
-  <option value="04">April</option>
-  <option value="05">May</option>
-  <option value="06">June</option>
-  <option value="07">July</option>
-  <option value="08">August</option>
-  <option value="09">September</option>
-  <option value="10">October</option>
-  <option value="11">November</option>
-  <option value="12">December</option>
+  <%
+  for (int i = 1; i <= 12 ; i++){ 
+  int month = i ;
+  System.out.println("MONTH COUNTED:"+month);
+  String currentMonth = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
+  int curMonth = Integer.parseInt(currentMonth);
+  System.out.println("CURRENT MONTH:"+curMonth);
+ %>
+ <option value = "<%=i %>"
+ <%if(i == curMonth){ %> selected <%}%>><%= getMonth(i)%></option>
+ <%} %>
 </select>
 <select name="eYear" >
  <%for (int i = 0; i <= 5 ; i++){ 
@@ -188,11 +207,11 @@ Buy Now Price  (Optional)<input name="BuyNow" type="text"><br>
 <form method="post" action="SellingManagement.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
-<% 		//}
-    }
-	catch(IllegalStateException ise){
-    	out.println(ise.getMessage());
-    }
-    %>
+<% 		
+}
+catch(IllegalStateException ise){
+	out.println(ise.getMessage());
+}
+%>
 </body>
 </html>
