@@ -122,13 +122,8 @@ Start Date<select name="sDay" >
 	  }
 	  else{
 		  return "";
-	  }
-
-	  
-		  
-	  
-  }
-  private %>
+	  }  
+  } %>
   <%
   for (int i = 1; i <= 12 ; i++){ 
   int month = i ;
