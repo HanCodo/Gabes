@@ -649,6 +649,24 @@ public class Customer implements Serializable {
 			  return null;
 		  }
 	}
+	 
+    public ResultSet endingSoon(Date todaysDate) {
+    	 try {
+			  Connection con = openDBConnection();
+			  String statementString = "{?= call GABES_EndingSoon(?)}";
+			  callStmt = con.prepareCall(statementString);
+			  callStmt.setDate(2,todaysDate);
+			  callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+			  //System.out.println("Test 7");
+			  callStmt.execute();
+			  //System.out.println("Test 8");
+			  ResultSet result = (ResultSet)callStmt.getObject(1); 
+			  return result;
+		  }catch(Exception ex) {
+			  ex.printStackTrace();
+			  return null;
+		  }
+    }
 
 	public ResultSet allActiveCategories() throws SQLException {
 		Connection con = openDBConnection();

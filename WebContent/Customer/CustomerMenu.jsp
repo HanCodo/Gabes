@@ -40,6 +40,17 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
+<% 
+String message = "";
+String errorParam = request.getParameter("error");
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "No items Ending soon";
+	}
+}
+%>
+<div style="color: red; text-align: center;"><%=message%></div><br>
 <div style="text-align: center;"><b>Customer Homepage</b></div><br>
 <form method="post" action="UpdateProfile.jsp"
 name="UpdateProfile"><input style = "color: black" name="UpdateProfile"

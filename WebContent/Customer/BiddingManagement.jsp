@@ -62,6 +62,9 @@ value="Browse All Items" type="submit"><br>
 <form method="post" action="CustomerMenu.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
+<form method="post" action="EndingSoon.jsp" name="ItemsEndingSoon"><input
+style = "color: black" name="Items Ending Soon" value="Item Ending Soon" type="submit"><br>
+</form>
 <br>
 <br>
 </body>

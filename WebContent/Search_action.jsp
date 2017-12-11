@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"
     %>
     <%@ page language="java" import="java.sql.*, java.text.*,java.sql.Date, gabes.*"%>
-<jsp:useBean id="admin" class= "gabes.Admin" scope="session"/> 
-<jsp:setProperty name="admin" property="*"/>
 <jsp:useBean id="customer" class= "gabes.Customer" scope="session"/> 
 <jsp:setProperty name="customer" property="*"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
