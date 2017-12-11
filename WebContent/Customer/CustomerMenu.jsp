@@ -53,8 +53,11 @@ value="Selling Management" type="submit"><br>
 name="BiddingManagement"><input style = "color: black" name="BiddingManagement"
 value="Bidding Management" type="submit"><br>
 </form>
+<form method="post" action="itemsBidOn.jsp" name="listBids"><input
+style = "color: black" name="Items Bid On" value="Check Status" type="submit"><br>
+</form>
 <form method="post" action="itemsBought.jsp" name="LeaveFeedback"><input
-style = "color: black" name="Items Bought" value="Items Bought" type="submit"><br>
+style = "color: black" name="Items Bought" value="Leave Feedback" type="submit"><br>
 </form>
 <form method="post" action="ViewFeedback.jsp" name="ViewFeedback"><input
 style = "color: black" name="View Feedback" value="View my Feedback" type="submit"><br>
