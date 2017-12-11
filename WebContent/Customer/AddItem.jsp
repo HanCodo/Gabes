@@ -14,13 +14,24 @@ if(customer.getUsername() == null)
 try{
 
             	%>
-            	<% 
+ <% 
 String message = "";
 String errorParam = request.getParameter("error");
 if (errorParam != null){
 	int error = Integer.parseInt(errorParam);
 	if (error == 1){
-		message = "Error";
+		message = "Please Enter Valid Values";
+	}else if(error == 2){
+		message = "Please Enter a Name";
+	}else if(error == 3){
+		message = "Please Enter a Description";
+	}else if(error == 4){
+		message = "Please Choose a Category";
+	}else if(error == 5){
+		message = "Please Enter a Price";
+	}
+	else if(error == 6){
+		message = "Please Enter a Valid Date";
 	}
 }
 %>
@@ -165,7 +176,6 @@ End Date<select name="eDay" >
 
   String currentMonth = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
   int curMonth = Integer.parseInt(currentMonth);
-
  %>
  <option value = "<%=i %>"
  <%if(i == curMonth){ %> selected <%}%>><%= getMonth(i)%></option>

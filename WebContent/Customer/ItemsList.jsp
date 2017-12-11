@@ -108,11 +108,19 @@ catch(IllegalStateException ise){
 <button style = "color: black" value="Item Info" name="Item Info">Item Info</button><br>
 </form><br>
 </td>
+<%if(r.getString("STATUS").equals("OFF AUCTION")){%>
+<td style="vertical-align: top;"><form method="GET" action="BidderList.jsp" name="BidList">
+<button style="display: none;" value="<%=r.getInt("ITEMID") %>" name="BidList">Bid History</button><br>
+</form><br>
+	
+	<%}
+else{
+%>
 <td style="vertical-align: top;"><form method="GET" action="BidderList.jsp" name="BidList">
 <button style = "color: black" value="<%=r.getInt("ITEMID") %>" name="BidList">Bid History</button><br>
 </form><br>
 </tr>
-<%} r.close(); %>
+<%}} r.close(); %>
 </tbody>
 </table>
 <br>

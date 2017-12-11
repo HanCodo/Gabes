@@ -328,12 +328,33 @@ public class Customer implements Serializable {
 	            java.sql.Date ed = java.sql.Date.valueOf(endDate);
 	            preparedStmt.setDate(3,ed);
 	            preparedStmt.setString(4,ItemName);
-	            preparedStmt.setString(5,Descript);
-	            preparedStmt.setString(6,Categories);
+	            if(Descript.equals(null)) {
+	            	String descript ="No Description";
+	            preparedStmt.setString(5,descript);
+	            }
+	            else {
+	            	 preparedStmt.setString(5,Descript);
+	            }
+	            if(Categories.equals(null)) {
+	            	String categ ="No Category";
+	            preparedStmt.setString(6,categ);
+	            }
+	            else {
+	            	preparedStmt.setString(6,Categories);
+	            }
+	            
 	            double sp = Double.parseDouble(startPrice);
-	            double bn = Double.parseDouble(buyNow);
 	            preparedStmt.setDouble(7,sp);
+	            if(buyNow.isEmpty()) {
+
+		            preparedStmt.setNull(10,java.sql.Types.INTEGER);
+	            }
+	            else {
+	            double bn = Double.parseDouble(buyNow);
 	            preparedStmt.setDouble(10,bn);
+	            }
+	            
+	            
 	            String currentDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 	            if(startDate.equals(currentDate)) {
 	            String status = "ON AUCTION";
