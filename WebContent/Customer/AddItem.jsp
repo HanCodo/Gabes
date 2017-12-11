@@ -189,7 +189,9 @@ End Date<select name="eDay" >
 <%} %>
   </select>
 <br>
-Description <input name="Descript" type="text"><br>
+Description <br>
+<textarea rows="4" cols="50" name="Descript" >
+</textarea><br>
 Category: <select name="Categories" >
 <option value = "">Select Category</option>
  <option value="Household">Household</option>
