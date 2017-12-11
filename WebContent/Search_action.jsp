@@ -146,6 +146,12 @@ try {
 	if(itemName.trim().length() == 0) {
 		itemName = null;
 	}
+	if(keyword.trim().length() == 0) {
+		keyword = null;
+	}
+	if(category.trim().length() == 0) {
+		category = null;
+	}
 	//System.out.println(keyword);
 	//System.out.println(itemID + ", "+ keyword+ ", " + category + ", "+ bidmin+ ", " + bidmax +", " + startDate1+" ," + endDate1+", " + itemName);
 	ResultSet users = customer.search(itemID, keyword, category, bidmin, bidmax, startDate1, endDate1, itemName);
