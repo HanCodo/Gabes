@@ -79,16 +79,15 @@ while(items.next()){ x++;
 Item ID<input value=<%=x=10000+x %> name=Item_ID readOnly><br>
 Item Name <input name="Item_Name"type="text"><br>
 Start Date<select name="sDay" >
-  <%for (int i = 1; i <= 31 ; i++){ 
-  int day = i ;
-
+  
+<% 
   String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
   int curDay = Integer.parseInt(currentDay);
 
  %>
- <option value = "<%=i %>"
- <%if(i == curDay){ %> selected <%}%>><%= i%></option>
- <%} %>
+ <option value = "<%=curDay %>"
+  selected><%= curDay%></option>
+ 
  
  
 </select>
@@ -136,24 +135,20 @@ Start Date<select name="sDay" >
 	  }  
   } %>
   <%
-  for (int i = 1; i <= 12 ; i++){ 
-  int month = i ;
 
   String currentMonth = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
   int curMonth = Integer.parseInt(currentMonth);
-
  %>
- <option value = "<%=i %>"
- <%if(i == curMonth){ %> selected <%}%>><%= getMonth(i)%></option>
- <%} %>
+ <option value = "<%=curMonth %>" selected ><%= getMonth(curMonth)%></option>
+
  
 </select>
 <select name="sYear" >
-  <%for (int i = 0; i <= 5 ; i++){ 
+  <% 
   String currentYear = new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
   int currentDateInt= Integer.parseInt(currentYear);%>
-<option value = "<%=currentDateInt + i%>"><%=currentDateInt + i%></option>
-<%} %>
+<option value = "<%=currentDateInt%>"><%=currentDateInt%></option>
+<% %>
   </select>
 <br>
 
@@ -161,12 +156,12 @@ End Date<select name="eDay" >
     <%for (int i = 1; i <= 31 ; i++){ 
   int day = i ;
 
-  String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
-  int curDay = Integer.parseInt(currentDay);
+  String currentDay1 = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
+  int curDay1 = Integer.parseInt(currentDay1);
 
  %>
  <option value = "<%=i %>"
- <%if(i == curDay){ %> selected <%}%>><%= i%></option>
+ <%if(i == curDay1){ %> selected <%}%>><%= i%></option>
  <%} %>
 </select>
 <select name="eMonth" >
@@ -174,18 +169,18 @@ End Date<select name="eDay" >
   for (int i = 1; i <= 12 ; i++){ 
   int month = i ;
 
-  String currentMonth = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
-  int curMonth = Integer.parseInt(currentMonth);
+  String currentMonth1 = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
+  int curMonth1 = Integer.parseInt(currentMonth1);
  %>
  <option value = "<%=i %>"
- <%if(i == curMonth){ %> selected <%}%>><%= getMonth(i)%></option>
+ <%if(i == curMonth1){ %> selected <%}%>><%= getMonth(i)%></option>
  <%} %>
 </select>
 <select name="eYear" >
  <%for (int i = 0; i <= 5 ; i++){ 
-  String currentYear = new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
-  int currentDateInt= Integer.parseInt(currentYear);%>
-<option value = "<%=currentDateInt + i%>"><%=currentDateInt + i%></option>
+	 String currentYear1 = new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
+	  int currentDateInt1= Integer.parseInt(currentYear1);%>
+<option value = "<%=currentDateInt1 + i%>"><%=currentDateInt1 + i%></option>
 <%} %>
   </select>
 <br>

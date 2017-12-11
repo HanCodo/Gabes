@@ -51,5 +51,9 @@ Re-Type Password: <input name="password2"><br>
 <input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
 </form>
 <br>
+<form method="post" action="AdminMenu.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Menu" type="submit"><br>
+</form>
 </body>
 </html>

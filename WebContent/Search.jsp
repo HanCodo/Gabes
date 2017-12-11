@@ -204,5 +204,9 @@ End Date<select name="eDay" >
 <input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
 </form>
 <br>
+
+<form method="post" action="./Customer/BiddingManagement.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Menu" type="submit"></form>
 </body>
 </html>

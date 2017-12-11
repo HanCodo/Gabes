@@ -93,5 +93,9 @@ value="Add User" type="submit"><br>
 
 <br>
 <br>
+<form method="post" action="AdminMenu.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Menu" type="submit"><br>
+</form>
 </body>
 </html>

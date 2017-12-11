@@ -85,7 +85,7 @@ cellspacing="2">
 <br>
 <form method="post" action="Bid_action.jsp?i=<%=itemid%>"
 name="Return"><div style="color: red; text-align: center;"><input name="bidprice"><input style = "color: black" name="Bid"
-value="Bid" type="submit"></div></form>
+value="Max Bid Limit" type="submit"></div></form>
 <form method="post" action="../Search.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
