@@ -180,7 +180,15 @@ End Date<select name="eDay" >
   </select>
 <br>
 Description <input name="Descript" type="text"><br>
-Categories<input name="Categories" type="text"><br>
+Category: <select name="Categories" >
+<option value = "">Select Category</option>
+ <option value="Household">Household</option>
+  <option value="Children">Children</option>
+  <option value="Health">Health</option>
+  <option value="Leisure">Leisure</option>
+  <option value="Electronics">Electronics</option>
+  <option value="Style">Style</option>
+  </select><br>
 Start Price <input name="Start_Price" type="text"><br>
 Buy Now Price  (Optional)<input name="BuyNow" type="text"><br>
 <input style = "color: black" name="Add" value="Add" type="submit">

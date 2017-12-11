@@ -42,29 +42,7 @@ http-equiv="content-type">
 <br>
 <div style = "text-align: center"><b>Item Info</b></div>
 <br>
-<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
-cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: top;"><b>Item ID</b><br>
-</td>
-<td style="vertical-align: top;"><b>Item Name</b><br>
-</td>
-<td style="vertical-align: top;"><b>Category</b><br>
-</td>
-<td style="vertical-align: top;"><b>Auction Start Time</b><br>
-</td>
-<td style="vertical-align: top;"><b>Auction End Time</b><br>
-</td>
-<td style="vertical-align: top;"><b>Start Price</b><br>
-</td>
-<td style="vertical-align: top;"><b>Current Bid</b><br>
-</td>
-<td style="vertical-align: top;"><b>Status</b><br>
-</td>
-<td style="vertical-align: top;"><b>Item Info</b><br>
-</td>
-</tr>
+
 <%ResultSet r = null;
 try{
 r = customer.viewItem(request.getParameter("ItemInfo"));}
@@ -73,30 +51,30 @@ catch(IllegalStateException ise){
     }%>
 <%while(r.next()){ %>
 
-<tr>
-<td style="vertical-align: top;"><%= r.getInt("ITEMID")%><br>
-</td>
-<td style="vertical-align: top;"><%= r.getString("ITEMNAME")%><br>
-</td>
-<td style="vertical-align: top;"><%= r.getString("CATEGORIES")%><br>
-</td>
-<td style="vertical-align: top;"><%= r.getString("STARTDATE").substring(0,10)%><br>
-</td>
-<td style="vertical-align: top;"><%= r.getString("ENDDATE").substring(0,10)%><br>
-</td>
-<td style="vertical-align: top;"><%= "$"+r.getString("STARTPRICE")%><br>
-</td>
-<td style="vertical-align: top;"><%= "$"+r.getString("CURRENTBID")%><br>
-</td>
-<td style="vertical-align: top;"><%= r.getString("STATUS")%><br>
-</td>
-<td style="vertical-align: top;"><%= r.getString("DESCRIPT")%><br>
-</td>
 
-</tr>
+<div style="color: Black; text-align: center;">Item ID: <%= r.getInt("ITEMID")%></div><br>
+
+
+<div style="color: Black; text-align: center;">Item Name: <%= r.getString("ITEMNAME")%></div><br>
+
+<div style="color: Black; text-align: center;">Category:<%= r.getString("CATEGORIES")%></div><br>
+
+<div style="color: Black; text-align: center;">Start Date:<%= r.getString("STARTDATE").substring(0,10)%></div><br>
+
+<div style="color: Black; text-align: center;">End Date: <%= r.getString("ENDDATE").substring(0,10)%></div><br>
+
+<div style="color: Black; text-align: center;">Start Price: <%= "$"+r.getString("STARTPRICE")%></div><br>
+
+<div style="color: Black; text-align: center;">Current Price: <%= "$"+r.getString("CURRENTBID")%></div><br>
+
+<div style="color: Black; text-align: center;">Status: <%= r.getString("STATUS")%></div><br>
+
+<div style="color: Black; text-align: center;">Description: <%= r.getString("DESCRIPT")%></div><br>
+
+
+
 <%} r.close(); %>
-</tbody>
-</table>
+
 <br>
 <form method="post" action="ItemsList.jsp"
 name="Return"><input style = "color: black" name="Return"
