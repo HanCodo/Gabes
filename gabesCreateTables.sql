@@ -12,6 +12,19 @@ CREATE TABLE gabes_customer (
 	PRIMARY KEY (UserID)
 );
 
+-- NEW CUSTOMERS
+DROP TABLE gabes_newcust CASCADE CONSTRAINTS;
+CREATE TABLE gabes_newcust (
+	UserID 			INTEGER 		NOT NULL,
+	Username 		VARCHAR(15) 	NOT NULL,
+	Pass 		    	VARCHAR(15) 	NOT NULL,
+	Fname 			VARCHAR(15),
+	Lname 			VARCHAR(15),
+	Phone 			VARCHAR(10),
+	Email			VARCHAR(30),
+	UNIQUE (Username),
+	PRIMARY KEY (UserID)
+);
 
 -- ADMIN
 DROP TABLE gabes_admin CASCADE CONSTRAINTS;
@@ -93,6 +106,7 @@ INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) 
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10002, 'Username3', 'Password3', 'Stanley', 'Steamer', '8007832637', 'ssteamer@csbsju.edu');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10003, 'Username4', 'Password4', 'Tommy', 'Tutone', '9528675309', 'ttutone@csbsju.edu');
 INSERT INTO GABES_CUSTOMER (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10004, 'Username5', 'Password5', 'Pizza', 'Hut', '5888888888', 'phutt@csbsju.edu');
+INSERT INTO GABES_NEWCUST (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) VALUES (10005, 'Username6', 'Password6', 'Lightning', 'McQueen', '9595959595', 'Ka-Chow@csbsju.edu');
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10000, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Iron', 'An iron for clothing', 'Household', 15.00, 'SOLD', 21.00, 50.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10001, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Pacemaker', 'Keep pace with your health', 'Health', 100.00, 'SOLD', 101.00, 300.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10002, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Man purse', 'ITS A SATCHEL!', 'Style', 50.00, 'SOLD', 76.00, 150.00);

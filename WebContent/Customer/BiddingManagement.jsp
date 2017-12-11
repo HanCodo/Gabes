@@ -59,9 +59,6 @@ value="Featured Item" type="submit"><br>
 name="AllItems"><input style = "color: black" name="AllItems"
 value="Browse All Items" type="submit"><br>
 </form>
-<form method="post" action="itemsBidOn.jsp" name="listBids"><input
-style = "color: black" name="Items Bid On" value="Items Bid On" type="submit"><br>
-</form>
 <form method="post" action="CustomerMenu.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>

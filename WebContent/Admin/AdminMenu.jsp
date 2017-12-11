@@ -47,6 +47,14 @@ value="User Management" type="submit"><br>
 name="ViewReports"><input style = "color: black" name="ViewReports"
 value="View Reports" type="submit"><br>
 </form>
+<form method="post" action="ApproveRequests.jsp"
+name="ApproveRequests"><input style = "color: black" name="ApproveRequests"
+value="View/Approve Account Requests" type="submit"><br>
+</form>
+<form method="post" action="UsageReport.jsp"
+name="UsageReport"><input style = "color: black" name="UsageReport"
+value="View Usage Report/Statistics" type="submit"><br>
+</form>
 <br>
 <br>
 </body>
