@@ -24,5 +24,8 @@ if (errorParam != null){
 Password: <input name="pass" type="password"><br>
 <input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
 </form>
+<form method="post" action="CreateAccount.jsp"
+name="CreateAccount"><input style = "color: black" name="CreateAccount"
+value="Register an Account" type="submit"><br>
 </body>
 </html>
