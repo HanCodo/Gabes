@@ -32,7 +32,7 @@ http-equiv="content-type">
 		</a>
 	</div>
     <div class="right">
-    	<form method="post" action="../CustomerLogout_action.jsp" name="logout">
+    	<form method="post" action="CustomerLogout_action.jsp" name="logout">
     		Logged in as: <%=customer.getUsername()%> <input style = "text-align: right; color: black" name="Logout" value="Logout" type="submit">
     	</form>
     </div>
