@@ -70,10 +70,10 @@ Item Name <input name="Item_Name"type="text"><br>
 Start Date<select name="sDay" >
   <%for (int i = 1; i <= 31 ; i++){ 
   int day = i ;
-  System.out.println("DAY COUNTD:"+day);
+
   String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
   int curDay = Integer.parseInt(currentDay);
-  System.out.println("CURRENT DAY:"+curDay);
+
  %>
  <option value = "<%=i %>"
  <%if(i == curDay){ %> selected <%}%>><%= i%></option>
@@ -127,10 +127,10 @@ Start Date<select name="sDay" >
   <%
   for (int i = 1; i <= 12 ; i++){ 
   int month = i ;
-  System.out.println("MONTH COUNTED:"+month);
+
   String currentMonth = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
   int curMonth = Integer.parseInt(currentMonth);
-  System.out.println("CURRENT MONTH:"+curMonth);
+
  %>
  <option value = "<%=i %>"
  <%if(i == curMonth){ %> selected <%}%>><%= getMonth(i)%></option>
@@ -149,10 +149,10 @@ Start Date<select name="sDay" >
 End Date<select name="eDay" >
     <%for (int i = 1; i <= 31 ; i++){ 
   int day = i ;
-  System.out.println("DAY COUNTD:"+day);
+
   String currentDay = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
   int curDay = Integer.parseInt(currentDay);
-  System.out.println("CURRENT DAY:"+curDay);
+
  %>
  <option value = "<%=i %>"
  <%if(i == curDay){ %> selected <%}%>><%= i%></option>
@@ -162,10 +162,10 @@ End Date<select name="eDay" >
   <%
   for (int i = 1; i <= 12 ; i++){ 
   int month = i ;
-  System.out.println("MONTH COUNTED:"+month);
+
   String currentMonth = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
   int curMonth = Integer.parseInt(currentMonth);
-  System.out.println("CURRENT MONTH:"+curMonth);
+
  %>
  <option value = "<%=i %>"
  <%if(i == curMonth){ %> selected <%}%>><%= getMonth(i)%></option>

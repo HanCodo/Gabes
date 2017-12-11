@@ -334,8 +334,15 @@ public class Customer implements Serializable {
 	            double bn = Double.parseDouble(buyNow);
 	            preparedStmt.setDouble(7,sp);
 	            preparedStmt.setDouble(10,bn);
-	            String status = null;
+	            String currentDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
+	            if(startDate.equals(currentDate)) {
+	            String status = "ON AUCTION";
 	            preparedStmt.setString(8,status);
+	            }
+	            else {
+	            String status = "OFF AUCTION";
+	            preparedStmt.setString(8,status);
+	            }
 	            preparedStmt.setDouble(9,sp);
 	            result = preparedStmt.executeUpdate();
 	            preparedStmt.close();
