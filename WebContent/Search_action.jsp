@@ -68,6 +68,7 @@ try {
 	String itemID1 = request.getParameter("itemID");
 	String bidmin1 = request.getParameter("minbid");
 	String bidmax1 = request.getParameter("maxbid");
+	
 	String sDay = request.getParameter("sDay");
 	String sMonth = request.getParameter("sMonth");
 	String sYear = request.getParameter("sYear");
@@ -116,6 +117,7 @@ try {
 		    response.sendRedirect("Search.jsp?error=3");
 		}
 	}
+	
 	int itemID = -1;
 	int bidmin = -1;
  	int bidmax = -1;
@@ -134,9 +136,23 @@ try {
 	String itemName = request.getParameter("itemName");
 	String keyword = request.getParameter("keyword");
 	String category = request.getParameter("category");
+	/*System.out.println(category);
+	System.out.println(keyword);
+	System.out.println(startDate1);
+	System.out.println(endDate1);
+	System.out.println("id"+itemID);
+	System.out.println("bidmin"+bidmin);
+	System.out.println("bidmax"+bidmax);*/
+	if(itemName.trim().length() == 0) {
+		itemName = null;
+	}
 	//System.out.println(keyword);
+	//System.out.println(itemID + ", "+ keyword+ ", " + category + ", "+ bidmin+ ", " + bidmax +", " + startDate1+" ," + endDate1+", " + itemName);
 	ResultSet users = customer.search(itemID, keyword, category, bidmin, bidmax, startDate1, endDate1, itemName);
 	//System.out.println(users);
+
+	//ResultSet users = customer.allItems();
+
 if(users == null){
 	response.sendRedirect("Search.jsp?error=4");
 }

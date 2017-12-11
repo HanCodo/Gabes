@@ -608,6 +608,8 @@ public class Customer implements Serializable {
 	  public ResultSet search(int ItemID, String keyword, String category, double bidMin, double bidMax, 
 		  Date startTime, Date endTime, String itemName) {
 		  try {
+			 // System.out.println(ItemID + ", "+ keyword+ ", " + category + ", "+ bidMin+ ", " + bidMax +", " + startTime+" ," + 
+		   //endTime+", " + itemName);
 		  //System.out.println("test");
 			  Connection con = openDBConnection();
 			  String statementString = "{?= call GABES_Search(?,?,?,?,?,?,?,?)}";
