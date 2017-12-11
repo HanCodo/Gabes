@@ -110,7 +110,7 @@ items.getDouble("CURRENTBID")
 <%=
 items.getDouble("BUYNOW")
 %>
-<form method="post" action="Customer/BuyNow_action.jsp?i=<%=items.getInt("ITEMID")%>&p=<%=items.getDouble("BUYNOW")%>" name="Buynow">
+<form method="post" action="BuyNow_action.jsp?i=<%=items.getInt("ITEMID")%>&p=<%=items.getDouble("BUYNOW")%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
 </tr>
 <%}}%>
