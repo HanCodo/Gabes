@@ -6,17 +6,15 @@ if(!customer.isLoggedIn()){
 	response.sendRedirect("index.jsp?error=1");
 }
 else{		
-
-		int i = Integer.parseInt(request.getParameter("watchList"));
+		int i = Integer.parseInt(request.getParameter("removeWatch"));
 		if(customer.checkItem(i)){
-			response.sendRedirect("WatchList.jsp?error=2");
+			int result = customer.removeWatchList(i);
+			response.sendRedirect("WatchList.jsp?itemID="+i);
+			
 		}
 		else{
 	
-	
-		int result = customer.addWatchList(request.getParameter("watchList"));
-		response.sendRedirect("WatchList.jsp?ItemID="+request.getParameter("watchList"));
-		
+			response.sendRedirect("WatchList.jsp?error=1");
 		}
 }
 

@@ -46,6 +46,36 @@ http-equiv="content-type">
 <br>
 <div style="text-align:center;"><b>Watch List</b></div>
 <br>
+<%
+String message = "";
+String errorParam = request.getParameter("error");
+String itemID = request.getParameter("itemID");
+String itemID2 = request.getParameter("ItemID");
+
+
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "Removed failed";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
+	}
+	else if(error ==2 ){
+		message = "Item already in Watch List";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
+	}
+}	
+if (itemID != null){
+	message = "You successfully deleted item number "+itemID+" from your Watch List";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+if (itemID2 != null){
+	message = "You successfully added item number "+itemID+" from your Watch List";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+
+
+
+%>
 <%ResultSet items = customer.getItemListforWatch(); %>
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
@@ -60,6 +90,7 @@ cellspacing="2" id ="team2">
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b>Status</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Current Bid</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Buy Now</b><br></th>
+      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Remove</b><br></th>
 
   </tr>
 <%while (items.next()){ 
@@ -101,6 +132,14 @@ else{
 
 <%
 }
+%>
+
+<td style="vertical-align: top;"><form method="GET" action="RemoveWatchList_action.jsp" name="removeWatch">
+<input  style = "color: black" name="removeWatch" type="hidden" value="<%=items.getInt("ITEMID") %>"/>
+<button style = "color: black" value="removeWatch" name="removeWatch">Remove from List</button><br>
+</form><br>
+</td>
+<% 
 }}%>
 </tbody>
 </table>

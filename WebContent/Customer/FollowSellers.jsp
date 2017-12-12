@@ -58,16 +58,17 @@ if (sellID != null){
 	
 
 %>
-<table style="text-align: left; width: 100%;" border="2" cellpadding="2">
-<tbody>
-<tr>
-<td style="vertical-align: top;"><b>Seller Username</b><br>
-</td>
-<td style="vertical-align: top;"><b>Seller Items</b><br>
-</td>
-<td style="vertical-align: top;"><b>Remove Seller</b><br>
-</td>
-</tr>
+
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
+cellspacing="2" id ="team2">
+   <tr>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(1)')"style="vertical-align: top;"><b>Seller Username</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(2)')"style="vertical-align: top;"><b>Seller Items</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b>Remove Seller</b><br></th>
+     
+
+  </tr>
 <%ResultSet rs = null;
 try{
 rs = customer.allFollowers();
@@ -77,7 +78,7 @@ catch(IllegalStateException ise){
     }
 while(rs.next()){
 %>
-<tr>
+<tr class ="items">
 <td style="vertical-align: top;"><%= rs.getString("Name")%><br>
 </td>
 <td style="vertical-align: top;"><form method="GET" action="SellerItems.jsp" name="SellerItems">

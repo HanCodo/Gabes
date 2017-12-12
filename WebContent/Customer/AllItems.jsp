@@ -46,26 +46,6 @@ http-equiv="content-type">
 <br>
 <div style="text-align:center;"><b>All Items on Sale</b></div>
 <br>
-<%
-String message = "";
-String errorParam = request.getParameter("error");
-String itemID = request.getParameter("ItemID");
-
-if (errorParam != null){
-	int error = Integer.parseInt(errorParam);
-	if (error == 1){
-		message = "You already added that item to your Watch List";
-		%><div style="text-align: center;color:red;"><%=message %></div><br><%
-	}
-}	
-if (itemID != null){
-	message = "You successfully added item number "+itemID+" to your Watch List";
-	%><div style="text-align: center; "><%=message %></div><br><%
-}
-
-
-
-%>
 <%ResultSet items = customer.allItems(); %>
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"

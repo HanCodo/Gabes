@@ -1018,5 +1018,15 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
+	public int removeWatchList(int itemID) throws SQLException{	
+		Connection con = openDBConnection();	
+		String queryString ="DELETE FROM gabes_watch w"+
+				" WHERE w.saverID ="+this.userID+" and "+itemID +"=w.ITEMID";
+	    preparedStmt = con.prepareStatement(queryString);
+	    preparedStmt.execute();
+	    preparedStmt.close();
+	    return 1;
+		
+	}
 
 }
