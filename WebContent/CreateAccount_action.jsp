@@ -10,6 +10,12 @@
 	if(!request.getParameter("password").equals(request.getParameter("password2"))){
 		response.sendRedirect("CreateAccount.jsp?status=0");
 	}
+	else if(request.getParameter("phone").length()!=10){
+		response.sendRedirect("CreateAccount.jsp?status=2");
+	}
+	else if(request.getParameter("password").length()>15){
+		response.sendRedirect("CreateAccount.jsp?status=3");
+	}
 	else if(request.getParameter("password").length()>15){
 		response.sendRedirect("CreateAccount.jsp?status=3");
 	}
