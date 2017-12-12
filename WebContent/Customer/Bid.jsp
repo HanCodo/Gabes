@@ -42,6 +42,7 @@ http-equiv="content-type">
 <br>
 <div style = "text-align: center"><b>Bid</b></div>
 <br>
+<<<<<<< HEAD
 <%
 ResultSet rs = customer.viewItem(request.getParameter("i"));
 rs.next();
@@ -89,6 +90,19 @@ else{
 	}
 	while(r.next()){
 		itemid = r.getInt("ITEMID");%>
+=======
+<%ResultSet r = null;
+int itemid = 0;
+try{
+r = customer.bidInfo(request.getParameter("i"));}
+catch(IllegalStateException ise){
+        out.println(ise.getMessage());
+    }%>
+<%while(r.next()){ 
+itemid = r.getInt("ITEMID");
+String message = "You have "+ customer.timeleft(itemid) + " days left to bid on this item ";%>
+<div style="text-align: center;"><b></b> <%=message %></div><br>
+>>>>>>> fb15db9f234c6eb25469e6b95d5ac96e87c52f83
 <div style="text-align: center;"><b>Leading Bidder:</b> <%=r.getString("Username") %></div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
