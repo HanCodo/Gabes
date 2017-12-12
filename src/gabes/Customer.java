@@ -222,22 +222,6 @@ public class Customer implements Serializable {
 	  }
 	  
 	  /**
-	   * shows the items info for a specific itemID
-	   * @param itemID
-	   * @return
-	   * @throws SQLException
-	   */
-	  public ResultSet showItemInfo(String itemID) throws SQLException {
-		  	Connection con = openDBConnection();
-		    String queryString = "SELECT *" + "FROM GABES_ITEM" + "WHERE itemID = ?";
-		    preparedStmt.setString(1,itemID);
-		    preparedStmt = con.prepareStatement(queryString);
-		    ResultSet result = preparedStmt.executeQuery();
-		    preparedStmt.close();
-		    return result;
-	  }
-	  
-	  /**
 	   * Retrieves the information for an account to be updated
 	   * @return an int representing the number of 
 	   * rows affected by the update statement
