@@ -612,6 +612,9 @@ public class Customer implements Serializable {
 	  /**
 	   * Takes a input of itemID which is a int and uses it to find the winner of bid
 	   * that winners username is then returned
+	   * @param double itemID the itemID
+	   * @return ResultSet containing all items in cat that have most bids
+	   * @throws SQLException
 	   */
 	  public ResultSet winnerInfo(String itemID) throws SQLException {
 		  	Connection con = openDBConnection();
@@ -626,6 +629,9 @@ public class Customer implements Serializable {
 	  /**
 	   * Takes a input of itemID which is a int and uses it to find the winner of bid
 	   * that winners username is then returned
+	   * @param double itemID the itemID
+	   * @return String containing winner of bid
+	   * @throws SQLException
 	   */
 	  public String winner(int itemID) throws SQLException {
 		  	Connection con = openDBConnection();
@@ -641,7 +647,9 @@ public class Customer implements Serializable {
 	  
 	  /**
 	   * Checks if a  item has been rated
+	   * @param int itemID the item's id
 	   * @return rated, a boolean
+	   * @throws SQLException
 	   */
 	  public boolean hasRated(int itemID) throws SQLException {
 		  	Connection con = openDBConnection();
@@ -796,9 +804,7 @@ public class Customer implements Serializable {
 	    String queryString = "Select distinct i.categories "+
 	    		" From GABES_ITEM i, GABES_BID b"+
 	    		" Where i.status = 'ON AUCTION' and i.itemID = b.itemID";
-	
-	
-	
+
 	    preparedStmt = con.prepareStatement(queryString);
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
@@ -881,6 +887,11 @@ public class Customer implements Serializable {
 
 		
 	}
+	  /**
+	   * Gets all followers of the user 
+	   * @return ResultSet containing all users followed sellers 
+	   * @throws SQLException
+	   */
 	public ResultSet allFollowers() throws SQLException {
 		Connection con = openDBConnection();
 	    String queryString = "Select c.USERNAME as Name, f.FollowID as SellerID"+
@@ -893,6 +904,12 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to find all Sellers with the same id
+	   * @param int sellerID the seller's ID
+	   * @return ResultSet containing all items of sell
+	   * @throws SQLException
+	   */
 	public ResultSet sellerItems(int sellerID) throws SQLException {
 		Connection con = openDBConnection();
 		String queryString = "SELECT *"+
@@ -905,7 +922,11 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
-	
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to add it to a list
+	   * @param int sellerID the seller's ID
+	   * @return int number if true or false
+	   */
 	public int addFavorites(String SellerID) {
 		 int result = -1;
 		  Connection con = openDBConnection();
@@ -926,6 +947,12 @@ public class Customer implements Serializable {
 	        return result;
 		
 	}
+	  /**
+	   * Takes a input of itemID which is a int and uses it to get sellers of the item
+	   * @param int itemID the item's ID
+	   * @return ResultSet containing all items by the seller
+	   * @throws SQLException
+	   */
 	public ResultSet getSellerId(int itemID) throws SQLException {
 		Connection con = openDBConnection();
 		String queryString = "SELECT s.USERID as SellerID"+
@@ -936,6 +963,12 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to check if seller is in table
+	   * @param int sellerID the seller's ID
+	   * @return boolean 
+	   * @throws SQLException
+	   */
 	public boolean checkSeller(int sellerID) throws SQLException {
 		Connection con = openDBConnection();
 		boolean check = false;
@@ -956,6 +989,12 @@ public class Customer implements Serializable {
 	    }
 	    return check;
 	}
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to remove the seller from table
+	   * @param int sellerID the seller's ID
+	   * @return int check if true or not
+	   * @throws SQLException
+	   */
 	public int removeFavSeller(int sellerID) throws SQLException{	
 		Connection con = openDBConnection();	
 		String queryString ="DELETE FROM gabes_follows f"+
@@ -966,7 +1005,11 @@ public class Customer implements Serializable {
 	    return 1;
 		
 	}
-	
+	  /**
+	   * Takes a input of itemId which is a int and uses it to add it to a watch list
+	   * @param int itemId the item's ID
+	   * @return int number if true or false
+	   */
 	public int addWatchList(String itemId) {
 		 int result = -1;
 		  Connection con = openDBConnection();
@@ -987,6 +1030,12 @@ public class Customer implements Serializable {
 	        return result;
 		
 	}
+	  /**
+	   * Takes a input of itemId which is a int and uses it to check if item is in table
+	   * @param int itemId the item's ID
+	   * @return boolean 
+	   * @throws SQLException
+	   */
 	public boolean checkItem(int itemId) throws SQLException {
 		Connection con = openDBConnection();
 		boolean check = false;
@@ -1007,7 +1056,11 @@ public class Customer implements Serializable {
 	    }
 	    return check;
 	}
-	
+	  /**
+	   * Gets all records of watch list
+	   * @return ResultSet containing all listed items from watch list table
+	   * @throws SQLException
+	   */
 	public ResultSet getItemListforWatch() throws SQLException {
 		Connection con = openDBConnection();
 		String queryString = "SELECT *"+
@@ -1018,6 +1071,12 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
+	  /**
+	   * Takes a input of itemID which is a int and uses it to remove the item from table
+	   * @param int itemID the item's ID
+	   * @return int check if true or not
+	   * @throws SQLException
+	   */
 	public int removeWatchList(int itemID) throws SQLException{	
 		Connection con = openDBConnection();	
 		String queryString ="DELETE FROM gabes_watch w"+
