@@ -36,19 +36,31 @@ public class User {
 	    }
 	    return null;
 	  }
-	
+	/**
+	 * This returns the total number of Customers currently in the databse
+	 * @return
+	 * @throws SQLException
+	 */
 	public int numUsers() throws SQLException{
-	  	Connection con = openDBConnection();
-	    String queryString = "SELECT COUNT(*) as number FROM GABES_CUSTOMER";
+	  	try {
+		Connection con = openDBConnection();
+	    String queryString = "SELECT COUNT(*) as COUNT FROM GABES_CUSTOMER";
 	    preparedStmt = con.prepareStatement(queryString);
 	    ResultSet result = preparedStmt.executeQuery();
-	    return result.getInt("number");
+	    result.next();
+	    return result.getInt("COUNT");
+	  	}
+	  	catch(Exception E) {
+	  		System.out.print(E);
+	  		System.out.println("nums");
+	  	}
+	  	return 0;
   }
   
 	
 	/**
-	 * This inserts the users information into the database and waits the apporval of an Admin
-	 * 
+	 * This inserts the users information into the database and awaits the apporval of an Admin. Once an admin approves
+	 * the user will be added into the database as a customer and the user will be removed from the database.
 	 * @param userID
 	 * @param Username
 	 * @param pass
@@ -60,11 +72,13 @@ public class User {
 	 * @throws SQLException
 	 */
 	public boolean insertUser(String Username, String pass, String fname, String lname, String phone, String Email) throws SQLException{
+		  try {
 		  Connection con = openDBConnection();
-		  String queryString = "INSERT INTO GABES_NEWCUS (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) "
-		  		+ "VALUES (?, ?, ?, ?, ?, ?, ?)";   
+		  String queryString = "INSERT INTO GABES_NEWCUST (USERID, USERNAME, PASS, FNAME, LNAME, PHONE, EMAIL) "
+		  		+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		  String userID = Integer.toString(10000+this.numUsers()+1);
 		  preparedStmt = con.prepareStatement(queryString);
-		  preparedStmt.setString(1,""+this.numUsers()+1);
+		  preparedStmt.setString(1, userID);
 		  preparedStmt.setString(2, Username);
 		  preparedStmt.setString(3, pass);
 		  preparedStmt.setString(4, fname);
@@ -72,8 +86,6 @@ public class User {
 		  preparedStmt.setString(6, phone);
 		  preparedStmt.setString(7, Email);
 		  ResultSet result = preparedStmt.executeQuery();
-		  
-		  preparedStmt.close();
 		  if(result.next()){
 		    	return true;
 		    }
@@ -81,5 +93,12 @@ public class User {
 		    	return false;
 		    }
 		  
-	  }
+		  }
+		  catch(Exception E){
+			  System.out.print(E);
+			  System.out.println("User");
+		  }
+		  return false;
+			  
+	}
 }
