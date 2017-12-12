@@ -5,6 +5,8 @@ import java.sql.*;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 
 import oracle.jdbc.*;
 import java.sql.*;
@@ -853,5 +855,44 @@ public class Customer implements Serializable {
 	    return result;
 	
 	}
+	public long timeleft(int itemID) {
+		try{
+			Connection con = openDBConnection();
+			String currentDay1 = new java.text.SimpleDateFormat("dd").format(new java.util.Date());
+			int curDay1 = Integer.parseInt(currentDay1);
+			String currentYear1 = new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
+			int currentDateInt1= Integer.parseInt(currentYear1);
+			String currentMonth1 = new java.text.SimpleDateFormat("MM").format(new java.util.Date());
+			int curMonth1 = Integer.parseInt(currentMonth1);
+			String Date = Integer.toString(curMonth1)+"/"+Integer.toString(curDay1)+"/"+Integer.toString(currentDateInt1);
+			Date todaysDate = null;
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			String queryString = "Select i.endDate " + 
+		    		"from gabes_item i "+ 
+		    		"where i.itemID = ? ";
+		    
+			preparedStmt = con.prepareStatement(queryString);
+		    preparedStmt.setInt(1, itemID);
+
+		    ResultSet result = preparedStmt.executeQuery();
+		    Date date =  result.getDate(1);
+		    
+			
+			try {
+			    java.util.Date startDate2 = df.parse(Date);
+			    todaysDate = new java.sql.Date(startDate2.getTime());
+			    
+			} catch (Exception e) {
+			    e.printStackTrace();
+			    //response.sendRedirect("Search.jsp?error=3");
+			}
+			long days = ChronoUnit.DAYS.between(LocalDate.parse(todaysDate.toString()),LocalDate.parse(date.toString()));
+			return days;
+		}catch(Exception ex) {
+			return 0;
+		}
+		
+	}
+	
 
 }

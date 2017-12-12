@@ -50,7 +50,8 @@ catch(IllegalStateException ise){
         out.println(ise.getMessage());
     }%>
 <%while(r.next()){ 
-itemid = r.getInt("ITEMID");%>
+itemid = r.getInt("ITEMID");
+out.println("you have " +customer.timeleft(itemid) + " days left");%>
 <div style="text-align: center;"><b>Leading Bidder:</b> <%=r.getString("Username") %></div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
