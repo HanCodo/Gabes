@@ -46,8 +46,9 @@ http-equiv="content-type">
 ResultSet rs = customer.viewItem(request.getParameter("i"));
 rs.next();
 if(rs.getDouble("currentBid") == rs.getDouble("startPrice")){
-	%>
 	
+	String message = "You have "+ customer.timeleft(Integer.parseInt(request.getParameter("i"))) + " days left to bid on this item ";%>
+		<div style="text-align: center;"><b></b> <%=message %></div><br>
 	<div style="text-align: center;"><b>Leading Bidder:</b> No active bidders</div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
