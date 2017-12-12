@@ -883,7 +883,7 @@ public class Customer implements Serializable {
 	}
 	public ResultSet allFollowers() throws SQLException {
 		Connection con = openDBConnection();
-	    String queryString = "Select c.USERNAME as USERNAME "+
+	    String queryString = "Select c.USERNAME as Name, f.FollowID as SellerID"+
 	    		" From GABES_CUSTOMER c, GABES_FOLLOWS f"+
 	    		" Where f.FollowID = c.USERID and f.MainID = "+this.userID;
 	
@@ -893,6 +893,17 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
+	public ResultSet sellerItems(int sellerID) throws SQLException {
+		Connection con = openDBConnection();
+		String queryString = "SELECT *"+
+				" FROM GABES_ITEM i, GABES_SELL s"+ 
+				" WHERE s.USERID = "+sellerID+" and i.itemID = s.itemID";
 	
+	
+	
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
 
 }
