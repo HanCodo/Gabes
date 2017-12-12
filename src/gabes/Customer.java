@@ -961,10 +961,10 @@ public class Customer implements Serializable {
 		System.out.println("THE VALUE IN THE user IS :"+this.userID);
 		System.out.println("THE VALUE IN THE TABLE IS :"+sellerID);
 		String queryString ="DELETE FROM gabes_follows f"+
-				" WHERE f.mainID ="+this.userID+" and "+sellerID +"=f.followid "+
-				"COMMIT";
+				" WHERE f.mainID ="+this.userID+" and "+sellerID +"=f.followid";
 
 	    preparedStmt = con.prepareStatement(queryString);
+	    preparedStmt.execute();
 	    preparedStmt.close();
 	    return 1;
 		
