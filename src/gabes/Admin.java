@@ -142,7 +142,7 @@ public class Admin {
 	   */
 	  public ResultSet viewUsers() throws SQLException{
 		  	Connection con = openDBConnection();
-		    String queryString = "SELECT * FROM GABES_CUSTOMER";
+		    String queryString = "select userID, username, CASE WHEN PASS IS NOT NULL THEN '******' END AS PASS, fname, lname, phone, email FROM(select * from gabes_customer)";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    //preparedStmt.close();
