@@ -106,6 +106,18 @@ CREATE TABLE gabes_follows (
 	PRIMARY KEY (MainID, FollowID)
 );
 
+--Watch
+DROP TABLE gabes_watch CASCADE CONSTRAINTS;
+CREATE TABLE gabes_watch (
+	saverID 	INTEGER			NOT NULL,
+	ItemID 		INTEGER			NOT NULL,
+ 	FOREIGN KEY (saverID) REFERENCES gabes_customer(UserID),
+--        ON DELETE SET NULL	ON UPDATE CASCADE,
+	FOREIGN KEY (ItemID) REFERENCES gabes_item(ItemID),
+--        ON DELETE SET NULL	ON UPDATE CASCADE,
+	PRIMARY KEY (saverID, ItemID)
+);
+
 
 INSERT INTO GABES_ADMIN (Username, Pass) VALUES ('Admin1', 'Password1');
 INSERT INTO GABES_ADMIN (Username, Pass) VALUES ('Admin2', 'Password2');
