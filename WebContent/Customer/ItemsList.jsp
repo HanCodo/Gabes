@@ -59,13 +59,12 @@ cellspacing="2" id ="team2">
    <tr>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(1)')"style="vertical-align: top;"><b>Item ID</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(2)')"style="vertical-align: top;"><b>Item Name</b><br></th>
-          <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Category</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Category</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b>Auction Start Time</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(4)')"style="vertical-align: top;"><b>Auction End Time</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(5)')" style="vertical-align: top;"><b>Start Price</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')"style="vertical-align: top;"><b>Current Bid</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b>Status</b><br></th>
-
      <td style="vertical-align: top;">Item Info<br>
 	</td>
 	<td style="vertical-align: top;">Bidder List<br>

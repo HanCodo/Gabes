@@ -47,32 +47,24 @@ http-equiv="content-type">
 <div style="text-align:center;"><b>All Items on Sale</b></div>
 <br>
 <%ResultSet items = customer.allItems(); %>
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
-cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: top;"><b>ItemID</b><br>
-</td>
-<td style="vertical-align: top;"><b>Start Date</b><br>
-</td>
-<td style="vertical-align: top; width: 253px;"><b>End Date</b><br>
-</td>
-<td style="vertical-align: top; width: 245px;"><b>Item Name</b><br>
-</td>
-<td style="vertical-align: top; width: 282px;"><b>Item Description</b><br>
-</td>
-<td style="vertical-align: top;"><b>Category</b><br>
-</td>
-<td style="vertical-align: top;"><b>Status</b><br>
-</td>
-<td style="vertical-align: top;"><b>Current Bid</b><br>
-</td>
-<td style="vertical-align: top;"><b>Buy Now</b><br>
-</td>
-</tr>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
+cellspacing="2" id ="team2">
+   <tr>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(1)')"style="vertical-align: top;"><b>Item ID</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(2)')"style="vertical-align: top;"><b>Item Name</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b>Category</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(4)')"style="vertical-align: top;"><b>Auction Start Time</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(5)')"style="vertical-align: top;"><b>Auction End Time</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')" style="vertical-align: top;"><b>Start Price</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b>Status</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Current Bid</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Buy Now</b><br></th>
+
+  </tr>
 <%while (items.next()){ 
 if(items.getString("STATUS").equals("ON AUCTION")){%>
-<tr>
+<tr class = "items">
 <td>
 <%=
 items.getInt("ITEMID")

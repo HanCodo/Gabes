@@ -946,7 +946,7 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    while(result.next()) {
 	    	int i = result.getInt("SellerID");
-	    	System.out.println("THE VALUE IN THE TABLE IS :"+i);
+	   
 	    	if(i == sellerID) {
 	    		check = true;
 
@@ -955,14 +955,10 @@ public class Customer implements Serializable {
 	    }
 	    return check;
 	}
-	public int removeFavSeller(int sellerID) throws SQLException{
-		
-		Connection con = openDBConnection();
-		System.out.println("THE VALUE IN THE user IS :"+this.userID);
-		System.out.println("THE VALUE IN THE TABLE IS :"+sellerID);
+	public int removeFavSeller(int sellerID) throws SQLException{	
+		Connection con = openDBConnection();	
 		String queryString ="DELETE FROM gabes_follows f"+
 				" WHERE f.mainID ="+this.userID+" and "+sellerID +"=f.followid";
-
 	    preparedStmt = con.prepareStatement(queryString);
 	    preparedStmt.execute();
 	    preparedStmt.close();
