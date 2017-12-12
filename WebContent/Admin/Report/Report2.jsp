@@ -105,6 +105,7 @@ http-equiv="content-type">
 <td><br></td>
 <td><br></td>
 <td><br></td>
+<%total = (Math.floor(total * 100) / 100); %>
 <td style="vertical-align: top;">$<%=total %><br></td>
 </tr>
 </tbody>
