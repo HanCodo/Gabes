@@ -175,7 +175,7 @@ public class Admin {
 		  preparedStmt.setString(7, Email);
 		  ResultSet result = preparedStmt.executeQuery();
 		  
-		  preparedStmt.close();
+		  
 		  if(result.next()){
 		    	return true;
 		    }
