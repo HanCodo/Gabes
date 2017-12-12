@@ -504,7 +504,7 @@ public class Customer implements Serializable {
 		  	Connection con = openDBConnection();
 
 		    String queryString = "SELECT ITEMID, STARTDATE, ENDDATE, ITEMNAME, DESCRIPT,"
-		    		+ " CATEGORIES, STARTPRICE, STATUS, CURRENTBID, CASE WHEN BUYNOW = NULL THEN 0 ELSE BUYNOW END  FROM GABES_ITEM";
+		    		+ " CATEGORIES, STARTPRICE, STATUS, CURRENTBID, CASE WHEN BUYNOW = NULL THEN 0 ELSE BUYNOW END BUYNOW FROM GABES_ITEM";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
