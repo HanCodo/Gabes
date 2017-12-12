@@ -43,12 +43,13 @@ http-equiv="content-type">
 <div style = "text-align: center"><b>Bid</b></div>
 <br>
 <%
+String message1 = "";
 ResultSet rs = customer.viewItem(request.getParameter("i"));
 rs.next();
 if(rs.getDouble("currentBid") == rs.getDouble("startPrice")){
 	
-	String message = "You have "+ customer.timeleft(Integer.parseInt(request.getParameter("i"))) + " days left to bid on this item ";%>
-		<div style="text-align: center;"><b></b> <%=message %></div><br>
+	%>
+	<div style="text-align: center;"><b></b> <%=message1 %></div><br>
 	<div style="text-align: center;"><b>Leading Bidder:</b> No active bidders</div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
@@ -90,8 +91,16 @@ else{
 	}
 	while(r.next()){
 		itemid = r.getInt("ITEMID");
-		String message = "You have "+ customer.timeleft(itemid) + " days left to bid on this item ";%>
-		<div style="text-align: center;"><b></b> <%=message %></div><br>
+		long days = customer.timeleft(Integer.parseInt(request.getParameter("i")));
+		if(days<=1){
+			message1 = " you have less then 24 hours to bid on this item";
+		
+		} else 
+		{
+			message1 = "You have "+ days + " days left to bid on this item ";
+		}
+		%>
+		<div style="text-align: center;"><b></b> <%=message1 %></div><br>
 <div style="text-align: center;"><b>Leading Bidder:</b> <%=r.getString("Username") %></div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">

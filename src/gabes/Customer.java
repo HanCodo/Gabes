@@ -859,6 +859,7 @@ public class Customer implements Serializable {
 		    preparedStmt.setInt(1, itemID);
 
 		    ResultSet result = preparedStmt.executeQuery();
+		    result.next();
 		    Date date =  result.getDate(1);
 		    
 			
@@ -868,11 +869,13 @@ public class Customer implements Serializable {
 			    
 			} catch (Exception e) {
 			    e.printStackTrace();
+			    System.out.println("test2");
 			    //response.sendRedirect("Search.jsp?error=3");
 			}
 			long days = ChronoUnit.DAYS.between(LocalDate.parse(todaysDate.toString()),LocalDate.parse(date.toString()));
 			return days;
 		}catch(Exception ex) {
+			ex.printStackTrace();
 			return 0;
 		}
 		
