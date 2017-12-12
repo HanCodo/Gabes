@@ -42,15 +42,53 @@ http-equiv="content-type">
 <br>
 <div style = "text-align: center"><b>Bid</b></div>
 <br>
-<%ResultSet r = null;
-int itemid = 0;
-try{
-r = customer.bidInfo(request.getParameter("i"));}
-catch(IllegalStateException ise){
-        out.println(ise.getMessage());
-    }%>
-<%while(r.next()){ 
-itemid = r.getInt("ITEMID");%>
+<%
+ResultSet rs = customer.viewItem(request.getParameter("i"));
+rs.next();
+if(rs.getDouble("currentBid") == rs.getDouble("startPrice")){
+	%>
+	
+	<div style="text-align: center;"><b>Leading Bidder:</b> No active bidders</div><br>
+<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
+cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><b>Item ID</b><br>
+</td>
+<td style="vertical-align: top;"><b>Item Name</b><br>
+</td>
+<td style="vertical-align: top;"><b>Category</b><br>
+</td>
+<td style="vertical-align: top;"><b>Auction End Time</b><br>
+</td>
+<td style="vertical-align: top;"><b>Current Bid</b><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><%= rs.getInt("ITEMID")%><br>
+</td>
+<td style="vertical-align: top;"><%= rs.getString("ITEMNAME")%><br>
+</td>
+<td style="vertical-align: top;"><%= rs.getString("CATEGORIES")%><br>
+</td>
+<td style="vertical-align: top;"><%= rs.getString("ENDDATE").substring(0,10)%><br>
+</td>
+<td style="vertical-align: top;"><%= "$"+rs.getString("CURRENTBID")%><br>
+</td>
+</tr>
+	
+	<%
+}
+else{
+	ResultSet r = null;
+	int itemid = 0;
+	try{
+		r = customer.bidInfo(request.getParameter("i"));}
+	catch(IllegalStateException ise){
+		out.println(ise.getMessage());
+	}
+	while(r.next()){
+		itemid = r.getInt("ITEMID");%>
 <div style="text-align: center;"><b>Leading Bidder:</b> <%=r.getString("Username") %></div><br>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2">
@@ -79,11 +117,14 @@ cellspacing="2">
 <td style="vertical-align: top;"><%= "$"+r.getString("CURRENTBID")%><br>
 </td>
 </tr>
-<%} r.close(); %>
+<%}
+    r.close(); 
+}
+%>
 </tbody>
 </table>
 <br>
-<form method="post" action="Bid_action.jsp?i=<%=itemid%>"
+<form method="post" action="Bid_action.jsp?i=<%=request.getParameter("i")%>"
 name="Return"><div style="color: red; text-align: center;"><input name="bidprice"><input style = "color: black" name="Bid"
 value="Max Bid Limit" type="submit"></div></form>
 <form method="post" action="../Search.jsp"
