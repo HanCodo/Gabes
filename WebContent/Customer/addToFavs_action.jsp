@@ -6,13 +6,18 @@ if(!customer.isLoggedIn()){
 	response.sendRedirect("index.jsp?error=1");
 }
 else{		
-			try{
-			int result = customer.addFavorites(request.getParameter("Favlist"));
-			}	catch(Exception ex){
-				out.println("noo");
-			}
-		response.sendRedirect("itemsBought.jsp?sellID="+request.getParameter("FavList"));
+		int i = Integer.parseInt(request.getParameter("Favlist"));
+		if(customer.checkSeller(i)){
+			response.sendRedirect("itemsBought.jsp?error=2");
 		}
+		else{
+	
+	
+		int result = customer.addFavorites(request.getParameter("Favlist"));
+		response.sendRedirect("itemsBought.jsp?sellID="+request.getParameter("FavList"));
+		
+		}
+}
 
 
 

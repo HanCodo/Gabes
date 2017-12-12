@@ -935,8 +935,9 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
-	public ResultSet checkSeller(int sellerID) throws SQLException {
+	public boolean checkSeller(int sellerID) throws SQLException {
 		Connection con = openDBConnection();
+		boolean check = true;
 		String queryString = "SELECT f.FOLLOWID as SellerID"+
 				" FROM GABES_FOLLOWS f"+
 				" WHERE NOT EXISTS (SELECT * FROM GABES_FOLLOWS WHERE "+sellerID+" = FOLLOWID)";
@@ -945,7 +946,18 @@ public class Customer implements Serializable {
 
 	    preparedStmt = con.prepareStatement(queryString);
 	    ResultSet result = preparedStmt.executeQuery();
-	    return result;
+	    while(result.next()) {
+	    	int i = result.getInt("SellerID");
+	    	if(i == sellerID) {
+	    		
+	    		return check;
+	    	}
+	    	else {
+	    		check = false;
+	    		return check;
+	    	}
+	    }
+	    return check;
 	}
 
 }
