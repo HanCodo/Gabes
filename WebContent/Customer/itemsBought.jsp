@@ -46,15 +46,25 @@ http-equiv="content-type">
 String message = "";
 String errorParam = request.getParameter("error");
 String itemID = request.getParameter("itemID");
+String sellID = request.getParameter("sellID");
 if (errorParam != null){
 	int error = Integer.parseInt(errorParam);
 	if (error == 1){
 		message = "You Already Rated That Item!";
 		%><div style="text-align: center;color:red;"><%=message %></div><br><%
 	}
+	else if(error ==2){
+		message = "You Already Added this User to your favorites!";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
+	}
 }	
 if (itemID != null){
 	message = "You successfully bought item number "+itemID+"! Don't forget to rate the seller!";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+
+if (sellID != null){
+	message = "You added User to your favorites";
 	%><div style="text-align: center; "><%=message %></div><br><%
 }
 	
@@ -82,6 +92,8 @@ cellspacing="2">
 <td><b> SELLER EMAIL </b>
 </td>
 <td><b> RATE SELLER </b>
+</td>
+<td><b> ADD TO FAVORITES SELLER </b>
 </td>
 </tr>
 <%ResultSet r = customer.listMyBoughtItems();
@@ -132,8 +144,23 @@ while(r.next()){%>
 <input style = "color: black" name="Rate" value="Rate" type="submit">
 </form>
 </td>
+<%ResultSet rs = null;
+
+int i = r.getInt("ITEMID");
+	try{
+	rs = customer.getSellerId(i);
+	}catch(Exception ex){
+		out.println("noo");
+		}
+
+while(rs.next()){
+	%>
+<td style="vertical-align: top;"><form method="GET" action="addToFavs_action.jsp" name="Favlist">
+<button style = "color: black" value="<%=rs.getInt("SellerID") %>" name="Favlist">Add to Favorites</button><br>
+</form><br>
 </tr>
-<%} %>
+
+<%} }%>
 </table>
 <form method="post" action="CustomerMenu.jsp"
 name="Return"><input style = "color: black" name="Return"

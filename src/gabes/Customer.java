@@ -290,7 +290,7 @@ public class Customer implements Serializable {
 		 
 		  	Connection con = openDBConnection();
 		  	
-		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
+		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS,s.USERID as USERID " + 
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
 		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" "+
 		    		"ORDER BY ENDDATE DESC, i.itemID desc";
@@ -901,6 +901,48 @@ public class Customer implements Serializable {
 	
 	
 	
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
+	public int addFavorites(String SellerID) {
+		 int result = -1;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "INSERT INTO GABES_FOLLOWS"+
+	        "(MainID, FollowID) "+
+	         "VALUES (?, ?)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setInt(1,this.getUserID());
+	            int itemId = Integer.parseInt(SellerID);
+	            preparedStmt.setInt(2,itemId);
+	            result = preparedStmt.executeUpdate();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
+		
+	}
+	public ResultSet getSellerId(int itemID) throws SQLException {
+		Connection con = openDBConnection();
+		String queryString = "SELECT s.USERID as SellerID"+
+				" FROM GABES_SELL s"+ 
+				" WHERE "+itemID+" = s.itemID";
+
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
+	public ResultSet checkSeller(int sellerID) throws SQLException {
+		Connection con = openDBConnection();
+		String queryString = "SELECT f.FOLLOWID as SellerID"+
+				" FROM GABES_FOLLOWS f"+
+				" WHERE NOT EXISTS (SELECT * FROM GABES_FOLLOWS WHERE "+sellerID+" = FOLLOWID)";
+		
+				            
+
 	    preparedStmt = con.prepareStatement(queryString);
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;

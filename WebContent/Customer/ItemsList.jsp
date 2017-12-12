@@ -112,6 +112,7 @@ else{
 <button style = "color: black" value="<%=r.getInt("ITEMID") %>" name="BidList">Bid History</button><br>
 </form><br>
 </tr>
+
 <%}} r.close(); %>
 </tbody>
 </table>
