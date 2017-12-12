@@ -72,7 +72,7 @@ DROP TABLE gabes_sell CASCADE CONSTRAINTS;
 CREATE TABLE gabes_sell (
 	UserID 			INTEGER			NOT NULL,
 	ItemID 			INTEGER			NOT NULL,
-	Overall 		INTEGER			CHECK (Overall >=0 AND Overall <= 10),
+	Overall 		INTEGER			CHECK (Overall >=0 AND Overall <= 5),
 	Comments 		VARCHAR(140),
 	Quality 		INTEGER			CHECK (Quality >=1 AND Quality <= 5),
 	Delivery 		INTEGER			CHECK (Delivery >=1 AND Delivery <= 5), 
@@ -111,7 +111,7 @@ INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categori
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10001, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Pacemaker', 'Keep pace with your health', 'Health', 100.00, 'SOLD', 101.00, 300.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10002, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Man purse', 'ITS A SATCHEL!', 'Style', 50.00, 'SOLD', 76.00, 150.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10003, to_date('2017-12-07', 'YYYY-MM-DD'), to_date('2017-12-25', 'YYYY-MM-DD'), 'Kidney', 'No need to deal with black-markets any longer -- ships right to you', 'Health', 10000.00, 'ON AUCTION', 10001.00, 20000.00);
-INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10004, to_date('2017-12-07', 'YYYY-MM-DD'), to_date('2017-12-12', 'YYYY-MM-DD'), 'Shoe', 'One single shoe, for left foot only', 'Style', 15.00, 'ON AUCTION', 15.00, null);
+INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10004, to_date('2017-12-07', 'YYYY-MM-DD'), to_date('2017-12-12', 'YYYY-MM-DD'), 'Shoe', 'One single shoe, for left foot only', 'Style', 16.00, 'ON AUCTION', 15.00, null);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10005, to_date('2017-12-07', 'YYYY-MM-DD'), to_date('2017-12-25', 'YYYY-MM-DD'), 'Eraser', 'For blackboard purposes', 'Children', 5.00, 'ON AUCTION', 5.00, null);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10006, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Toaster', 'A toaster for toasting', 'Household', 15.00, 'OFF AUCTION', 15.00, 35.00);
 INSERT INTO GABES_ITEM (ItemID, StartDate, EndDate, ItemName, Descript, Categories, StartPrice, Status, CurrentBid, buyNow) VALUES (10007, to_date('2017-10-22', 'YYYY-MM-DD'), to_date('2017-11-12', 'YYYY-MM-DD'), 'Tool Kit', 'For household use', 'Household', 15.00, 'SOLD', 16.00, null);
