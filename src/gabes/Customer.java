@@ -34,65 +34,119 @@ public class Customer implements Serializable {
 	*/    
 	private boolean loggedIn = false;
 		
+	
+	/* getter for customer field UserID 
+	 * @returns int userID
+	 * */
 	public int getUserID() {
 		return userID;
 	}
-		  
+	
+	/* setter for customer field UserID  
+	 * @param Int userID
+	 * */
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 	
+	/* getter for customer field username 
+	 * @returns String username
+	 * */
 	public String getUsername() {
 		return username;
 	}
 	
+	/* setter for customer field username  
+	 * @param String username
+	 * */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/* getter for customer field pass  
+	 * @returns String pass
+	 * */
 	public String getPass() {
 		return pass;
 	}
 
+	/* setter for customer field pass  
+	 * @param String pass
+	 * */
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
 
+	/* getter for customer field fname   
+	 * @returns String fname
+	 * */
 	public String getFname() {
 		return fname;
 	}
 
+	/* setter for customer field fname  
+	 * @param String fname
+	 * */
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
 
+	/* getter for customer field lname  
+	 * @returns String lname
+	 * */
 	public String getLname() {
 		return lname;
 	}
 
+	/* setter for customer field lname  
+	 * @param String lname
+	 * */
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
 
+	/* getter for customer field phone 
+	 * @returns String phone
+	 * */
 	public String getPhone(){
 		return phone;
 	}
 
+	/* setter for customer field phone  
+	 * @param String phone
+	 * */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
+	/* getter for customer field email  
+	 * @returns String email
+	 * */
 	public String getEmail() {
 		return email;
 	}
 
+	/* setter for customer field email  
+	 * @param String email
+	 * */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	
+	/* setter for customer field loggedIn 
+	 * @param boolean loggedIn
+	 * */
 	public void setLoggedIn(Boolean loggedIn) {
 	    this.loggedIn = loggedIn;
 	}
+	
+	/**
+	   * A getter for class field loggedIn
+	   * @return whether the Customer is logged in or not
+	   */
+	  public Boolean isLoggedIn() {
+	    return this.loggedIn;
+	  }
 	
 	/**
 	   * A default constructor for Customer
@@ -117,15 +171,7 @@ public class Customer implements Serializable {
 	    	E.printStackTrace();
 	    }
 	    return null;
-	  }
-	  
-	  /**
-	   * A getter for class field loggedIn
-	   * @return whether the Customer is logged in or not
-	   */
-	  public Boolean isLoggedIn() {
-	    return this.loggedIn;
-	  }
+	}
 	  
 	  /** When called, this method uses a Statement object to query table ProductDeals_CUSTOMER 
 	   * for the customer whose last name and customer number are stored in class instance
@@ -277,12 +323,6 @@ public class Customer implements Serializable {
 		 
 		  	Connection con = openDBConnection();
 		  	
-//		  	String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS, " +
-//		    		"c2.USERNAME as SUSERNAME, c2.EMAIL as EMAIL "+
-//		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2 " + 
-//		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" AND i.status = 'SOLD' "+
-//		    		"AND s.USERID = c2.USERID";
-//		  	
 		  	String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS, " +
 		    		"c2.USERNAME as SUSERNAME, c2.EMAIL as EMAIL "+
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s, GABES_CUSTOMER c2, GABES_BID b " + 
@@ -312,6 +352,20 @@ public class Customer implements Serializable {
 		    
 		    return result;
 	  }
+	  
+	  /**
+	   * inserts new item into SQL database based on the parameters provided
+	   * @param String itemId
+	   * @param String startDate
+	   * @param String endDate
+	   * @param String ItemName
+	   * @param String Descript
+	   * @param String Categories
+	   * @param String startPrice
+	   * @param String buyNow
+	   * @return int number of rows inserted
+	   * @throws SQLException
+	   */
 	  public int addItem(String itemId,String startDate,String endDate,String ItemName,String Descript,String Categories,String startPrice, String buyNow){
 		  int result = -1;
 		  Connection con = openDBConnection();
@@ -373,6 +427,13 @@ public class Customer implements Serializable {
 	        }       
 	        return result;
 	  }
+	  
+	  /**
+	   * adds a sell relation to a given ItemID
+	   * @param int itemId
+	   * @return int number of rows inserted
+	   * @throws SQLException
+	   */
 	  public int addSeller(int itemId){
 		  int result = -1;
 		  Connection con = openDBConnection();
@@ -391,13 +452,14 @@ public class Customer implements Serializable {
 	        }       
 	        return result;
 	  }
+	  
+	  /**
+	   * retrieves all feedback for customer
+	   * @return ResultSet with all feedback for provided user
+	   * @throws SQLException
+	   */
 	  public ResultSet viewFeedback() throws SQLException{
 		  	Connection con = openDBConnection();
-
-//		    String queryString = "Select c2.USERNAME as userName,item.itemname as Item_Sold ,sell.overall as OVERALL,sell.quality as Quality,sell.delivery as Delivery, sell.Comments as Buyer_Response "+
-//		    		"FROM GABES_SELL sell,GABES_ITEM item,GABES_CUSTOMER customer, GABES_CUSTOMER c2"+
-//		    		"WHERE "+this.userID+ "= sell.userid and item.itemId = sell.itemid and item.status='SOLD' and sell.userid = customer.userid";
-
 		    String queryString = "Select c.USERNAME as userName, i.itemID as itemID, i.itemname as Item_Sold , s.overall as OVERALL, s.quality as Quality, s.delivery as Delivery, s.Comments as Buyer_Response "+
 		    		"FROM GABES_SELL s, GABES_ITEM i, GABES_CUSTOMER c, GABES_Winners w "+
 		    		"WHERE c.userID = w.userID and s.UserID ="+this.userID+" and i.itemId = s.itemid and w.itemID = i.itemID and i.status='SOLD'";
@@ -407,6 +469,14 @@ public class Customer implements Serializable {
 		    return result;
 		 
 	  }
+	  
+	  /**
+	   * given an itemID, it returns all the information in relation item 
+	   * associated to that ID
+	   * @param String itemId
+	   * @return ResultSet of information for given ItemID
+	   * @throws SQLException
+	   */
 	  public ResultSet viewItem(String ItemId) throws SQLException{
 		  	Connection con = openDBConnection();
 		  	int itemId = Integer.parseInt(ItemId);
@@ -420,13 +490,16 @@ public class Customer implements Serializable {
 		    ResultSet result = preparedStmt.executeQuery();
 		    return result;
 	  }
+	  
+	  /**
+	   * retrieves all necessary info for bid page given an itemID
+	   * @param String itemId
+	   * @return ResultSet containing all necessary info
+	   * @throws SQLException
+	   */
 	  public ResultSet bidInfoList(String itemId) throws SQLException {
 		  	Connection con = openDBConnection();
 		  	int newId = Integer.parseInt(itemId);
-//		    String queryString = "Select DISTINCT GABES_CUSTOMER.USERNAME as USERNAME, GABES_BID.MAXBIDLIMIT as MAX_BID, GABES_BID.BIDTIME as BID_TIME "+
-//    				"FROM GABES_BID,GABES_ITEM, GABES_CUSTOMER " + 
-//    				"WHERE GABES_BID.ITEMID = "+newId+" and GABES_CUSTOMER.UserID ="+this.userID;
-		    
 		    String queryString = "Select DISTINCT c.USERNAME as USERNAME, b.MAXBIDLIMIT as MAX_BID, b.BIDTIME as BID_TIME "+
     				"FROM GABES_BID b,GABES_ITEM i, GABES_CUSTOMER c " + 
     				"WHERE b.ITEMID = "+newId+" and c.UserID = b.UserID";
@@ -435,6 +508,12 @@ public class Customer implements Serializable {
 		    
 		    return result;
 	  }
+	  
+	  /**
+	   * Returns a ResultSet of all items in the database
+	   * @return ResultSet containing all items in the database
+	   * @throws SQLException
+	   */
 	  public ResultSet allItems() throws SQLException {
 		  	Connection con = openDBConnection();
 
@@ -445,6 +524,15 @@ public class Customer implements Serializable {
 		    return result;
 	  
 	  }
+	  
+	  /**
+	   * For given itemID and buynow price, this function adds a bid relation
+	   * for the item with the customers ID and the price they commited to paying
+	   * @param int itemID for item that is being bid on
+	   * @param double price that item was bid on
+	   * @return ResultSet containing bid relation added
+	   * @throws SQLException
+	   */
 	  public ResultSet bid(int itemId, double price){
 		  String mydate = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
 		  java.sql.Date date1 = null;
@@ -477,7 +565,17 @@ public class Customer implements Serializable {
 	        return result;
 	  }
 	  
-	  
+	  /**
+	   * For given itemID and buynow price, this function updates the status of
+	   * the item to sold, updates the end date to the current date, updates
+	   * the currentBid to that final selling price, and creates a bid 
+	   * relation with the user to ensure they are credited as the winner
+	   * of the auction
+	   * @param int itemID for item that is being bought now
+	   * @param double price that item was bought now
+	   * @return ResultSet containing all items in cat that have most bids
+	   * @throws SQLException
+	   */
 	  public ResultSet buyNow(int itemId, double price){
 		  String mydate = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
 		  java.sql.Date date1 = null;
@@ -554,6 +652,7 @@ public class Customer implements Serializable {
 		    String name = result.getString("USERNAME");
 		    return name;
 	  }
+	  
 	  /**
 	   * Checks if a  item has been rated
 	   * @return rated, a boolean
@@ -572,6 +671,12 @@ public class Customer implements Serializable {
 		    return false;
 	  }
 	  
+	  /**
+	   * retrieves all information of the bid given an itemID
+	   * @param String itemId
+	   * @return ResultSet containing all information of the bid
+	   * @throws SQLException
+	   */
 	  public ResultSet bidInfo(String ItemId) throws SQLException{
 		  	Connection con = openDBConnection();
 		  	int itemId = Integer.parseInt(ItemId);
@@ -586,6 +691,13 @@ public class Customer implements Serializable {
 		    return result;
 	  }
 	  
+	  /**
+	   * For a certain category, finds the most popular item based on number of 
+	   * bids it has received.
+	   * @param String category in which to find featured item
+	   * @return ResultSet containing all items in cat that have most bids
+	   * @throws SQLException
+	   */
 	  public ResultSet featuredItem(String cat) throws SQLException{
 		  	Connection con = openDBConnection();
 		    String queryString = "Select i.itemID " + 
@@ -604,7 +716,21 @@ public class Customer implements Serializable {
 		    return result;
 	  }
 
-
+	  /**
+	   * search function to find all items in the database related to the search
+	   * terms provided
+	   * @param int ItemID
+	   * @param String keyword
+	   * @param String category
+	   * @param double bidMin
+	   * @param double bidMax
+	   * @param Date startTime
+	   * @param Date endTime
+	   * @param String itemName
+	   * @return ResultSet containing the product of our search given the terms
+	   * entered by the user
+	   * @throws SQLException
+	   */
 	  public ResultSet search(int ItemID, String keyword, String category, double bidMin, double bidMax, 
 		  Date startTime, Date endTime, String itemName) {
 		  try {
@@ -650,6 +776,12 @@ public class Customer implements Serializable {
 		  }
 	}
 	 
+	  /**
+	   * finds all items ending either today or tomorrow
+	   * @param Date todaysDate
+	   * @return ResultSet containing all items ending either today or tomorrow
+	   * @throws SQLException
+	   */
     public ResultSet endingSoon(Date todaysDate) {
     	 try {
 			  Connection con = openDBConnection();
@@ -668,6 +800,11 @@ public class Customer implements Serializable {
 		  }
     }
 
+	  /**
+	   * Finds a list of all categories which have an item currently being sold
+	   * @return ResultSet containing all active categories
+	   * @throws SQLException
+	   */
 	public ResultSet allActiveCategories() throws SQLException {
 		Connection con = openDBConnection();
 	    String queryString = "Select distinct i.categories "+
@@ -680,7 +817,25 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
+	
+	  /**
+	   * When called, checks all on auction items to see if their end date has
+	   * been reached, and updates them accordingly using a case clause
+	   * @return int num rows affected
+	   * @throws SQLException
+	   */
+	public int updateStatuses() throws SQLException {
+		Connection con = openDBConnection();
+	    String queryString = "Update i.status "+
+	    		" From GABES_ITEM i, GABES_BID b"+
+	    		" Where i.status = 'ON AUCTION' and i.itemID = b.itemID";
+	
+	
+	
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return 0;
+	
+	}
 
 }
-
-
