@@ -878,7 +878,20 @@ public class Customer implements Serializable {
 			ex.printStackTrace();
 			return 0;
 		}
+
 		
+	}
+	public ResultSet allFollowers() throws SQLException {
+		Connection con = openDBConnection();
+	    String queryString = "Select c.USERNAME as USERNAME "+
+	    		" From GABES_CUSTOMER c, GABES_FOLLOWS f"+
+	    		" Where f.FollowID = c.USERID and f.MainID = "+this.userID;
+	
+	
+	
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
 	}
 	
 
