@@ -57,7 +57,7 @@ catch(IllegalStateException ise){
         out.println(ise.getMessage());
     }
 while(rs.next()){
-	System.out.println(rs.getString("Name"));%>
+%>
 <tr>
 <td style="vertical-align: top;"><%= rs.getString("Name")%><br>
 </td>
