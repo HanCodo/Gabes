@@ -72,7 +72,7 @@ DROP TABLE gabes_sell CASCADE CONSTRAINTS;
 CREATE TABLE gabes_sell (
 	UserID 			INTEGER			NOT NULL,
 	ItemID 			INTEGER			NOT NULL,
-	Overall 		INTEGER			CHECK (Overall >=0 AND Overall <= 5),
+	Overall 		INTEGER			CHECK (Overall >=0 AND Overall <= 10),
 	Comments 		VARCHAR(140),
 	Quality 		INTEGER			CHECK (Quality >=1 AND Quality <= 5),
 	Delivery 		INTEGER			CHECK (Delivery >=1 AND Delivery <= 5), 
