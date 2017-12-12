@@ -9,6 +9,7 @@ if(customer.getUsername() == null)
 {
 	response.sendRedirect("../CustomerLogout_action.jsp");
 }
+int change = customer.updateStatuses();
 %>
 <html>
 <head>

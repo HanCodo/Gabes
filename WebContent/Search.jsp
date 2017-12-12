@@ -10,6 +10,7 @@ if(customer.isLoggedIn() == false)
 {
 	response.sendRedirect("CustomerLogout_action.jsp");
 }
+int change = customer.updateStatuses();
 %>
 <html>
 <head>

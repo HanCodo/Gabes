@@ -826,15 +826,31 @@ public class Customer implements Serializable {
 	   */
 	public int updateStatuses() throws SQLException {
 		Connection con = openDBConnection();
-	    String queryString = "Update i.status "+
-	    		" From GABES_ITEM i, GABES_BID b"+
-	    		" Where i.status = 'ON AUCTION' and i.itemID = b.itemID";
-	
-	
+		String mydate = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
+		java.sql.Date date1 = null;
+		if(mydate.trim().length() > 0){
+		  	DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		  	try {
+		  	    java.util.Date date2 = df.parse(mydate);
+		  	    date1 = new java.sql.Date(date2.getTime());
+		  	   
+		  	} 
+		  	catch (Exception e) {
+		  	}
+		}
+	    String queryString = "UPDATE GABES_ITEM "+
+	    		"SET status = "+
+	    		"(CASE "+
+	    		"WHEN currentBid > startPrice THEN 'SOLD' "+
+	    		"ELSE 'OFF AUCTION' "+
+	    		"END "+
+	    		") "+
+	    		"WHERE status = 'ON AUCTION' and endDate <= ?";
 	
 	    preparedStmt = con.prepareStatement(queryString);
-	    ResultSet result = preparedStmt.executeQuery();
-	    return 0;
+	    preparedStmt.setDate(1,date1);
+	    int result = preparedStmt.executeUpdate();
+	    return result;
 	
 	}
 
