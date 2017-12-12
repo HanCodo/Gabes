@@ -15,7 +15,7 @@ if(customer.getUsername() == null)
 <head>
 <meta content="text/html; charset=ISO-8859-1"
 http-equiv="content-type">
-<title>Selling Manager</title>
+<title>Bidding Manager</title>
 <style type="text/css">
 .left {
     float: left;
@@ -59,12 +59,12 @@ value="Featured Item" type="submit"><br>
 name="AllItems"><input style = "color: black" name="AllItems"
 value="Browse All Items" type="submit"><br>
 </form>
-<form method="post" action="CustomerMenu.jsp"
-name="Return"><input style = "color: black" name="Return"
-value="Return to Menu" type="submit"></form>
 <form method="post" action="EndingSoon.jsp" name="ItemsEndingSoon"><input
 style = "color: black" name="Items Ending Soon" value="Item Ending Soon" type="submit"><br>
 </form>
+<form method="post" action="CustomerMenu.jsp"
+name="Return"><input style = "color: black" name="Return"
+value="Return to Menu" type="submit"></form>
 <br>
 <br>
 </body>
