@@ -80,7 +80,7 @@ http-equiv="content-type">
 </td>
 <td style="vertical-align: top;"><%try{out.println(rs.getString(5));}catch(Exception ex){out.println("noo");} %><br>
 </td>
-<td style="vertical-align: top;"><%try{out.println(rs.getString(6));}catch(Exception ex){out.println("noo");} %><br>
+<td style="vertical-align: top;"><%if (rs.getString(6) == null){out.println("0");}else{try{out.println(rs.getString(6));}catch(Exception ex){out.println("noo");}} %><br>
 </td>
 <td style="vertical-align: top;"><%try{out.println("$"+rs.getDouble(7)); total = total+rs.getDouble(7);}catch(Exception ex){out.println("noo");} %><br>
 
