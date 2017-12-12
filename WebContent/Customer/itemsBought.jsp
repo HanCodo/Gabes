@@ -46,10 +46,15 @@ http-equiv="content-type">
 String message = "";
 String errorParam = request.getParameter("error");
 String itemID = request.getParameter("itemID");
+String sellID = request.getParameter("sellID");
 if (errorParam != null){
 	int error = Integer.parseInt(errorParam);
 	if (error == 1){
 		message = "You Already Rated That Item!";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
+	}
+	else if(error ==2){
+		message = "You Already Added this User to your favorites!";
 		%><div style="text-align: center;color:red;"><%=message %></div><br><%
 	}
 }	
@@ -57,37 +62,37 @@ if (itemID != null){
 	message = "You successfully bought item number "+itemID+"! Don't forget to rate the seller!";
 	%><div style="text-align: center; "><%=message %></div><br><%
 }
+
+if (sellID != null){
+	message = "You added User to your favorites";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
 	
 
 %>
+
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
-cellspacing="2">
-<tr>
-<td><b>ITEM ID</b>
-</td>
-<td><b>ITEM NAME </b>
-</td>
-<td><b> CATEGORY </b>
-</td>
-<td><b> START DATE </b>
-</td>
-<td><b> END DATE </b>
-</td>
-<td><b> START PRICE </b>
-</td>
-<td><b> BUY PRICE </b>
-</td>
-<td><b> SELLER USERNAME </b>
-</td>
-<td><b> SELLER EMAIL </b>
-</td>
-<td><b> RATE SELLER </b>
-</td>
-</tr>
+cellspacing="2" id ="team2">
+   <tr>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(1)')"style="vertical-align: top;"><b>Item ID</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(2)')"style="vertical-align: top;"><b>ITEM NAME</b><br></th>
+      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b> CATEGORY</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b> START DATE</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(4)')"style="vertical-align: top;"><b> END DATE</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(5)')"style="vertical-align: top;"><b>START PRICE</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')" style="vertical-align: top;"><b> BUY PRICE</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b> SELLER USERNAME</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>SELLER EMAIL </b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(9)')"style="vertical-align: top;"><b> RATE SELLER</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(10)')"style="vertical-align: top;"><b>ADD TO FAVORITES SELLER</b><br></th>
+     
+
+  </tr>
 <%ResultSet r = customer.listMyBoughtItems();
 
 while(r.next()){%>
-<tr>
+<tr class ="items">
 <td>
 <%=r.getInt("ITEMID")
 %>
@@ -132,8 +137,23 @@ while(r.next()){%>
 <input style = "color: black" name="Rate" value="Rate" type="submit">
 </form>
 </td>
+<%ResultSet rs = null;
+
+int i = r.getInt("ITEMID");
+	try{
+	rs = customer.getSellerId(i);
+	}catch(Exception ex){
+		out.println("noo");
+		}
+
+while(rs.next()){
+	%>
+<td style="vertical-align: top;"><form method="GET" action="addToFavs_action.jsp" name="Favlist">
+<button style = "color: black" value="<%=rs.getInt("SellerID") %>" name="Favlist">Add to Favorites</button><br>
+</form><br>
 </tr>
-<%} %>
+
+<%} }%>
 </table>
 <form method="post" action="CustomerMenu.jsp"
 name="Return"><input style = "color: black" name="Return"

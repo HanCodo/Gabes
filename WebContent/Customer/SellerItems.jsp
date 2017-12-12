@@ -46,27 +46,36 @@ http-equiv="content-type">
 <br>
 <div style="text-align:center;"><b>All Items on Sale</b></div>
 <br>
-<%ResultSet items = customer.allItems(); %>
-<script src="https://www.w3schools.com/lib/w3.js"></script>
-<table style="text-align: left; width: 100%;" border="2" cellpadding="2"
-cellspacing="2" id ="team2">
-   <tr>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(1)')"style="vertical-align: top;"><b>Item ID</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(2)')"style="vertical-align: top;"><b>Auction Start Time</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b>Auction End Time</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(4)')"style="vertical-align: top;"><b>Item Name</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(5)')"style="vertical-align: top;"><b>Description</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')" style="vertical-align: top;"><b>Category</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b>Status</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Current Bid</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(9)')"style="vertical-align: top;"><b>Buy Now</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(10)')"style="vertical-align: top;"><b>Add to Watch List</b><br></th>
-     
-
-  </tr>
+<%
+String s = request.getParameter("SellerItems");
+int sNum =Integer.parseInt(s);
+ResultSet items = customer.sellerItems(sNum); %>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><b>ItemID</b><br>
+</td>
+<td style="vertical-align: top;"><b>Start Date</b><br>
+</td>
+<td style="vertical-align: top; width: 253px;"><b>End Date</b><br>
+</td>
+<td style="vertical-align: top; width: 245px;"><b>Item Name</b><br>
+</td>
+<td style="vertical-align: top; width: 282px;"><b>Item Description</b><br>
+</td>
+<td style="vertical-align: top;"><b>Category</b><br>
+</td>
+<td style="vertical-align: top;"><b>Status</b><br>
+</td>
+<td style="vertical-align: top;"><b>Current Bid</b><br>
+</td>
+<td style="vertical-align: top;"><b>Buy Now</b><br>
+</td>
+</tr>
 <%while (items.next()){ 
 if(items.getString("STATUS").equals("ON AUCTION")){%>
-<tr class = "items">
+<tr>
 <td>
 <%=
 items.getInt("ITEMID")
@@ -111,7 +120,7 @@ items.getDouble("CURRENTBID")
 </td>
 <td>
 <%
-if(items.getDouble("BUYNOW") == -1){
+if(items.getString(10) == null){
 	out.println("Buy now not made available by seller");
 }
 else{
@@ -124,23 +133,14 @@ else{
 	%>
 <form method="post" action="BuyNow_action.jsp?i=<%=items.getInt("ITEMID")%>&p=<%=items.getDouble("BUYNOW")%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
-
-
-
-
-<%
+</tr>
+<%}
+}
 }%>
-
-<td style="vertical-align: top;"><form method="GET" action="WatchList_action.jsp" name="watchList">
-<input  style = "color: black" name="watchList" type="hidden" value="<%=items.getInt("ITEMID") %>"/>
-<button style = "color: black" value="watchList" name="watchList">Add to Watch List</button><br>
-</form><br>
-</td>
-<%}}%>
 </tbody>
 </table>
 <br>
-<form method="post" action="BiddingManagement.jsp"
+<form method="post" action="FollowSellers.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
 </body>

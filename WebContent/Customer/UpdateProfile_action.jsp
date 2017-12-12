@@ -16,7 +16,6 @@ if(!request.getParameter("oldPass").equals("")){
 	}
 }
 else{
-	System.out.println(request.getParameter("username") + request.getParameter("fname")+ request.getParameter("lname")+ request.getParameter("phone")+ request.getParameter("email"));
 	int result = customer.updateProfile(request.getParameter("username"), request.getParameter("fname"), request.getParameter("lname"), request.getParameter("phone"), request.getParameter("email"), customer.getPass());
 	response.sendRedirect("UpdateProfile.jsp");
 }

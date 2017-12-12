@@ -53,31 +53,23 @@ if (itemID != null){
 	
 
 %>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
-cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: top;"><b>Item ID</b><br>
-</td>
-<td style="vertical-align: top;"><b>Item Name</b><br>
-</td>
-<td style="vertical-align: top;"><b>Category</b><br>
-</td>
-<td style="vertical-align: top;"><b>Auction Start Time</b><br>
-</td>
-<td style="vertical-align: top;"><b>Auction End Time</b><br>
-</td>
-<td style="vertical-align: top;"><b>Start Price</b><br>
-</td>
-<td style="vertical-align: top;"><b>Current Bid</b><br>
-</td>
-<td style="vertical-align: top;"><b>Status</b><br>
-</td>
-<td style="vertical-align: top;"><b>Item Info</b><br>
-</td>
-<td style="vertical-align: top;"><b>Bidders List</b><br>
-</td>
-</tr>
+cellspacing="2" id ="team2">
+   <tr>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(1)')"style="vertical-align: top;"><b>Item ID</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(2)')"style="vertical-align: top;"><b>Item Name</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Category</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b>Auction Start Time</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(4)')"style="vertical-align: top;"><b>Auction End Time</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(5)')" style="vertical-align: top;"><b>Start Price</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')"style="vertical-align: top;"><b>Current Bid</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b>Status</b><br></th>
+     <td style="vertical-align: top;">Item Info<br>
+	</td>
+	<td style="vertical-align: top;">Bidder List<br>
+	</td>
+  </tr>
 <%ResultSet r = null;
 try{
 r = customer.listMyItems();}
@@ -85,8 +77,7 @@ catch(IllegalStateException ise){
         out.println(ise.getMessage());
     }%>
 <%while(r.next()){ %>
-
-<tr>
+<tr class = "items">
 <td style="vertical-align: top;"><%= r.getInt("ITEMID")%><br>
 </td>
 <td style="vertical-align: top;"><%= r.getString("ITEMNAME")%><br>
@@ -120,6 +111,7 @@ else{
 <button style = "color: black" value="<%=r.getInt("ITEMID") %>" name="BidList">Bid History</button><br>
 </form><br>
 </tr>
+
 <%}} r.close(); %>
 </tbody>
 </table>

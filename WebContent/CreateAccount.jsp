@@ -19,16 +19,21 @@ http-equiv="content-type">
 </style>
 </head>
 <body>
+<%String message = "";
+if(request.getParameter("status")!=null){
+if (request.getParameter("status").equals("0"))
+	message = "Missmached Passwords, please try again.";
+else if(request.getParameter("status").equals("3"))
+	message = "Password too long, max length of 15.";
+else if(request.getParameter("status").equals("1"))
+	message = "Account submitted for approval, Once approved you can use GABES!";
+}
+%>
 <br>
 <br>
 <br>
-<form method="post" action="AddUser_action.jsp" name="adduser">
-<%ResultSet users = admin.viewUsers();
-//out.println(users);
-int x=0;
-while(users.next()){ x++;
-}%>
-UserID: <input value=<%=x=10000+x %> name="userID" readonly><br>
+<div style="color: red; text-align: center;"><%=message%></div><br>
+<form method="post" action="CreateAccount_action.jsp" name="adduser">
 User Name: <input name="userName"><br>
 First Name: <input name="fName"><br>
 Last Name: <input name="lName"><br>
@@ -39,9 +44,9 @@ Re-Type Password: <input name="password2"><br>
 <input style = "color: black" name="Confirm" value="Confirm" type="submit"><br>
 </form>
 <br>
-<form method="post" action="AdminMenu.jsp"
+<form method="post" action="index.jsp"
 name="Return"><input style = "color: black" name="Return"
-value="Return to Menu" type="submit"><br>
+value="Return to Login" type="submit"><br>
 </form>
 </body>
 </html>

@@ -59,6 +59,8 @@ cellspacing="2">
 </td>
 <td style="vertical-align: top;"><b>Buy Now</b><br>
 </td>
+<td style="vertical-align: top;"><b>Watch List</b><br>
+</td>
 </tr>
 <%
 
@@ -189,8 +191,16 @@ while(users.next()){  x++; %>
 
 <form method="post" action="Customer/BuyNow_action.jsp?i=<%=users.getString(1)%>&p=<%=users.getString(10)%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
+<td style="vertical-align: top;"><form method="GET" action="Customer/WatchList_action.jsp" name="watchList">
+<input  style = "color: black" name="watchList" type="hidden" value="<%=users.getInt("ITEMID") %>"/>
+<button style = "color: black" value="watchList" name="watchList">Add to Watch List</button><br>
+</form><br>
+</td>
 </tr>
-<%}}
+
+<%}
+
+}
 if(x==0){
 	response.sendRedirect("Search.jsp?error=2");
 }

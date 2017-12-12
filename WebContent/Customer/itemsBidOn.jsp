@@ -42,29 +42,24 @@ http-equiv="content-type">
 <div style="text-align: center;"><b>My Bid History</b>  <br>
 </div>
 <br>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
-cellspacing="2">
-<tr>
-<td><b>Item ID</b>
-</td>
-<td><b>Item Name</b>
-</td>
-<td><b>Category</b>
-</td>
-<td><b>Bid Date</b>
-</td>
-<td><b>Auction End Time</b>
-</td>
-<td><b>Bid Amount</b>
-</td>
-<td><b>Item Info</b>
-</td>
-<td><b>Winner</b>
-</td>
-</tr>
+cellspacing="2" id ="team2">
+   <tr>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(1)')"style="vertical-align: top;"><b>Item ID</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(2)')"style="vertical-align: top;"><b>Item Name</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b>Category</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(4)')"style="vertical-align: top;"><b>Bid Date</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(5)')"style="vertical-align: top;"><b>Auction End Time</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')"style="vertical-align: top;"><b>Bid Amount</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b>Item Info</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Winner</b><br></th>
+
+
+  </tr>
 <%ResultSet r = customer.listBidOnItems();
 while(r.next()){%>
-<tr>
+<tr class = "items">
 <td>
 <%=r.getInt("ITEMID")
 %>

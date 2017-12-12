@@ -80,6 +80,12 @@ cellspacing="2">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
 
 <%		}
+%>
+<td style="vertical-align: top;"><form method="GET" action="WatchList_action.jsp" name="watchList">
+<input  style = "color: black" name="watchList" type="hidden" value="<%=item.getInt("ItemID") %>"/>
+<button style = "color: black" value="watchList" name="watchList">Add to Watch List</button><br>
+</form><br>
+</td><% 
 	}
 	%> 
 	</tr>
