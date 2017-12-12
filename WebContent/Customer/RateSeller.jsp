@@ -54,22 +54,27 @@ Overall Rating:<br><select name="Overall">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
-    <option value="3">4</option>
-    <option value="3">5</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
 </select><br>
 Item Quality:<br><select name="Quality">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
-    <option value="3">4</option>
-    <option value="3">5</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
 </select><br>
 Delivery:<br><select name="Delivery">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
-    <option value="3">4</option>
-    <option value="3">5</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
 </select><br>
 Comments:<br><textarea name="Comments" cols="50" rows="10"></textarea><br>
 <input style = "color: black" name="Submit" value="Submit" type="submit"><br>
