@@ -142,7 +142,7 @@ public class Admin {
 	   */
 	  public ResultSet viewUsers() throws SQLException{
 		  	Connection con = openDBConnection();
-		    String queryString = "SELECT * FROM GABES_CUSTOMER";
+		    String queryString = "select userID, username, CASE WHEN PASS IS NOT NULL THEN '******' END AS PASS, fname, lname, phone, email FROM(select * from gabes_customer)";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    //preparedStmt.close();
@@ -175,7 +175,7 @@ public class Admin {
 		  preparedStmt.setString(7, Email);
 		  ResultSet result = preparedStmt.executeQuery();
 		  
-		  preparedStmt.close();
+		  
 		  if(result.next()){
 		    	return true;
 		    }
@@ -209,7 +209,7 @@ public class Admin {
 	   * View report 2 allows you to view the commision report 
 	   * @return a result set containing the second report 
 	   */
-	  public ResultSet viewReport2(){
+	  public ResultSet viewReport2() throws SQLException{
 		  try {
 			  Connection con = openDBConnection();
 //	  	String queryString = "SELECT c.UserID, c.Username, c.FName, c.LName, c.Email, AVG (se.Overall) as rating, (it.currentBid  * 0.05) AS Commission" + 
@@ -229,6 +229,72 @@ public class Admin {
 			  E.printStackTrace();
 			  return null;
 		  }   
+	  }
+	  
+	  /**
+	   * Denies the user from being added by deleting them from the table
+	   * @param userID
+	   * @return boolean
+	   * @throws SQLException
+	   */
+	  public boolean denyUser(String userID) throws SQLException{
+		  try{
+		  Connection con = openDBConnection();
+		  String queryString = "DELETE GABES_NEWCUST where USERID = ?";
+		  preparedStmt = con.prepareStatement(queryString);
+		  preparedStmt.clearParameters();  
+		  preparedStmt.setString(1, userID);
+		  return preparedStmt.execute();
+		  }catch(Exception E) {
+			  E.printStackTrace();
+			  return false;
+		  }
+	  }	
+	  
+	  /**
+	   * Accepts users who are in the NewCust Table and adds them as real customers!
+	   * @param userID
+	   * @return
+	   * @throws SQLException
+	   */
+	  public boolean acceptUser(String userID) throws SQLException{
+		  try {
+			  ResultSet users = this.viewUsers();
+			  int x=0;
+			  while(users.next()){ x++;
+			  }
+			  x = x+10000;
+			  Connection con = openDBConnection();
+			  String queryString = "SELECT * FROM GABES_NEWCUST a WHERE a.USERID = ?";
+			  preparedStmt = con.prepareStatement(queryString);
+			  preparedStmt.clearParameters();  
+			  preparedStmt.setString(1,userID);
+			  ResultSet result = preparedStmt.executeQuery();
+			  result.next();
+			  boolean added = this.insertUser(Integer.toString(x), result.getString("USERNAME"), result.getString("PASS"), result.getString("FNAME"), result.getString("LNAME"), result.getString("PHONE"), result.getString("EMAIL"));
+			  if(added) {
+				  this.denyUser(userID);
+				  return true;
+			  }
+			  else
+				  return false;
+		  	}
+		  catch (Exception E) {
+			  E.printStackTrace();
+			  return false;
+		  }
+	  }
+	  
+	  /**
+	   * views all users in the NewCust table
+	   * @return returns a result set of all users in the NewCust table
+	   */
+	  public ResultSet viewRequests() throws SQLException{
+		  	Connection con = openDBConnection();
+		    String queryString = "SELECT * FROM GABES_NEWCUST";
+		    preparedStmt = con.prepareStatement(queryString);
+		    ResultSet result = preparedStmt.executeQuery();
+		    return result;
 	  }
 }
 

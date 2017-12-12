@@ -37,7 +37,7 @@ CREATE TABLE gabes_admin (
 -- ITEM
 DROP TABLE gabes_item CASCADE CONSTRAINTS;
 CREATE TABLE gabes_item (
-	ItemID 			INTEGER 				NOT NULL,
+	ItemID 			INTEGER 		NOT NULL,
 	StartDate 		DATE            	NOT NULL,
 	EndDate 			DATE            	NOT NULL,
 	ItemName 		VARCHAR(30) 		NOT NULL,
@@ -93,6 +93,29 @@ CREATE TABLE gabes_manage (
 	FOREIGN KEY (Username) REFERENCES gabes_admin(Username),
 --        ON DELETE SET NULL	ON UPDATE CASCADE,
 	PRIMARY KEY (UserID, Username)
+);
+--Follow
+DROP TABLE gabes_follows CASCADE CONSTRAINTS;
+CREATE TABLE gabes_follows (
+	MainID 			INTEGER			NOT NULL,
+	FollowID 		INTEGER			NOT NULL, CHECK (FollowID <> MainID),
+ 	FOREIGN KEY (MainID) REFERENCES gabes_customer(UserID),
+--        ON DELETE SET NULL	ON UPDATE CASCADE,
+	FOREIGN KEY (FollowID) REFERENCES gabes_customer(UserID),
+--        ON DELETE SET NULL	ON UPDATE CASCADE,
+	PRIMARY KEY (MainID, FollowID)
+);
+
+--Watch
+DROP TABLE gabes_watch CASCADE CONSTRAINTS;
+CREATE TABLE gabes_watch (
+	saverID 	INTEGER			NOT NULL,
+	ItemID 		INTEGER			NOT NULL,
+ 	FOREIGN KEY (saverID) REFERENCES gabes_customer(UserID),
+--        ON DELETE SET NULL	ON UPDATE CASCADE,
+	FOREIGN KEY (ItemID) REFERENCES gabes_item(ItemID),
+--        ON DELETE SET NULL	ON UPDATE CASCADE,
+	PRIMARY KEY (saverID, ItemID)
 );
 
 

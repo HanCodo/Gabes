@@ -30,7 +30,7 @@ else{
 			response.sendRedirect("AddItem.jsp?error=5");
 			
 		}
-		else if(sDate.before(cDate) || eDate.before(cDate)||sDate.before(cDate) & eDate.before(cDate)){
+		else if(sDate.before(cDate) || eDate.before(cDate)||eDate.equals(sDate)||sDate.before(cDate) & eDate.before(cDate)){
 			response.sendRedirect("AddItem.jsp?error=6");
 		}
 		

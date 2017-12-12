@@ -44,9 +44,39 @@ http-equiv="content-type">
 <br>
 <br>
 <br>
-<div style="text-align:center;"><b>All Items on Sale</b></div>
+<div style="text-align:center;"><b>Watch List</b></div>
 <br>
-<%ResultSet items = customer.allItems(); %>
+<%
+String message = "";
+String errorParam = request.getParameter("error");
+String itemID = request.getParameter("itemID");
+String itemID2 = request.getParameter("ItemID");
+
+
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "Removed failed";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
+	}
+	else if(error ==2 ){
+		message = "Item already in Watch List";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
+	}
+}	
+if (itemID != null){
+	message = "You successfully deleted item number "+itemID+" from your Watch List";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+if (itemID2 != null){
+	message = "You successfully added item number "+itemID+" from your Watch List";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+
+
+
+%>
+<%ResultSet items = customer.getItemListforWatch(); %>
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2"
 cellspacing="2" id ="team2">
@@ -56,62 +86,37 @@ cellspacing="2" id ="team2">
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(3)')"style="vertical-align: top;"><b>Auction End Time</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(4)')"style="vertical-align: top;"><b>Item Name</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(5)')"style="vertical-align: top;"><b>Description</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')" style="vertical-align: top;"><b>Category</b><br></th>
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(6)')"style="vertical-align: top;"><b>Category</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(7)')"style="vertical-align: top;"><b>Status</b><br></th>
      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Current Bid</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(9)')"style="vertical-align: top;"><b>Buy Now</b><br></th>
-     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(10)')"style="vertical-align: top;"><b>Add to Watch List</b><br></th>
-     
+     <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Buy Now</b><br></th>
+      <th  onclick="w3.sortHTML('#team2', '.items', 'td:nth-child(8)')"style="vertical-align: top;"><b>Remove</b><br></th>
 
   </tr>
 <%while (items.next()){ 
 if(items.getString("STATUS").equals("ON AUCTION")){%>
 <tr class = "items">
-<td>
-<%=
-items.getInt("ITEMID")
-%>
+<td><%=items.getInt("ITEMID")%>
 </td>
-<td>
-<%=
-items.getDate("STARTDATE")
-%>
+<td><%=items.getDate("STARTDATE")%>
 </td>
-<td>
-<%=
-items.getDate("ENDDATE")
-%>
+<td><%=items.getDate("ENDDATE")%>
 </td>
-<td>
-<%=
-items.getString("ITEMNAME")
-%>
+<td><%=items.getString("ITEMNAME")%>
 </td>
-<td>
-<%=
-items.getString("DESCRIPT")
-%>
+<td><%=items.getString("DESCRIPT")%>
 </td>
-<td>
-<%=
-items.getString("CATEGORIES")
-%>
+<td><%=items.getString("CATEGORIES")%>
 </td>
-<td>
-<%=
-items.getString("STATUS")
-%>
+<td><%=items.getString("STATUS")%>
 </td>
-<td>
-<%=
-items.getDouble("CURRENTBID")
-%>
+<td><%=items.getDouble("CURRENTBID")%>
 <form method="post" action="Bid.jsp?i=<%=items.getInt("ITEMID")%>" name="Bid"><input style = "color: black" name="Bid" value="Bid" type="submit">
 </form>
 </td>
 <td>
 <%
-if(items.getDouble("BUYNOW")==0){
+if(items.getString(10) == null){
 	out.println("Buy now not made available by seller");
 }
 else{
@@ -125,18 +130,17 @@ else{
 <form method="post" action="BuyNow_action.jsp?i=<%=items.getInt("ITEMID")%>&p=<%=items.getDouble("BUYNOW")%>" name="Buynow">
 <input style = "color: black" name="BuyNow" value="Buy Now" type="submit"></form></td>
 
-
-
-
 <%
-}%>
+}
+%>
 
-<td style="vertical-align: top;"><form method="GET" action="WatchList_action.jsp" name="watchList">
-<input  style = "color: black" name="watchList" type="hidden" value="<%=items.getInt("ITEMID") %>"/>
-<button style = "color: black" value="watchList" name="watchList">Add to Watch List</button><br>
+<td style="vertical-align: top;"><form method="GET" action="RemoveWatchList_action.jsp" name="removeWatch">
+<input  style = "color: black" name="removeWatch" type="hidden" value="<%=items.getInt("ITEMID") %>"/>
+<button style = "color: black" value="removeWatch" name="removeWatch">Remove from List</button><br>
 </form><br>
 </td>
-<%}}%>
+<% 
+}}%>
 </tbody>
 </table>
 <br>

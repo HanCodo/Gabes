@@ -290,7 +290,7 @@ public class Customer implements Serializable {
 		 
 		  	Connection con = openDBConnection();
 		  	
-		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS " + 
+		    String queryString = "Select i.ITEMID as ITEMID, i.ITEMNAME as ITEMNAME,i.CATEGORIES as CATEGORIES,i.STARTDATE as STARTDATE,i.ENDDATE as ENDDATE,i.STARTPRICE as STARTPRICE, i.CURRENTBID as CURRENTBID,i.status as STATUS,s.USERID as USERID " + 
 		    		"FROM GABES_CUSTOMER c, GABES_ITEM i, GABES_SELL s " + 
 		    		"WHERE c.UserID = s.UserID AND i.ItemID = s.ItemID AND c.UserID = "+this.getUserID()+" "+
 		    		"ORDER BY ENDDATE DESC, i.itemID desc";
@@ -503,7 +503,8 @@ public class Customer implements Serializable {
 	  public ResultSet allItems() throws SQLException {
 		  	Connection con = openDBConnection();
 
-		    String queryString = "SELECT * FROM GABES_ITEM";
+		    String queryString = "SELECT ITEMID, STARTDATE, ENDDATE, ITEMNAME, DESCRIPT,"
+		    		+ " CATEGORIES, STARTPRICE, STATUS, CURRENTBID, CASE WHEN BUYNOW = NULL THEN 0 ELSE BUYNOW END BUYNOW FROM GABES_ITEM";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
@@ -612,6 +613,9 @@ public class Customer implements Serializable {
 	  /**
 	   * Takes a input of itemID which is a int and uses it to find the winner of bid
 	   * that winners username is then returned
+	   * @param double itemID the itemID
+	   * @return ResultSet containing all items in cat that have most bids
+	   * @throws SQLException
 	   */
 	  public ResultSet winnerInfo(String itemID) throws SQLException {
 		  	Connection con = openDBConnection();
@@ -626,6 +630,9 @@ public class Customer implements Serializable {
 	  /**
 	   * Takes a input of itemID which is a int and uses it to find the winner of bid
 	   * that winners username is then returned
+	   * @param double itemID the itemID
+	   * @return String containing winner of bid
+	   * @throws SQLException
 	   */
 	  public String winner(int itemID) throws SQLException {
 		  	Connection con = openDBConnection();
@@ -641,7 +648,9 @@ public class Customer implements Serializable {
 	  
 	  /**
 	   * Checks if a  item has been rated
+	   * @param int itemID the item's id
 	   * @return rated, a boolean
+	   * @throws SQLException
 	   */
 	  public boolean hasRated(int itemID) throws SQLException {
 		  	Connection con = openDBConnection();
@@ -796,9 +805,7 @@ public class Customer implements Serializable {
 	    String queryString = "Select distinct i.categories "+
 	    		" From GABES_ITEM i, GABES_BID b"+
 	    		" Where i.status = 'ON AUCTION' and i.itemID = b.itemID";
-	
-	
-	
+
 	    preparedStmt = con.prepareStatement(queryString);
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
@@ -859,6 +866,7 @@ public class Customer implements Serializable {
 		    preparedStmt.setInt(1, itemID);
 
 		    ResultSet result = preparedStmt.executeQuery();
+		    result.next();
 		    Date date =  result.getDate(1);
 		    
 			
@@ -868,15 +876,217 @@ public class Customer implements Serializable {
 			    
 			} catch (Exception e) {
 			    e.printStackTrace();
+			    System.out.println("test2");
 			    //response.sendRedirect("Search.jsp?error=3");
 			}
 			long days = ChronoUnit.DAYS.between(LocalDate.parse(todaysDate.toString()),LocalDate.parse(date.toString()));
 			return days;
 		}catch(Exception ex) {
+			ex.printStackTrace();
 			return 0;
 		}
+
 		
 	}
+	  /**
+	   * Gets all followers of the user 
+	   * @return ResultSet containing all users followed sellers 
+	   * @throws SQLException
+	   */
+	public ResultSet allFollowers() throws SQLException {
+		Connection con = openDBConnection();
+	    String queryString = "Select c.USERNAME as Name, f.FollowID as SellerID"+
+	    		" From GABES_CUSTOMER c, GABES_FOLLOWS f"+
+	    		" Where f.FollowID = c.USERID and f.MainID = "+this.userID;
 	
+	
+	
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to find all Sellers with the same id
+	   * @param int sellerID the seller's ID
+	   * @return ResultSet containing all items of sell
+	   * @throws SQLException
+	   */
+	public ResultSet sellerItems(int sellerID) throws SQLException {
+		Connection con = openDBConnection();
+		String queryString = "SELECT *"+
+				" FROM GABES_ITEM i, GABES_SELL s"+ 
+				" WHERE s.USERID = "+sellerID+" and i.itemID = s.itemID";
+	
+	
+	
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to add it to a list
+	   * @param int sellerID the seller's ID
+	   * @return int number if true or false
+	   */
+	public int addFavorites(String SellerID) {
+		 int result = -1;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "INSERT INTO GABES_FOLLOWS"+
+	        "(MainID, FollowID) "+
+	         "VALUES (?, ?)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setInt(1,this.getUserID());
+	            int itemId = Integer.parseInt(SellerID);
+	            preparedStmt.setInt(2,itemId);
+	            result = preparedStmt.executeUpdate();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
+		
+	}
+	  /**
+	   * Takes a input of itemID which is a int and uses it to get sellers of the item
+	   * @param int itemID the item's ID
+	   * @return ResultSet containing all items by the seller
+	   * @throws SQLException
+	   */
+	public ResultSet getSellerId(int itemID) throws SQLException {
+		Connection con = openDBConnection();
+		String queryString = "SELECT s.USERID as SellerID"+
+				" FROM GABES_SELL s"+ 
+				" WHERE "+itemID+" = s.itemID";
+
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to check if seller is in table
+	   * @param int sellerID the seller's ID
+	   * @return boolean 
+	   * @throws SQLException
+	   */
+	public boolean checkSeller(int sellerID) throws SQLException {
+		Connection con = openDBConnection();
+		boolean check = false;
+		String queryString = "SELECT f.FOLLOWID as SellerID"+
+				" FROM GABES_FOLLOWS f"+
+				" WHERE f.mainID ="+this.userID;
+		
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    while(result.next()) {
+	    	int i = result.getInt("SellerID");
+	   
+	    	if(i == sellerID) {
+	    		check = true;
+
+	    	}
+
+	    }
+	    return check;
+	}
+	  /**
+	   * Takes a input of sellerID which is a int and uses it to remove the seller from table
+	   * @param int sellerID the seller's ID
+	   * @return int check if true or not
+	   * @throws SQLException
+	   */
+	public int removeFavSeller(int sellerID) throws SQLException{	
+		Connection con = openDBConnection();	
+		String queryString ="DELETE FROM gabes_follows f"+
+				" WHERE f.mainID ="+this.userID+" and "+sellerID +"=f.followid";
+	    preparedStmt = con.prepareStatement(queryString);
+	    preparedStmt.execute();
+	    preparedStmt.close();
+	    return 1;
+		
+	}
+	  /**
+	   * Takes a input of itemId which is a int and uses it to add it to a watch list
+	   * @param int itemId the item's ID
+	   * @return int number if true or false
+	   */
+	public int addWatchList(String itemId) {
+		 int result = -1;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "INSERT INTO gabes_watch"+
+	        "(saverID, ItemID) "+
+	         "VALUES (?, ?)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setInt(1,this.getUserID());
+	            int itemVal = Integer.parseInt(itemId);
+	            preparedStmt.setInt(2,itemVal);
+	            result = preparedStmt.executeUpdate();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
+		
+	}
+	  /**
+	   * Takes a input of itemId which is a int and uses it to check if item is in table
+	   * @param int itemId the item's ID
+	   * @return boolean 
+	   * @throws SQLException
+	   */
+	public boolean checkItem(int itemId) throws SQLException {
+		Connection con = openDBConnection();
+		boolean check = false;
+		String queryString = "SELECT s.ItemID as itemID"+
+				" FROM gabes_watch s"+
+				" WHERE s.saverID ="+this.userID;
+		
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    while(result.next()) {
+	    	int i = result.getInt("itemID");
+	   
+	    	if(i == itemId) {
+	    		check = true;
+
+	    	}
+
+	    }
+	    return check;
+	}
+	  /**
+	   * Gets all records of watch list
+	   * @return ResultSet containing all listed items from watch list table
+	   * @throws SQLException
+	   */
+	public ResultSet getItemListforWatch() throws SQLException {
+		Connection con = openDBConnection();
+		String queryString = "SELECT *"+
+				 " FROM GABES_ITEM i,GABES_WATCH w"+
+				" WHERE w.itemID = i.itemID and w.saverID ="+this.userID;
+
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
+	}
+	  /**
+	   * Takes a input of itemID which is a int and uses it to remove the item from table
+	   * @param int itemID the item's ID
+	   * @return int check if true or not
+	   * @throws SQLException
+	   */
+	public int removeWatchList(int itemID) throws SQLException{	
+		Connection con = openDBConnection();	
+		String queryString ="DELETE FROM gabes_watch w"+
+				" WHERE w.saverID ="+this.userID+" and "+itemID +"=w.ITEMID";
+	    preparedStmt = con.prepareStatement(queryString);
+	    preparedStmt.execute();
+	    preparedStmt.close();
+	    return 1;
+		
+	}
 
 }

@@ -92,6 +92,7 @@ while(rs.next()){
 </tr>
 <%
 last = rs.getString(1);
+sum = (Math.floor(sum * 100) / 100);
 }
 %>
 <tr><td></td><td></td><td></td><td>--------------</td><td>----------</td></tr><tr>
