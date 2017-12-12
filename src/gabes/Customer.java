@@ -905,6 +905,7 @@ public class Customer implements Serializable {
 	    ResultSet result = preparedStmt.executeQuery();
 	    return result;
 	}
+	
 	public int addFavorites(String SellerID) {
 		 int result = -1;
 		  Connection con = openDBConnection();
@@ -964,6 +965,58 @@ public class Customer implements Serializable {
 	    preparedStmt.close();
 	    return 1;
 		
+	}
+	
+	public int addWatchList(String itemId) {
+		 int result = -1;
+		  Connection con = openDBConnection();
+	        try{
+	            String queryString = "INSERT INTO gabes_watch"+
+	        "(saverID, ItemID) "+
+	         "VALUES (?, ?)";
+
+	            preparedStmt = con.prepareStatement(queryString);
+	            preparedStmt.setInt(1,this.getUserID());
+	            int itemVal = Integer.parseInt(itemId);
+	            preparedStmt.setInt(2,itemVal);
+	            result = preparedStmt.executeUpdate();
+	            preparedStmt.close();
+	        } catch (Exception E) {
+	            E.printStackTrace();
+	        }       
+	        return result;
+		
+	}
+	public boolean checkItem(int itemId) throws SQLException {
+		Connection con = openDBConnection();
+		boolean check = false;
+		String queryString = "SELECT s.ItemID as itemID"+
+				" FROM gabes_watch s"+
+				" WHERE s.saverID ="+this.userID;
+		
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    while(result.next()) {
+	    	int i = result.getInt("itemID");
+	   
+	    	if(i == itemId) {
+	    		check = true;
+
+	    	}
+
+	    }
+	    return check;
+	}
+	
+	public ResultSet getItemListforWatch() throws SQLException {
+		Connection con = openDBConnection();
+		String queryString = "SELECT *"+
+				 " FROM GABES_ITEM i,GABES_WATCH w"+
+				" WHERE w.itemID = i.itemID and w.saverID ="+this.userID;
+
+	    preparedStmt = con.prepareStatement(queryString);
+	    ResultSet result = preparedStmt.executeQuery();
+	    return result;
 	}
 
 }

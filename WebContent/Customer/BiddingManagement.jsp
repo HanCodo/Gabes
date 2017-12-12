@@ -65,6 +65,9 @@ style = "color: black" name="Items Ending Soon" value="Item Ending Soon" type="s
 <form method="post" action="FollowSellers.jsp" name="Favorite Sellers"><input
 style = "color: black" name="Favorite Sellers" value="Favorite Sellers" type="submit"><br>
 </form>
+<form method="post" action="WatchList.jsp" name="Watch List"><input
+style = "color: black" name="Watch List" value="Watch List" type="submit"><br>
+</form>
 <form method="post" action="CustomerMenu.jsp"
 name="Return"><input style = "color: black" name="Return"
 value="Return to Menu" type="submit"></form>
