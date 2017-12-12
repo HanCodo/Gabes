@@ -26,20 +26,38 @@ public class Admin {
 	* to the System
 	*/    
 	private boolean loggedIn = false;
-	
+	/**
+	 * Gets the username of the admin logged in
+	 * @return the username of the Admin
+	 */
 	public String getUsername() {
 		return username;
 	}
+	/**
+	 * sets the username to the username it is given
+	 * @param username the username of the admin 
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	/**
+	 * gets the password of the admin
+	 * @return the password of the admin
+	 */
 	public String getPass() {
 		return pass;
 	}
+	/**
+	 * sets the password of the admin 
+	 * @param pass the password
+	 */
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	
+	/**
+	 * gets whether the admin is logged in or not 
+	 * @param loggedIn  true if logged in false if not
+	 */
 	public void setLoggedIn(Boolean loggedIn) {
 	    this.loggedIn = loggedIn;
 	}
@@ -120,6 +138,7 @@ public class Admin {
 	  
 	  /**
 	   * views all users in the database
+	   * @return returns a result set of all users in the database
 	   */
 	  public ResultSet viewUsers() throws SQLException{
 		  	Connection con = openDBConnection();
@@ -131,7 +150,16 @@ public class Admin {
 	  }
 	  
 	  /**
-	   * inserts a new user to the database
+	   * insertUser inserts a new user into the database
+	   * @param userID the userid of the new user
+	   * @param Username the username of the new user
+	   * @param pass the password of the new user
+	   * @param fname the first name of the new user
+	   * @param lname the last name of the new user
+	   * @param phone the phone number of the new user
+	   * @param Email the email of the new user
+	   * @return a boolean if the user was entered or not 
+	   * @throws SQLException if userId is invaild or username is invailid
 	   */
 	  public boolean insertUser(String userID, String Username, String pass, String fname, String lname, String phone, String Email) throws SQLException{
 		  Connection con = openDBConnection();
@@ -158,7 +186,8 @@ public class Admin {
 	  }
 	  
 	  /**
-	   * used to view report 1
+	   * viewReport1 allows you to access the view for report one
+	   * @return a result set containing the view
 	   */
 	  public ResultSet viewReport1() throws SQLException{
 
@@ -176,7 +205,10 @@ public class Admin {
 		  return result;
 	  }
 	  
-	  
+	  /**
+	   * View report 2 allows you to view the commision report 
+	   * @return a result set containing the second report 
+	   */
 	  public ResultSet viewReport2(){
 		  try {
 			  Connection con = openDBConnection();
