@@ -40,13 +40,32 @@ http-equiv="content-type">
 <br>
 <br>
 
+<%
+String message = "";
+String errorParam = request.getParameter("error");
+String sellID = request.getParameter("sellID");
+if (errorParam != null){
+	int error = Integer.parseInt(errorParam);
+	if (error == 1){
+		message = "Its gone ";
+		%><div style="text-align: center;color:red;"><%=message %></div><br><%
+	}
+}	
+if (sellID != null){
+	message = "You removed User from your list";
+	%><div style="text-align: center; "><%=message %></div><br><%
+}
+	
 
+%>
 <table style="text-align: left; width: 100%;" border="2" cellpadding="2">
 <tbody>
 <tr>
 <td style="vertical-align: top;"><b>Seller Username</b><br>
 </td>
 <td style="vertical-align: top;"><b>Seller Items</b><br>
+</td>
+<td style="vertical-align: top;"><b>Remove Seller</b><br>
 </td>
 </tr>
 <%ResultSet rs = null;
@@ -64,6 +83,11 @@ while(rs.next()){
 <td style="vertical-align: top;"><form method="GET" action="SellerItems.jsp" name="SellerItems">
 <input  style = "color: black" name="SellerItems" type="hidden" value="<%=rs.getInt("SellerID") %>"/>
 <button style = "color: black" value="SellerItems" name="SellerItems">Seller Items</button><br>
+</form><br>
+</td>
+<td style="vertical-align: top;"><form method="GET" action="RemoveFavSeller_action.jsp" name="removeFav">
+<input  style = "color: black" name="removeFav" type="hidden" value="<%=rs.getInt("SellerID") %>"/>
+<button style = "color: black" value="removeFav" name="removeFav">Remove from List</button><br>
 </form><br>
 </td>
 </tr>

@@ -937,27 +937,37 @@ public class Customer implements Serializable {
 	}
 	public boolean checkSeller(int sellerID) throws SQLException {
 		Connection con = openDBConnection();
-		boolean check = true;
+		boolean check = false;
 		String queryString = "SELECT f.FOLLOWID as SellerID"+
 				" FROM GABES_FOLLOWS f"+
-				" WHERE NOT EXISTS (SELECT * FROM GABES_FOLLOWS WHERE "+sellerID+" = FOLLOWID)";
+				" WHERE f.mainID ="+this.userID;
 		
-				            
-
 	    preparedStmt = con.prepareStatement(queryString);
 	    ResultSet result = preparedStmt.executeQuery();
 	    while(result.next()) {
 	    	int i = result.getInt("SellerID");
+	    	System.out.println("THE VALUE IN THE TABLE IS :"+i);
 	    	if(i == sellerID) {
-	    		
-	    		return check;
+	    		check = true;
+
 	    	}
-	    	else {
-	    		check = false;
-	    		return check;
-	    	}
+
 	    }
 	    return check;
+	}
+	public int removeFavSeller(int sellerID) throws SQLException{
+		
+		Connection con = openDBConnection();
+		System.out.println("THE VALUE IN THE user IS :"+this.userID);
+		System.out.println("THE VALUE IN THE TABLE IS :"+sellerID);
+		String queryString ="DELETE FROM gabes_follows f"+
+				" WHERE f.mainID ="+this.userID+" and "+sellerID +"=f.followid "+
+				"COMMIT";
+
+	    preparedStmt = con.prepareStatement(queryString);
+	    preparedStmt.close();
+	    return 1;
+		
 	}
 
 }
