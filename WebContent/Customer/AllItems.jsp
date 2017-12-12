@@ -111,7 +111,7 @@ items.getDouble("CURRENTBID")
 </td>
 <td>
 <%
-if(items.getString(10) == null){
+if(items.getDouble("BUYNOW") == -1){
 	out.println("Buy now not made available by seller");
 }
 else{

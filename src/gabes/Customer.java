@@ -503,7 +503,7 @@ public class Customer implements Serializable {
 	  public ResultSet allItems() throws SQLException {
 		  	Connection con = openDBConnection();
 
-		    String queryString = "SELECT * FROM GABES_ITEM";
+		    String queryString = "SELECT * CASE WHEN BUYNOW = 0 THEN null END FROM GABES_ITEM";
 		    preparedStmt = con.prepareStatement(queryString);
 		    ResultSet result = preparedStmt.executeQuery();
 		    
